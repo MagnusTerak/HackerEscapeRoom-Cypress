@@ -1,0 +1,16 @@
+{
+    "name": "scss-project",
+    "version": "1.0.0",
+    "description": "A project to compile SCSS to CSS using node-sass or dart-sass",
+    "main": "index.js",
+    "scripts": {
+        "build-css": "sass styles/layouts/scss:styles/layouts/css --style compressed --source-map",
+        "watch-css": "sass --watch styles/layouts/scss:styles/layouts/css --style compressed --source-map"
+    },
+    "author": "Elena Lehto Fredenbrink",
+    "license": "MIT",
+    "devDependencies": {
+        "sass": "^1.80.6"
+    },
+    "keywords": []
+}

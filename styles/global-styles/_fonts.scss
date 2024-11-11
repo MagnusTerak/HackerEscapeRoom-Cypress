@@ -1,0 +1,17 @@
+$font-primary: 'Roboto', sans-serif;
+$size-default: 1rem;
+
+@mixin font-style($style: normal, $weight: normal, $size: 1rem) {
+  font-family: $font-primary;
+  font-style: $style;
+  font-weight: $weight;
+  font-size: $size;
+}
+
+@mixin font-italic($size: $size-default) {
+  @include font-style(italic, 400, $size);
+}
+
+@mixin font-bold($size: $size-default) {
+  @include font-style(normal, 700, $size);
+}
