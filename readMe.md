@@ -7,6 +7,7 @@ Moment 3: Boka challenge ) Ronja & Linnea
 
 # När ska ni ha gruppmöten? Bestäm alla datum redan nu
 Måndagar kl. 20.
+Onsdag 13/11 skapar vi alla filer ihop, så att vi kan undvika konflikter och github krockar. Vi lägger upp en mer detaljerad plan! 
 
 # Hur sköter ni kommunikationen mellan möten?
 Voicechat i Discord och chattgruppen. 
