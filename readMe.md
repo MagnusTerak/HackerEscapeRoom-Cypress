@@ -12,6 +12,7 @@ Onsdag 13/11 skapar vi alla filer ihop, så att vi kan undvika konflikter och gi
 # Hur sköter ni kommunikationen mellan möten?
 Voicechat i Discord och chattgruppen. 
 Vi kommunicerar också via pullrequests.
+Vi ska också använda GitHub Project Board för att planera och följa upp vårt arbete.
 
 # Vems befintliga kod ska ni utgå ifrån?
 Elena 
