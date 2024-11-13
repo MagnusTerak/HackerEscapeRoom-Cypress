@@ -20,9 +20,10 @@ class Challenge {
     this.image = image;
     this.labels = labels;
   }
-  
+
 //methods:
   createChallengeCard(){
 
   }
 }
+export default Challenge;
