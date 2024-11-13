@@ -1,4 +1,4 @@
-class Challenge {
+export class Challenge {
   constructor(
     id,
     title,
@@ -92,24 +92,3 @@ class Challenge {
     return liItem;
   }
 }
-export default Challenge;
-
-/* <li id="room__carousel__slide1" tabindex="0" class="carousel__slide roomy room1">
-  <div class="room__image-container">
-    <img class="room__img" src="./assets/images/gallery/image1.png" alt="room1 - description of room 1" loading="lazy">
-  </div>
-  <div class="room__details">
-    <h2 class="room__details__title">Title of room</h2>
-    <div class="room__details-info">
-      <div class="room__ratings">
-        // Vi behöver bygga en funktion för rating
-      </div>
-      <div class="room__participants"></div>
-    </div>
-    <p class="room__description">
-      Praeterea, ex culpa non invenies unum aut non accusatis unum. Et
-      nihil inuitam. Nemo nocere tibi erit, et non inimicos, et.
-    </p>
-    <a href="#booking-section" class="room__btn">Book this room</a>
-  </div>
-</li> */
