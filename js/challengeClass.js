@@ -22,7 +22,18 @@ class Challenge {
   }
 
   createRatingStars() {
-    //returns a div
+    // Funktion for rating(under construction)
+    const challengeRating = document.createElement("div");
+    challengeRating.className = "challenge__ratings"
+
+    for (let i = 0; i < 5; i++) {
+      const star = new Image();
+      star.src = "assets/svg/star-filled.svg"
+      //star.src = "assets/svg/star.svg"
+      ratingContainer.appendChild(star);
+    }
+
+    return challengeRating;
   }
 
   //methods:
@@ -56,6 +67,7 @@ class Challenge {
 
     const challengeParticipants = document.createElement("div");
     challengeParticipants.className = "challenge__participants";
+    challengeParticipants.textContent = `${this.minParticipants} - ${this.maxParticipants}`;
 
     detailsInfo.appendChild(rating);
     detailsInfo.appendChild(challengeParticipants);
@@ -67,7 +79,7 @@ class Challenge {
     const link = document.createElement("a");
     link.className = "challenge_btn";
     link.textContent = "Book this challenge";
-    link.href("/")
+    link.href(""+this.id)
 
     detailsContainer.appendChild(title);
     detailsContainer.appendChild(detailsInfo);
