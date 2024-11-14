@@ -6,88 +6,105 @@ const isValidDate = (date) => /^\d{4}-\d{2}-\d{2}$/.test(date);
 // Helper function to validate time format (HH:mm)
 const isValidTime = (time) => /^\d{2}:\d{2}$/.test(time);
 
+// Helper function for a simple input validation
+const validateReservationInput = ({ challengeId, name, email, date, time, participants }) => {
+    if (
+        typeof challengeId !== 'number' || 
+        typeof name !== 'string' || 
+        typeof email !== 'string' || 
+        typeof date !== 'string' || 
+        typeof time !== 'string' || 
+        typeof participants !== 'number'
+    ) {
+        console.log("Invalid parameter/s: ", { challengeId, name, email, date, time, participants });
+        return false;
+    }
+    if (!isValidDate(date)) {
+        console.log("Invalid 'date': Must be in YYYY-MM-DD format.");
+        return false;
+    }
+    if (!isValidTime(time)) {
+        console.log("Invalid 'time': Must be in HH:mm format.");
+        return false;
+    }
+    return true;
+};
 
 //API Services:
 
+// Generalized fetch function that accepts options and throws errors for critical issues
 const fetchApi = async (url, requestOptions = {}) => {
     try {
-      const res = await fetch(url, requestOptions);
-  
-      if (!res.ok) {
-        const errorText = await res.text();
-        console.log(`Error response from ${url}:`, errorText);
-        throw new Error(`HTTP error! status: ${res.status}`);
-      }
-  
-      return await res.json();
+        const res = await fetch(url, requestOptions);
+        if (!res.ok) {
+            const errorText = await res.text();
+            console.log(`Error response from ${url}:`, errorText);
+            throw new Error(`HTTP error! status: ${res.status}, message: ${errorText}`);
+        }
+        return await res.json();
     } catch (error) {
-      console.log(`Error fetching data from ${url}:`, error);
-      return null;
+        console.log(`Error fetching data from ${url}:`, error);
+        throw error;
     }
-  };
-
-export const fetchAllChallenges = async () => {
-    const {challenges}= await fetchApi(`${BASE_URL}/challenges`);
-    console.log('challengs:', challenges);
-    return challenges ?? [];
-
 };
 
-export const fetchAvailableTimes = async (challengeId, date) => {
+// Fetch all challenges 
+export const fetchAllChallenges = async () => {
+    try {
+        const { challenges } = await fetchApi(`${BASE_URL}/challenges`);
+        console.log('Challenges:', challenges);
+        return { success: true, data: challenges ?? [] };  
+    } catch (error) {
+        return { success: false, data: [], error: error.message };  
+    }
+};
 
+// Fetch available times per a date
+export const fetchAvailableTimes = async (challengeId, date) => {
     if (typeof challengeId !== 'number' || typeof date !== 'string') {
         console.log('Invalid parameters:', { challengeId, date });
-        return [];
-      }
+        return { success: false, data: [], error: 'Invalid parameters' };
+    }
 
-    const { slots } = await fetchApi(
-      `${BASE_URL}/booking/available-times?date=${date}&challenge=${challengeId}`
-);
-console.log('challengeId:', typeof(challengeId), 'dateType:' , typeof(date))
-    console.log('available slots:',slots);
-    return slots ?? [];
+    try {
+        const { slots } = await fetchApi(
+            `${BASE_URL}/booking/available-times?date=${date}&challenge=${challengeId}`
+        );
+        console.log('Available slots:', slots);
+        return { success: true, data: slots ?? [] };
+    } catch (error) {
+        return { success: false, data: [], error: error.message };
+    }
 };
 
-export const createReservation = async ({ challengeId, name, email, date, time, participants }) => {
-    
-    console.log('Type of ID:', challengeId, 'type of name:', name , 'type of email:', typeof(date), 'type of date:',typeof(date), 'type of time:',typeof(time),'type of participants:', typeof(participants))
-    if (typeof challengeId !== 'number' || typeof name !== 'string' || typeof email !== 'string' || typeof date !== 'string' || typeof time !== 'string' || typeof participants !== 'number') {
-        console.log('Invalid parameter/s');
-        return null;
-      }  
-      if (typeof date !== 'string' || !isValidDate(date)) {
-        console.log("Invalid 'date': Must be a string in YYYY-MM-DD format.");
-        return null;
+// Create reservation with  simple input validation
+export const createReservation = async (reservationData) => {
+    if (!validateReservationInput(reservationData)) {
+        return { success: false, error: "Invalid input data" };
     }
-    if (typeof time !== 'string' || !isValidTime(time)) {
-        console.log("Invalid 'time': Must be a string in HH:mm format.");
-        return null;
-    }
-    
+
     try {
-      const data = await fetchApi(`${BASE_URL}/booking/reservations`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          challenge: challengeId,
-          name,
-          email,
-          date,
-          time,
-          participants
-        })
-      });
-  
-      if (data?.status === 'ok') {
-          console.log(data)
-        return data.booking; 
-      } else {
-        throw new Error("Reservation failed");
-      }
+        const res = await fetchApi(`${BASE_URL}/booking/reservations`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                challenge: reservationData.challengeId,
+                name: reservationData.name,
+                email: reservationData.email,
+                date: reservationData.date,
+                time: reservationData.time,
+                participants: reservationData.participants
+            })
+        });
+
+        if (res?.status === 'ok') {
+            console.log("Booking successful:", res);
+            return { success: true, data: res.booking };
+        } else {
+            return { success: false, error: "Reservation failed" };
+        }
     } catch (error) {
-      console.log("Error in creating reservation:", error);
-      return null; 
+        console.log("Error in creating reservation:", error);
+        return { success: false, error: error.message };
     }
-  };
+};
