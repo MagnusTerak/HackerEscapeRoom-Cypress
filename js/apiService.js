@@ -1,35 +1,43 @@
 const BASE_URL = 'https://lernia-sjj-assignments.vercel.app/api';
 
+const fetchApi = async (url) => {
+    try {
+      const res = await fetch(url);
+  
+      if (!res.ok) {
+        const errorText = await res.text();
+        console.log(`Error response from ${url}:`, errorText);
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
+  
+      return await res.json();
+    } catch (error) {
+      console.log(`Error fetching data from ${url}:`, error);
+      return null;
+    }
+  };
+
 export const fetchAllChallenges = async () => {
-  try {
-    const res = await fetch(`${BASE_URL}/challenges`);
-    const { challenges } = await res.json();
+    const {challenges}= await fetchApi(`${BASE_URL}/challenges`);
     console.log('challengs:', challenges);
-    console.log(typeof challenges);
     return challenges ?? [];
-  } catch (error) {
-    console.error('Error in feching challenges', error);
-    return [];
-  }
+
 };
 
 export const fetchAvailableTimes = async (challengeId, date) => {
-  try {
-    const res = await fetch(
+
+    if (typeof challengeId !== 'number' || typeof date !== 'string') {
+        console.log('Invalid parameters:', { challengeId, date });
+        return [];
+      }
+
+    const { slots } = await fetchApi(
       `${BASE_URL}/booking/available-times?date=${date}&challenge=${challengeId}`
 );
 console.log('challengeId:', typeof(challengeId), 'dateType:' , typeof(date))
-
-if (!res.ok) {
-    const errorText = await res.text(); 
-    console.error('Error response:', errorText);
-    throw new Error(`HTTP error! status: ${res.status}`);
-  }
-    const { slots } = await res.json();
     console.log('available slots:',slots);
     return slots ?? [];
-  } catch (error) {
-    console.error('Error fetching available times:', error);
-    return [];
-  }
+
 };
+
+ 
