@@ -1,3 +1,5 @@
+import { fetchAllChallenges, fetchAvailableTimes, createReservation } from "./apiService.js";
+
 export class Challenge {
   constructor(
     id,
@@ -22,28 +24,27 @@ export class Challenge {
   }
 
   createChallengeStars() {
-    // Funktion for rating(under construction)
+    // Drawing a stars
+    const rate = this.rating;
     const challengeRating = document.createElement("div");
     challengeRating.className = "room__ratings"
-    const starFilled = new Image();
-    starFilled.src = "assets/svg/star-filled.svg";
-    starFilled.className = "star filled";
-    const starEmpty = new Image();
-    starEmpty.src = "assets/svg/star.svg";
-    starEmpty.className = "star unfilled";
-    const starHalf = new Image();
-    starHalf.src = "assets/svg/star-half.svg";
-    starHalf.className = "star half";
 
-    for (let i = 0; i < 5; i++) {
-      //star.src = "assets/svg/star.svg"
-      //star.src = "assets/svg/star-half.svg"
-      challengeRating.appendChild(starFilled);
-      challengeRating.appendChild(starEmpty);
-      challengeRating.appendChild(starHalf);
-      
+    for (let i = 1; i <= 5; i++) {
+      const star = new Image();
+
+      if (i <= Math.floor(rate)) {
+        star.src = "assets/svg/star-filled.svg";
+        star.className = "star filled";
+      } else if (i === Math.ceil(rate) && rate % 1 !== 0) {
+        star.src = "assets/svg/star-half.svg";
+        star.className = "star half";
+      } else {
+        star.src = "assets/svg/star.svg";
+        star.className = "star unfilled";
+      }
+
+      challengeRating.appendChild(star);
     }
-
     return challengeRating;
   }
 
@@ -69,7 +70,7 @@ export class Challenge {
 
     const detailsContainer = document.createElement("div");
     detailsContainer.className = "challenge__details";
-    
+
 
     const title = document.createElement("h2");
     title.className = "challenge__details__title";
@@ -107,7 +108,6 @@ export class Challenge {
   }
 }
 
-
 const challenge = new Challenge(
   1,
   "Title of room",
@@ -118,7 +118,7 @@ const challenge = new Challenge(
   4.5,
   "assets/images/gallery/image1.png",
   ""
-  );
-  
-  const roomList = document.querySelector(".challenges__list");
-  roomList.appendChild(challenge.createChallengeCard());
+);
+
+const roomList = document.querySelector(".challenges__list");
+roomList.appendChild(challenge.createChallengeCard());
