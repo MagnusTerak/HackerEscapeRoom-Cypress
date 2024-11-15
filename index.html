@@ -7,10 +7,10 @@
       content="width=device-width, initial-scale=1.0"
     >
     <title>Hacker Escape Rooms - Play Online & Onsite Challenges</title>
-    <meta
+    <!-- <meta
       http-equiv="Content-Security-Policy"
       content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; object-src 'none'"
-    >
+    > -->
 
     <meta
       name="description"
@@ -90,7 +90,8 @@
         "openingHours": "Mo-Su 09:00-22:00"
       }
     </script>
-    <script src="menu.js" defer></script>
+    <script src="js/menu.js" defer></script>
+    <script type="module" src="./js/apiTest.js"></script>
   </head>
 
 <body>
@@ -198,267 +199,19 @@
             
           </ol>
         </div>
-        
-        <!-- <aside class="carousel__navigation">
-          <ol class="carousel__navigation-list">
-            <li class="carousel__navigation-item">
-              <a href="#testimonial__carousel__slide1" class="carousel__navigation-button">Go to slide 1</a>
-            </li>
-            <li class="carousel__navigation-item">
-              <a href="#testimonial__carousel__slide2" class="carousel__navigation-button">Go to slide 2</a>
-            </li>
-          </ol>
-        </aside> -->
       </div>
       
       
-      <!--*************************************************** ROOMS ******************************************************-->
+      <!--*************************************************** Challenges ******************************************************-->
       <article
-      class="rooms carousel"
+      class="challenges carousel"
         aria-label="rooms and challenges"
         >
         <!-- Slide container with cards  -->
-        <h2 class="rooms__title">Popular challenges right now</h2>
-        <ol class="rooms__list carousel__viewport">
-           <!-- <div class="rooms__list">  -->
-
-          <li
-            id="room__carousel__slide1"
-            tabindex="0"
-            class="carousel__slide roomy room1"
-          >
-            <div class="room__image-container"> 
-              <img
-                class="room__img"
-                src="./assets/images/gallery/image1.png"
-                alt="room1 - description of room 1"
-                loading="lazy"
-              >
-            </div>
-            <div class="room__details">
-              <h2 class="room__details__title">Title of room</h2>
-              <div class="room__details-info">
-                <div class="room__ratings">
-                  <img
-                    class="star filled"
-                    src="assets/svg/star-filled.svg"
-                    alt="Star Rating"
-                    loading="lazy"
-                  >
-                  <img
-                    class="star filled"
-                    src="assets/svg/star-filled.svg"
-                    alt="Star Rating"
-                    loading="lazy"
-                  >
-                  <img
-                    class="star filled"
-                    src="assets/svg/star-filled.svg"
-                    alt="Star Rating"
-                  >
-                  <img
-                    class="star filled"
-                    src="assets/svg/star-filled.svg"
-                    alt="Star Rating"
-                    loading="lazy"
-                  >
-                  <img
-                    class="star unfilled"
-                    src="assets/svg/star.svg"
-                    alt="Star Rating"
-                    loading="lazy"
-                  >
-                </div>
-
-                <div class="room__participants">2-6 participants</div>
-              </div>
-              <p class="room__description">
-                Praeterea, ex culpa non invenies unum aut non accusatis unum. Et
-                nihil inuitam. Nemo nocere tibi erit, et non inimicos, et.
-              </p>
-              <a href="#booking-section" class="room__btn">Book this room</a>
-            </div>
-            <div class="carousel__snapper">
-              <a
-                href="#room__carousel__slide3"
-                class="carousel__prev"
-                aria-label="go to room 3"
-              ></a>
-              <a
-                href="#room__carousel__slide2"
-                class="carousel__next"
-                aria-label="go to room 2"
-              ></a>
-            </div>
-          </li>
-          <li
-            id="room__carousel__slide2"
-            tabindex="0"
-            class="carousel__slide roomy room2"
-          >
-            <div class="room__image-container">
-              <img
-                class="room__img"
-                src="./assets/images/gallery/image1.png"
-                alt="room2 - description of room 2"
-                loading="lazy"
-                >
-              </div>
-            <div class="room__details">
-              <h2 class="room__details__title">Title of room</h2>
-              <div class="room__details-info">
-                <div class="room__ratings">
-                  <img
-                    class="star filled"
-                    src="assets/svg/star-filled.svg"
-                    alt="Star Rating"
-                    loading="lazy"
-                  >
-                  <img
-                    class="star filled"
-                    src="assets/svg/star-filled.svg"
-                    alt="Star Rating"
-                    loading="lazy"
-                    >
-                    <img
-                    class="star filled"
-                    src="assets/svg/star-filled.svg"
-                    alt="Star Rating"
-                    loading="lazy"
-                  >
-                  <img
-                    class="star filled"
-                    src="assets/svg/star-filled.svg"
-                    alt="Star Rating"
-                    loading="lazy"
-                  >
-                  <img
-                    class="star unfilled"
-                    src="assets/svg/star.svg"
-                    alt="Star Rating"
-                    loading="lazy"
-                  >
-                </div>
-
-                <div class="room__participants">2-6 participants</div>
-              </div>
-              <p class="room__description">
-                Praeterea, ex culpa non invenies unum aut non accusatis unum. Et
-                nihil inuitam. Nemo nocere tibi erit, et non inimicos, et.
-              </p>
-            <a href="#booking-section" class="room__btn">Book this room</a>
-            </div>
-            <div class="carousel__snapper">
-              <a
-                href="#room__carousel__slide1"
-                class="carousel__prev"
-                aria-label="go to room 1"
-              ></a>
-              <a
-                href="#room__carousel__slide3"
-                class="carousel__next"
-                aria-label="go to room 3"
-              ></a>
-            </div>
-          </li>
-
-          <li
-            id="room__carousel__slide3"
-            tabindex="0"
-            class="carousel__slide roomy room3"
-          >
-            <div class="room__image-container">
-              <img
-                class="room__img"
-                src="./assets/images/gallery/image1.png"
-                alt="room3 - description of room 3"
-                loading="lazy"
-                >
-              </div>
-              <div class="room__details">
-                <h2 class="room__details__title">Title of room</h2>
-                <div class="room__details-info">
-                  <div class="room__ratings">
-                    <img
-                    class="star filled"
-                    src="assets/svg/star-filled.svg"
-                    alt="Star Rating"
-                    loading="lazy"
-                    >
-                    <img
-                    class="star filled"
-                    src="assets/svg/star-filled.svg"
-                    alt="Star Rating"
-                    loading="lazy"
-                    >
-                  <img
-                    class="star filled"
-                    src="assets/svg/star-filled.svg"
-                    alt="Star Rating"
-                    loading="lazy"
-                  >
-                  <img
-                    class="star filled"
-                    src="assets/svg/star-filled.svg"
-                    alt="Star Rating"
-                    loading="lazy"
-                  >
-                  <img
-                  class="star unfilled"
-                  src="assets/svg/star.svg"
-                  alt="Star Rating"
-                  loading="lazy"
-                  >
-                </div>
-                
-                <div class="room__participants">2-6 participants</div>
-              </div>
-              <p class="room__description">
-                Praeterea, ex culpa non invenies unum aut non accusatis unum. Et
-                nihil inuitam. Nemo nocere tibi erit, et non inimicos, et.
-              </p>
-              <a href="#booking-section" class="room__btn">Book this room</a>
-            </div>
-            <div class="carousel__snapper">
-              <a
-              href="#room__carousel__slide2"
-              class="carousel__prev"
-                aria-label="go to room 2"
-                ></a>
-              <a
-                href="#room__carousel__slide1"
-                class="carousel__next"
-                aria-label="go to room 1"
-              ></a>
-            </div>
-          </li>
+        <h2 class="challenges__title">Popular challenges right now</h2>
+        <ol class="challenges__list carousel__viewport">
+          <!-- top 3 challenges regineras automatisk   -->
         </ol>
-
-        <!-- <aside class="carousel__navigation">
-          <ol class="carousel__navigation-list">
-            <li class="carousel__navigation-item">
-              <a
-              href="#room__carousel__slide1"
-              class="carousel__navigation-button"
-                >Go to slide 1</a
-                >
-              </li>
-              <li class="carousel__navigation-item">
-                <a
-                href="#room__carousel__slide2"
-                class="carousel__navigation-button"
-                >Go to slide 2</a
-                >
-              </li>
-              <li class="carousel__navigation-item">
-                <a
-                href="#room__carousel__slide3"
-                class="carousel__navigation-button"
-                >Go to slide 3</a
-                >
-              </li>
-            </ol>
-          </aside> -->
         </article>
         
         <div class="main__btns">
@@ -472,6 +225,69 @@
             </li>
           </ul>
         </div> 
+
+        <!--*************************************************** Modal******************************************************-->
+
+        <!-- <dialog class="booking-modal">  -->
+          <div class="booking-modal">
+          <div class="booking-modal__content">
+
+            <!-- Step 1: Select Date -->
+            <div class="booking-modal__step booking-modal__step--active" id="step1">
+              <h2 class="booking-modal__title">Select a Date(Step1/Modal1)</h2>
+              Add a Form labels, an input field for the date, and a button for searching available times (Modal 1). Decide whether to generate these elements dynamically using JavaScript or include them directly as static HTML tags. Regardless of the approach, ensure all necessary elements are properly integrated into challenges.html.
+            </div>
+
+             <!-- Step 2: Enter Details -->
+        <div class="booking_modal_step_2" id="step2">
+          <h1>Book room "Title of room" (step 2)</h1>
+          <form class="user_booking" id="user-booking" action="/submit_booking" method="post">
+            <!-- Name -->
+            <div class="user_booking_name">
+              <label for="name_booking" class="booking_name">Name</label>
+              <input type="name" class="custom_name" id="booking-name" name="user_name" required>
+            </div>
+            <!-- Email -->
+            <div class="user_booking_email">
+              <label for="email_booking" class="booking_email">Email</label>
+              <input type="email" class="custom_email" id="booking-email" name="user_email" required>
+            </div>
+            <!-- Times -->
+            <div class="user_booking_time">
+              <label for="time_booking" class="booking_time">What time?</label>
+              <select id="booking-time" name="selected_time" class="custom_time" required>
+                <!-- placeholder times -->
+                <option value="10:00-11:30">10:00-11:30</option>
+                <option value="12:00-13:30">12:00-13:30</option>
+                <option value="14:00-15:30">14:00-15:30</option>
+              </select>
+            </div>
+            <!-- participants -->
+            <div class="user_booking_participants">
+              <label for="participants_booking" class="booking_participants">How many participants?</label>
+              <select id="booking-participants" name="selected_participants" class="custom_participants" required>
+                <!-- placeholder participants -->
+                <option value="2">2 participants</option>
+                <option value="3">3 participants</option>
+                <option value="4">4 participants</option>
+                <option value="5">5 participants</option>
+                <option value="6">6 participants</option>
+              </select>
+            </div>
+            <!-- submit booking btn -->
+            <button type="submit" class="submit_booking_btn">submit booking</button>
+          </form>
+        </div>
+
+              <!-- Step 3: Confirmation -->
+              <div class="booking-modal__step" id="step3">
+                <h2 class="booking-modal__title">Thank You!</h2>
+                add a paragraph for the confirmation and a button to close the modal button
+              </div>
+          </div>
+        </div>
+        <!-- </dialog> -->
+        
         <!--*************************************************** STORY ******************************************************-->
         <section class="story">
         <div class="story__container">
@@ -520,7 +336,7 @@
               Praeterea, ex culpa non invenies unum aut non accusatis unum. Et
               nihil inuitam. Nemo nocere tibi erit, et non inimicos, et
             </p>
-            <a href="#challenges"  class="play__btn">See all challenges</a>
+            <a href="challenges.html"  class="play__btn">See all challenges</a>
           </section>
         </div>
       </div>
