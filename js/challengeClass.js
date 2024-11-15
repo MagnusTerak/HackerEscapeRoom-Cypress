@@ -1,4 +1,4 @@
-export class Challenge {
+class Challenge {
   constructor(
     id,
     title,
@@ -105,3 +105,5 @@ export class Challenge {
     return liItem;
   }
 }
+
+export default Challenge;
