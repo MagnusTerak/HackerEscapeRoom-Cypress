@@ -1,5 +1,3 @@
-import { fetchAllChallenges, fetchAvailableTimes, createReservation } from "./apiService.js";
-
 export class Challenge {
   constructor(
     id,
@@ -107,18 +105,3 @@ export class Challenge {
     return liItem;
   }
 }
-
-const challenge = new Challenge(
-  1,
-  "Title of room",
-  "Praeterea, ex culpa non invenies unum aut non accusatis unum. Et nihil inuitam. Nemo nocere tibi erit, et non inimicos, et. ",
-  "on-site",
-  2,
-  6,
-  4.5,
-  "assets/images/gallery/image1.png",
-  ""
-);
-
-const roomList = document.querySelector(".challenges__list");
-roomList.appendChild(challenge.createChallengeCard());
