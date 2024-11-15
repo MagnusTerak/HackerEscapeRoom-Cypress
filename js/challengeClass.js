@@ -31,12 +31,16 @@ export class Challenge {
     const starEmpty = new Image();
     starEmpty.src = "assets/svg/star.svg";
     starEmpty.className = "star unfilled";
+    const starHalf = new Image();
+    starHalf.src = "assets/svg/star-half.svg";
+    starHalf.className = "star half";
 
     for (let i = 0; i < 5; i++) {
       //star.src = "assets/svg/star.svg"
       //star.src = "assets/svg/star-half.svg"
       challengeRating.appendChild(starFilled);
       challengeRating.appendChild(starEmpty);
+      challengeRating.appendChild(starHalf);
       
     }
 
