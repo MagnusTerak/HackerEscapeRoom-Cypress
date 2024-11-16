@@ -46,7 +46,6 @@ class Challenge {
     return challengeRating;
   }
 
-  //methods:
   createChallengeCard() {
     const liItem = document.createElement("li");
     liItem.id = "room__carousel__slide" + this.id;
