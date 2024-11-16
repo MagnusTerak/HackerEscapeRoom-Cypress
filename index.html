@@ -237,24 +237,29 @@
               <h2 class="booking-modal__title">Select a Date(Step1/Modal1)</h2>
               Add a Form labels, an input field for the date, and a button for searching available times (Modal 1). Decide whether to generate these elements dynamically using JavaScript or include them directly as static HTML tags. Regardless of the approach, ensure all necessary elements are properly integrated into challenges.html.
             </div>
-
+<!-- link to styling -->
+  <link rel="stylesheet" href="./styles/layouts/css/modul-step-2.css">
+  <!-- link to step2 js -->
+<script src="./js/modul-step-2.js" defer></script>
              <!-- Step 2: Enter Details -->
+             <button id="openModalBtn">Open Modal</button> <!-- test btn-->
+
         <div class="booking_modal_step_2" id="step2">
           <h1>Book room "Title of room" (step 2)</h1>
           <form class="user_booking" id="user-booking" action="/submit_booking" method="post">
             <!-- Name -->
             <div class="user_booking_name">
-              <label for="name_booking" class="booking_name">Name</label>
+              <label for="booking-name" class="booking_name">Name</label>
               <input type="name" class="custom_name" id="booking-name" name="user_name" required>
             </div>
             <!-- Email -->
             <div class="user_booking_email">
-              <label for="email_booking" class="booking_email">Email</label>
+              <label for="booking-email" class="booking_email">Email</label>
               <input type="email" class="custom_email" id="booking-email" name="user_email" required>
             </div>
             <!-- Times -->
             <div class="user_booking_time">
-              <label for="time_booking" class="booking_time">What time?</label>
+              <label for="booking-time" class="booking_time">What time?</label>
               <select id="booking-time" name="selected_time" class="custom_time" required>
                 <!-- placeholder times -->
                 <option value="10:00-11:30">10:00-11:30</option>
@@ -264,7 +269,7 @@
             </div>
             <!-- participants -->
             <div class="user_booking_participants">
-              <label for="participants_booking" class="booking_participants">How many participants?</label>
+              <label for="booking-participants" class="booking_participants">How many participants?</label>
               <select id="booking-participants" name="selected_participants" class="custom_participants" required>
                 <!-- placeholder participants -->
                 <option value="2">2 participants</option>
