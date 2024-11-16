@@ -70,8 +70,8 @@ class Challenge {
 
 
     const title = document.createElement("h2");
-    title.className = "challenge__details__title";
-    title.textContent = this.title;
+    title.className = "challenge__details__title_temporary";
+    title.textContent = this.title + " (" + this.type + ")";
 
     const detailsInfo = document.createElement("div");
     detailsInfo.className = "challenge__details-info";
