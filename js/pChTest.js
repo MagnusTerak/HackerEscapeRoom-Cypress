@@ -17,8 +17,12 @@ const displayNumberOfChallenges = async () => {
 
     challengesArray = challenges;
 
+    let ascendingArray = [];
+
+    ascendingArray = challengesArray.sort((b, a) => a.rating - b.rating);
+
     for (let i = 0; i < displayedChallenges; i++) {
-        const challengeData = challenges[i];
+        const challengeData = ascendingArray[i];
 
         const challenge = new Challenge(
             challengeData.id,
