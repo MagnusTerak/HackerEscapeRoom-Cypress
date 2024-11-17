@@ -10,7 +10,8 @@
   >
   <script src="js/menu.js" defer></script>
   <script type="module" src="./js/apiTest.js"></script>
-  <script src="./js/modal1.js" defer></script>
+  <script type="module" src="./js/modal1.js" defer></script>
+  <script type="module" src="./js/displayAllChallenges.js"></script>
 </head>
 
 <body>
@@ -49,6 +50,8 @@
      <main class="main">
 
 
+
+
         
         
         <!--*************************************************** Challenges ******************************************************-->
@@ -61,19 +64,21 @@
 
         <!--************ Filters ****************-->
         
-        <section>
-            <h2>Filter challenges</h2>
+        <section class="filter">
+          <button class="filter__button">
+            <h2 class="filter__button__title">Filter challenges</h2>
+          </button>
         </section>
         
         <!--************ continue to challenge list *********-->
-        <ol class="rooms__list carousel__viewport">
-          <!-- top 3 challenges regineras automatisk   -->
+        <ol class="challenges__list carousel__viewport">
+          
         </ol>
         </article>
 
          <!--*************************************************** Modal******************************************************-->
                 <!-- <dialog class="booking-modal">  -->
-                    <div class="booking-modal">
+                    <div class="booking-modal" id="booking-modal">
                         <div class="booking-modal__content">
               
                           <!-- Step 1: Select Date -->
@@ -81,8 +86,8 @@
                               <div class="modal" id="modal1">
                                 <div class="modal__content">
                                     <h1>Book room "Title of room" (step 1)</h1>
-                                    <form class="booking__form"> 
-                                      <label for "dates" class="booking__date">What date would you like to come?</label>
+                                    <form class="booking__form" id="booking-form"> 
+                                      <label for="booking-date" class="booking__date">What date would you like to come?</label>
                                       <h1>date</h1>
                                       <input type="date" class="custom__date" id="booking-date" name="booking-date" required>
                                       <button type="submit" class="booking__search-btn">Search available times</button>
