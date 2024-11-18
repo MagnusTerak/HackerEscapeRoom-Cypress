@@ -4,12 +4,46 @@
 .filter {
     display: flex;
     justify-content: center;
+    margin-bottom: 5rem;
+    &__modal {
+        width: 84.5%;
+        height: 25rem;
+        border: 2px solid $color-light-blue;
+        border-radius: 2px; 
+
+        &__header {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+
+            &__closeBtn {
+                background-color: transparent;
+                border: none;
+                font-size: 2.5rem;
+                color: grey;
+                padding-top: 1.5rem;
+                padding-right: 1.5rem;
+
+                &:hover {
+                    color: red;
+                    cursor: pointer;
+                }
+            }
+
+            &__title {
+                @include font-style;
+                font-size: 1.5rem;
+                padding-left: 2rem;
+                padding-top: 1.5rem;
+            }
+        }
+    }
 
     &__button {
         color: $color-blue;
         border: 2px solid $color-light-blue;
         border-radius: 0.3rem;
-        background-color: #ffffff;
+        background-color: transparent;
 
         &:hover {
             background-color: $color-blue;
@@ -21,7 +55,11 @@
         &__title {
             @include font-style;
             padding: 0.5rem;
-            font-size: 1.2rem;
+            font-size: 1.75rem;
         }
+    }
+
+    &__hidden {
+        display: none;
     }
 }
