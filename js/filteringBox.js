@@ -31,10 +31,10 @@ function openFilterModal() {
 
 function closeFilterModal() {
     filterBtn.classList.remove("filter__hidden");
-    destroyModal();
+    destroyFilterBox();
 }
 
-function destroyModal() {
+function destroyFilterBox() {
     const filterBox = document.querySelector(".filter__box");
     filterBox.remove();
 }
