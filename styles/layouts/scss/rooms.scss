@@ -175,4 +175,13 @@
   }
 }
 
+.rooms {
+  &__title {
+    text-align: center;
+    @include font-bold;
+    font-size: 3rem;
+    margin: 5rem 0 5rem 0;
+  }
+}
+
 // }
