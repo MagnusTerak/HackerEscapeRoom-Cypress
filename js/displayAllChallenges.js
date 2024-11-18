@@ -1,5 +1,6 @@
 import { fetchAllChallenges } from './apiService.js';
 import TCard from './temporary.js'; 
+import { handleBookButtonClick } from './modal1.js';
 
 
 const challengesListElement = document.querySelector('.challenges__list');
@@ -50,9 +51,6 @@ export const displayAllChallenges = async () => {
     });
 };
 
-const handleBookButtonClick = (challengeId) => {
-    console.log(`display challenge ID: ${challengeId}`);
-};
 export const getChallengesArray = () => challengesArray;
 
 displayAllChallenges();

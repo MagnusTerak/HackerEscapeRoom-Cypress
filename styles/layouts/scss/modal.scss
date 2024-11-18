@@ -2,7 +2,7 @@
 @use'../../global-styles/_colors.scss' as*;
 
 .booking-modal{
-    //display: flex; Initially hidden, pops up with btn that I am trying to fix 
+    display: none;//display: flex; Initially hidden, pops up with btn that I am trying to fix 
     background-color: white;
     width: 620px;
     height: 550px;
@@ -18,14 +18,14 @@
 .modal__content h1{
     font-size: 1.5rem;
     padding-bottom: 2rem;
-    color:grayscale($color: #444444);
+    color: #444444;
     font-weight:500;
     margin-right: auto;
 }
 
 .booking__date{
     font-size: 1rem;
-    color:grayscale($color: #444444);
+    color:#444444;
     font-weight: bolder;    
 }
 
