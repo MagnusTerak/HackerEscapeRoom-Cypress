@@ -7,22 +7,20 @@ body {
 
 /* container */
 .booking_modal_step_2 {
-    display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: px; /* Location of the box */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    display: none; 
+  z-index: 1;
+  overflow: auto;
+  background-color: rgb(0,0,0); 
+  background-color: rgba(0,0,0,0.4); 
     padding: 20px 30px;
     background-color: rgb(234, 235, 240);
-    width: 60%;
-    min-height: 50%;
+    width: 40%;
+    height: 70%;
     margin: 5% auto;
     border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+    border-radius: 2px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    position: relative;
+    position:relative;
 
 }
 
@@ -30,7 +28,7 @@ body {
 .booking_modal_step_2 h1 {
     font-size: 1.5rem;
     color: #444;
-    font-weight: bold;
+    font-weight: normal;
     margin-bottom: 20px;
     text-align: left;
 }
@@ -44,22 +42,37 @@ body {
 
 /* labels */
 .user_booking label {
-    font-size: 0.9rem;
-    font-weight: bold;
+    font-size: 13px;
+    font-weight:bolder;
     color: 333;
-    margin-bottom: 5px;
+    margin-bottom: 1px;
     display: block;
-}
+    color: #555555;
 
-/* input fields */
-.user_booking input,
-.user_booking select {
+
+}
+.user_booking input {
     width: 100%;
     padding: 8px 12px;
     font-size: 1rem;
     border-radius: 4px;
     outline: none;
+    field-sizing: content;
+    max-width: 300px;
+    border-color: #b6b6b6;
+}
+
+/* select fields */
+.user_booking select {
+    width: 100%;
+    padding: 8px 12px;
+    font-size: 1.15rem;
+    border-radius: 4px;
+    outline: none;
     transition: border-color 0.3s;
+    field-sizing: content;
+    max-width: 170px;
+    
 }
 
 /* input focus */
@@ -73,12 +86,15 @@ body {
     background-color: blue;
     color: #fff;
     font-size: 1rem;
-    padding-left: 10px 20px;
+    padding-left: 0px;
     border: none;
-    border-radius: 4px;
+    border-radius: 4.5px;
     cursor: pointer;
     transition: background-color 0.3s;
     align-self: flex-end;
+    padding: 10px;
+    padding-right: 20px;
+    margin-top: 100px;
 }
 
     /* button hover */

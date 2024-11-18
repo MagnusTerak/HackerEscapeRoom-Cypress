@@ -1,13 +1,15 @@
 document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('openModalBtn').addEventListener('click', function() {
     console.log("Button clicked!");
-    document.querySelector('.booking_modal_step_2').style.display = 'block'; // Show the modal
+    document.querySelector('.booking_modal_step_2').style.display = 'block'; 
   });
 });
 
-// Optional: Close the modal when clicking outside the modal
-document.querySelector('.booking_modal_step_2').addEventListener('click', function(e) {
-  if (e.target === this) {
-    this.style.display = 'none';  // Hide the modal if clicked outside
+window.onclick = function(event) {
+  if (event.target == step2) {
+    modal.style.display = "none";
   }
-});
+}
+
+
+var booking_modal_step_2 = document.getElementById("step2")
