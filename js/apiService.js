@@ -70,8 +70,9 @@ export const fetchAvailableTimes = async (challengeId, date) => {
         const { slots } = await fetchApi(
             `${BASE_URL}/booking/available-times?date=${date}&challenge=${challengeId}`
         );
+        
         console.log('Available slots:', slots);
-        return { success: true, data: array (5) };
+        return { success: true, data: array [5]};
     } catch (error) {
         return { success: false, data: [], error: error.message };
     }

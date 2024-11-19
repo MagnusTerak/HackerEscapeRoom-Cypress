@@ -9,7 +9,7 @@ const modal = document.querySelector('.booking-modal');
 console.log(modal);
 
 export const handleBookButtonClick = ()=>{
-console.log('hello from the book btn');
+console.log('Hello from the book btn');
   
 modal.style.display = 'block';
 
@@ -18,10 +18,9 @@ modal.style.display = 'block';
 const searchButton = document.querySelector('.booking__search-btn');
 const dateInput = document.querySelector('.custom__date');
 
-const displayAvailableTimes= (availableTimes) => {
-
-    if(!Array.isArray(availableTimes.data)){
-        console.error('invalid data format', availableTimes);
+const displayAvailableTimes = (availableTimes) => {
+    if(!Array.isArray(availableTimes.data)) {
+        console.error('Invalid data format', availableTimes);
         return;
     }
     //Creating a list for the available times
@@ -36,31 +35,35 @@ const displayAvailableTimes= (availableTimes) => {
     });
 
     const modalContent = document.querySelector('#step1 .modal__content');
+    modalContent.innerHTML=''; //Clearing 
     modalContent.appendChild(timesContainer);
-    console.log('Times are displayed with success');
+    console.log('Available times are successfully displayed');
 };
 
-searchButton.addEventListener('click', async (event)=>{
+searchButton.addEventListener('click', async (event) => {
     event.preventDefault();
 
+    const challengeId=3;
     const selectedDate = dateInput.value;
     
     if (!selectedDate){
-        alert('Please, select a date!');
+        alert('Please, select a valid date!');
+        dateInput.focus();
         return;
     }
 
     try {
-        const availableTimes = await fetchAvailableTimes(selectedDate);
+        const availableTimes = await fetchAvailableTimes(challengeId, selectedDate);
 
-        if (availableTimes=success){
+        if (availableTimes.success) {
             console.log('Available times are:', availableTimes.data);
             displayAvailableTimes(availableTimes);
         } else{
-            alert('could not fetch. try again later.')
+            console.error('Could not fetch available times:', availableTimes.error);
+            alert('Could not fetch. try again later.');
         }
-        
-    } catch (error){
+
+    } catch (error) {
         console.error('Error fetching times:', error);
         alert('Could not fetch available times. Please try again later.');
     }
