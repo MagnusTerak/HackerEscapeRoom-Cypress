@@ -50,7 +50,7 @@ class Challenge {
     const liItem = document.createElement("li");
     liItem.id = "room__carousel__slide" + this.id;
     liItem.setAttribute('tabindex', 0);
-    liItem.className = "challenge__slide challengey challenges" + this.id;
+    liItem.className = "challenge__slide challengey challenges";
 
     const imageContainer = document.createElement("div");
     imageContainer.className = "challenge__image-container"
