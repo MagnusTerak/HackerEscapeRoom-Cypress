@@ -71,7 +71,7 @@ export const fetchAvailableTimes = async (challengeId, date) => {
             `${BASE_URL}/booking/available-times?date=${date}&challenge=${challengeId}`
         );
         console.log('Available slots:', slots);
-        return { success: true, data: slots ?? [] };
+        return { success: true, data: array (5) };
     } catch (error) {
         return { success: false, data: [], error: error.message };
     }
@@ -108,3 +108,4 @@ export const createReservation = async (reservationData) => {
         return { success: false, error: error.message };
     }
 };
+

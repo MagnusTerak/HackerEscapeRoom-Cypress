@@ -1,8 +1,13 @@
 @use '../../global-styles/_fonts.scss' as *;
 @use'../../global-styles/_colors.scss' as*;
 
-.booking-modal{
-    display: none;//display: flex; Initially hidden, pops up with btn that I am trying to fix 
+
+.booking-modal{//modal with all steps, initially hidden
+display:none;
+}
+
+.booking-modal__step{ 
+    display: none;//Initially hidden, pops up with btn
     background-color: white;
     width: 620px;
     height: 550px;
@@ -13,6 +18,10 @@
     right:30%;
     padding: 20px;
     z-index: 1000;    
+}
+
+.booking-modal__step--active{
+    display: block;
 }
 
 .modal__content h1{
@@ -48,7 +57,7 @@
     
 }
 
-.booking__search-btn{
+.booking__search-btn{ //Searching for available times
     background-color: rgb(76, 76, 215);
     color:white;
     margin-top:22rem;
@@ -57,3 +66,4 @@
     border-radius: 3px;
     margin-left:400px;
 }
+
