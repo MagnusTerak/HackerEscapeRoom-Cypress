@@ -1,27 +1,60 @@
 @use '../../global-styles/_colors.scss' as *;
 @use '../../global-styles/_fonts.scss' as *;
+@use '../../global-styles/_buttons.scss' as *;
 
 .filter {
     display: flex;
     justify-content: center;
+    margin-bottom: 5rem;
+    &__box {
+        width: 84.5%;
+        height: 25rem;
+        border: 2px solid $color-light-blue;
+        border-radius: 2px; 
+
+        &__topDiv {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+
+            &__closeFilterBtn {
+                background-color: transparent;
+                border: none;
+                font-size: 2.5rem;
+                color: grey;
+                padding-top: 1.5rem;
+                padding-right: 1.5rem;
+
+                &:hover {
+                    color: red;
+                    cursor: pointer;
+                }
+            }
+
+            &__title {
+                @include font-style;
+                font-size: 1.5rem;
+                padding-left: 2rem;
+                padding-top: 1.5rem;
+            }
+        }
+    }
 
     &__button {
-        color: $color-blue;
-        border: 2px solid $color-light-blue;
-        border-radius: 0.3rem;
-        background-color: #ffffff;
+        @include button-outlined;
 
         &:hover {
-            background-color: $color-blue;
-            border: 2px solid $color-blue;
-            color: white;
             cursor: pointer;
         }
 
         &__title {
             @include font-style;
             padding: 0.5rem;
-            font-size: 1.2rem;
+            font-size: 1.75rem;
         }
+    }
+
+    &__hidden {
+        display: none;
     }
 }
