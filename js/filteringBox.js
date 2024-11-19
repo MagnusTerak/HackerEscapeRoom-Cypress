@@ -73,6 +73,32 @@ function openFilterModal() {
     checkBoxLabel2.appendChild(document.createTextNode("Include on-site challenges"));
     checkDiv4.appendChild(checkBoxLabel2);
 
+    // Search field divs
+    const searchDivMain = document.createElement("div");
+    filterBox.appendChild(searchDivMain);
+    searchDivMain.classList.add("filter__box__searchDivMain");
+
+    const searchDiv2 = document.createElement("div");
+    searchDivMain.appendChild(searchDiv2);
+    searchDiv2.classList.add("filter__box__searchDivMain__searchDiv2");
+
+    const searchDiv3 = document.createElement("div");
+    searchDivMain.appendChild(searchDiv3);
+    searchDiv3.classList.add("filter__box__searchDivMain__searchDiv3");
+
+    // Search field
+    const searchFieldTitle = document.createElement("h4");
+    searchFieldTitle.innerHTML = "Or type to search for keywords";
+    searchDiv2.appendChild(searchFieldTitle);
+    searchFieldTitle.classList.add("filter__box__searchDiv__title");
+
+    const searchField = document.createElement("input");
+    searchField.type = "search";
+    searchField.id = "searchField-input";
+    searchField.placeholder = "Start typing to filter";
+    searchDiv3.appendChild(searchField);
+    searchField.classList.add("filter__box__searchDiv__searchfield");
+
 }
 
 function closeFilterModal() {
