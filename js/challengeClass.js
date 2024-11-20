@@ -25,7 +25,7 @@ class Challenge {
     // Drawing a stars
     const rate = this.rating;
     const challengeRating = document.createElement("div");
-    challengeRating.className = "room__ratings"
+    challengeRating.className = "challenge__ratings"
 
     for (let i = 1; i <= 5; i++) {
       const star = new Image();
@@ -48,7 +48,7 @@ class Challenge {
 
   createChallengeCard() {
     const liItem = document.createElement("li");
-    liItem.id = "room__carousel__slide" + this.id;
+    liItem.id = "challenges__carousel__slide" + this.id;
     liItem.setAttribute('tabindex', 0);
     liItem.className = "challenge__slide challengey challenges";
 
