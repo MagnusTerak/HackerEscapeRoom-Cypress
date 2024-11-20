@@ -72,7 +72,7 @@ export const fetchAvailableTimes = async (challengeId, date) => {
         );
         
         console.log('Available slots:', slots);
-        return { success: true, data: slots};
+        return { success: true, data: slots ?? [] };
     } catch (error) {
         return { success: false, data: [], error: error.message };
     }
