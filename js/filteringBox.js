@@ -4,9 +4,9 @@ import TCard from "./temporary.js";
 const filterBtn = document.querySelector(".filter__button");
 filterBtn.addEventListener("click", openFilterModal);
 
-// Debounce delay
+// Debounce delay for smoother operation
 let searchDebounceTimer;
-const searchDebounceDelay = 200;
+const searchDebounceDelay = 400;
 
 function openFilterModal() {
     const filterSection = document.querySelector(".filter");
@@ -61,8 +61,10 @@ function openFilterModal() {
     const checkBox1 = document.createElement("input");
     checkBox1.type = ("checkbox");
     checkBox1.id = "DOM__checkBox1";
+    checkBox1.checked = true;
     checkDiv3.appendChild(checkBox1);
     checkBox1.classList.add("filter__box__checkDiv__checkbox1");
+    checkBox1.addEventListener("change", () => executeSearch(searchField.value));
 
     const checkBoxLabel1 = document.createElement("label");
     checkBoxLabel1.htmlFor = "DOM__checkBox1";
@@ -72,11 +74,13 @@ function openFilterModal() {
     const checkBox2 = document.createElement("input");
     checkBox2.type = ("checkbox");
     checkBox2.id = ("DOM__checkBox2")
+    checkBox2.checked = true;
     checkDiv4.appendChild(checkBox2);
     checkBox2.classList.add("filter__box__checkDiv__checkbox2");
+    checkBox2.addEventListener("change", () => executeSearch(searchField.value));
 
     const checkBoxLabel2 = document.createElement("label");
-    checkBoxLabel2.htmlFor = "DOM__checkBox1";
+    checkBoxLabel2.htmlFor = "DOM__checkBox2";
     checkBoxLabel2.appendChild(document.createTextNode("Include on-site challenges"));
     checkDiv4.appendChild(checkBoxLabel2);
 
@@ -118,13 +122,23 @@ function debounceSearch(event) {
 }
 
 //Perform search on challenges array from case-insensitive userinput 
-function executeSearch(event) {
+function executeSearch(query) {
     const challengesArray = getChallengesArray();
-    const filteredResults = challengesArray.filter(challenge => 
-        challenge.title.toLowerCase().includes(event.toLowerCase()) || 
-        challenge.description.toLowerCase().includes(event.toLowerCase()) ||
-        challenge.labels.some(label =>
-            label.toLowerCase().includes(event.toLowerCase())));
+    console.log("All challenges:", challengesArray); 
+    const onlineChecked = document.getElementById("DOM__checkBox1").checked;
+    const onsiteChecked = document.getElementById("DOM__checkBox2").checked;
+    const filteredResults = challengesArray.filter(challenge => {
+        const matchesQuery =
+            challenge.title.toLowerCase().includes(query.toLowerCase()) || 
+            challenge.description.toLowerCase().includes(query.toLowerCase()) ||
+            challenge.labels.some(label =>
+                label.toLowerCase().includes(query.toLowerCase()));
+
+        const matchesType = 
+            (onlineChecked && challenge.type.toLowerCase() === "online") ||
+            (onsiteChecked && challenge.type.toLowerCase() === "onsite");
+                return matchesQuery && matchesType;
+            });
 
             displaySearchResults(filteredResults);
 
