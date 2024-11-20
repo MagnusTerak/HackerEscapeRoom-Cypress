@@ -91,10 +91,17 @@ class Challenge {
 
     const link = document.createElement("a");
     link.className = "challenge__btn";
-    if (this.type === "onsite")
+    if (this.type === "onsite") {
       link.textContent = "Book this room";
-    else if (this.type === "online")
+      link.addEventListener('click', () => {
+        window.location.href = "challenges.html";
+    });
+    } else if (this.type === "online") {
       link.textContent = "Take challenge online";
+      link.addEventListener('click', () => {
+        window.location.href = "challenges.html";
+    });
+    }
 
     detailsContainer.appendChild(title);
     detailsContainer.appendChild(detailsInfo);
