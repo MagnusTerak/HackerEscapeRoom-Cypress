@@ -91,7 +91,10 @@ class Challenge {
 
     const link = document.createElement("a");
     link.className = "challenge__btn";
-    link.textContent = "Book this challenge";
+    if (this.type === "onsite")
+      link.textContent = "Book this room";
+    else if (this.type === "online")
+      link.textContent = "Take challenge online";
 
     detailsContainer.appendChild(title);
     detailsContainer.appendChild(detailsInfo);
