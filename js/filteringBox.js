@@ -1,5 +1,12 @@
+import { getChallengesArray } from "./displayAllChallenges.js";
+import TCard from "./temporary.js";
+
 const filterBtn = document.querySelector(".filter__button");
 filterBtn.addEventListener("click", openFilterModal);
+
+// Debounce delay
+let searchDebounceTimer;
+const searchDebounceDelay = 200;
 
 function openFilterModal() {
     const filterSection = document.querySelector(".filter");
@@ -98,6 +105,62 @@ function openFilterModal() {
     searchField.placeholder = "Start typing to filter";
     searchDiv3.appendChild(searchField);
     searchField.classList.add("filter__box__searchDiv__searchfield");
+    searchField.addEventListener("input", debounceSearch);
+
+}
+
+// Delayed search from input event
+function debounceSearch(event) {
+    clearTimeout(searchDebounceTimer);
+    searchDebounceTimer = setTimeout(() => 
+        executeSearch(event.target.value), searchDebounceDelay);
+
+}
+
+//Perform search on challenges array from case-insensitive userinput 
+function executeSearch(event) {
+    const challengesArray = getChallengesArray();
+    const filteredResults = challengesArray.filter(challenge => 
+        challenge.title.toLowerCase().includes(event.toLowerCase()) || 
+        challenge.description.toLowerCase().includes(event.toLowerCase()) ||
+        challenge.labels.some(label =>
+            label.toLowerCase().includes(event.toLowerCase())));
+
+            displaySearchResults(filteredResults);
+
+}
+ 
+// Prints filteredResults in DOM-element
+function displaySearchResults(filteredResults) {
+    const challengesListElement = document.querySelector (".challenges__list");
+   
+    // Clear list
+    challengesListElement.innerHTML = ""; 
+
+    // Errorhandling
+    if (filteredResults.length === 0) {
+        challengesListElement.innerHTML = "<li>No matching challenges</li>";
+        return;
+    }
+
+    // Loop challenges and present in cards
+    filteredResults.forEach((challengeData) => {
+        const tCard = new TCard(
+            challengeData.id,
+            challengeData.title,
+            challengeData.description,
+            challengeData.type,
+            challengeData.minParticipants,
+            challengeData.maxParticipants,
+            challengeData.rating,
+            challengeData.image,
+            challengeData.labels
+        );
+
+        const challengeElement = tCard.createTCard(tCard);
+
+        challengesListElement.appendChild(challengeElement);
+    });
 
 }
 
