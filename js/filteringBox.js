@@ -54,7 +54,7 @@ function openFilterModal() {
 
     // Checkboxes
     const checkBoxTitle = document.createElement("h4");
-    checkBoxTitle.innerHTML = "By type";
+    checkBoxTitle.textContent = "By type";
     checkDiv2.appendChild(checkBoxTitle);
     checkBoxTitle.classList.add("filter__box__checkDiv__title");
 
@@ -99,7 +99,7 @@ function openFilterModal() {
 
     // Search field
     const searchFieldTitle = document.createElement("h4");
-    searchFieldTitle.innerHTML = "Or type to search for keywords";
+    searchFieldTitle.textContent = "Or type to search for keywords";
     searchDiv2.appendChild(searchFieldTitle);
     searchFieldTitle.classList.add("filter__box__searchDiv__title");
 
@@ -149,11 +149,11 @@ function displaySearchResults(filteredResults) {
     const challengesListElement = document.querySelector (".challenges__list");
    
     // Clear list
-    challengesListElement.innerHTML = ""; 
+    challengesListElement.textContent = ""; 
 
     // Errorhandling
     if (filteredResults.length === 0) {
-        challengesListElement.innerHTML = "<li>No matching challenges</li>";
+        challengesListElement.textContent = "No matching challenges";
         return;
     }
 
@@ -181,6 +181,11 @@ function displaySearchResults(filteredResults) {
 function closeFilterModal() {
     filterBtn.classList.remove("filter__hidden");
     destroyFilterBox();
+    
+    // Reset filtering to show all challenges when filterbox is closed 
+    const challengesArray = getChallengesArray();
+    displaySearchResults(challengesArray);
+
 }
 
 function destroyFilterBox() {
