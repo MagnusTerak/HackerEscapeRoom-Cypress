@@ -46,7 +46,24 @@ class Challenge {
     return challengeRating;
   }
 
-  createChallengeCard() {
+  mainPageBtn() {
+    const link = document.createElement("a");
+    link.className = "challenge__btn";
+    if (this.type === "onsite") {
+      link.textContent = "Book this room";
+      link.addEventListener('click', () => {
+        window.location.href = "challenges.html";
+      });
+    } else if (this.type === "online") {
+      link.textContent = "Take challenge online";
+      link.addEventListener('click', () => {
+        window.location.href = "challenges.html";
+      });
+    }
+    return link;
+  }
+
+  createChallengeCard(btn) {
     const liItem = document.createElement("li");
     liItem.id = "challenges__carousel__slide" + this.id;
     liItem.setAttribute('tabindex', 0);
@@ -81,7 +98,7 @@ class Challenge {
     const challengeParticipants = document.createElement("div");
     challengeParticipants.className = "challenge__participants";
     challengeParticipants.textContent = `${this.minParticipants} - ${this.maxParticipants} participants`;
-
+    
     detailsInfo.appendChild(rating);
     detailsInfo.appendChild(challengeParticipants);
 
@@ -89,24 +106,13 @@ class Challenge {
     challengeDescription.className = "challenge__description"
     challengeDescription.textContent = this.description;
 
-    const link = document.createElement("a");
-    link.className = "challenge__btn";
-    if (this.type === "onsite") {
-      link.textContent = "Book this room";
-      link.addEventListener('click', () => {
-        window.location.href = "challenges.html";
-    });
-    } else if (this.type === "online") {
-      link.textContent = "Take challenge online";
-      link.addEventListener('click', () => {
-        window.location.href = "challenges.html";
-    });
-    }
-
     detailsContainer.appendChild(title);
     detailsContainer.appendChild(detailsInfo);
     detailsContainer.appendChild(challengeDescription);
-    detailsContainer.appendChild(link);
+    
+    if(btn){
+    detailsContainer.appendChild(this.mainPageBtn());
+    }
 
     liItem.appendChild(imageContainer);
     liItem.appendChild(detailsContainer);

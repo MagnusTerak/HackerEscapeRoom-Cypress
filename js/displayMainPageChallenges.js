@@ -36,7 +36,7 @@ const displayNumberOfChallenges = async () => {
             challengeData.labels
         );
 
-        challengesListElement.appendChild(challenge.createChallengeCard());
+        challengesListElement.appendChild(challenge.createChallengeCard(true));
     }
 };
 
