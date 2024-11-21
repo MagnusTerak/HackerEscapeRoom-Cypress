@@ -7,6 +7,13 @@ filterBtn.addEventListener("click", openFilterModal);
 // Debounce delay for smoother operation
 let searchDebounceTimer;
 const searchDebounceDelay = 400;
+let searchField;
+
+// Variable for toggletracing
+let activeTag = null;
+
+// Array for the dynamic tags
+let dynamicTagButtons = [];
 
 function openFilterModal() {
     const filterSection = document.querySelector(".filter");
@@ -84,6 +91,29 @@ function openFilterModal() {
     checkBoxLabel2.appendChild(document.createTextNode("Include on-site challenges"));
     checkDiv4.appendChild(checkBoxLabel2);
 
+    // Div-structure for dynamic tags
+    const dynamicDivMain = document.createElement("div");
+    filterBox.appendChild(dynamicDivMain);
+    dynamicDivMain.classList.add("filter__box__dynamicDivMain")
+
+    const dynamicDivTitle = document.createElement("div");
+    dynamicDivMain.appendChild(dynamicDivTitle);
+    dynamicDivTitle.classList.add("filter__box__dynamicDivMain__dynamicDivTitle")
+
+    const dynamicDivTagContainer = document.createElement("div");
+    dynamicDivMain.appendChild(dynamicDivTagContainer);
+    dynamicDivTagContainer.classList.add("filter__box__dynamicDivMain__dynamicDivTagContainer");
+
+    // Dynamic tags title
+    const dynamicTagTitle = document.createElement("h4");
+    dynamicTagTitle.textContent = "By tags";
+    dynamicDivTitle.appendChild(dynamicTagTitle);
+    dynamicTagTitle.classList.add("filter__box__dynamicDivMain__title");
+
+    // Populate dynamic tags
+    const challengesArray = getChallengesArray();
+    updateDynamicTags(challengesArray);
+
     // Search field divs
     const searchDivMain = document.createElement("div");
     filterBox.appendChild(searchDivMain);
@@ -113,6 +143,63 @@ function openFilterModal() {
 
 }
 
+function filterByTag(tag) {
+    const challengesArray = getChallengesArray();
+    const filteredResults = challengesArray.filter( challenge =>
+        challenge.labels.some(label =>
+            label.toLowerCase() === tag.toLowerCase())
+        );   
+    displaySearchResults(filteredResults);
+}
+
+function updateTagButtons() {
+    dynamicTagButtons.forEach(button => {
+        const buttonActive = button.textContent === activeTag;
+        button.classList.toggle("active-tag", buttonActive);
+    });
+}
+
+function toggleTagFilter(tag) {
+    if (activeTag === tag) {
+        activeTag = null;
+    }
+    else {
+        activeTag = tag;
+    }
+
+    updateTagButtons();
+    executeSearch(searchField.value || "");
+}
+
+// Update the dynamic tags based on tags present in the filteredResults
+function updateDynamicTags(filteredResults) {
+    const dynamicDivTagContainer = document.querySelector(".filter__box__dynamicDivMain__dynamicDivTagContainer");
+    dynamicDivTagContainer.textContent = "";
+    const tags = getUniqueTags(filteredResults);
+    dynamicTagButtons = [];
+
+    tags.forEach(tag => {
+        const tagButton = document.createElement("button");
+        tagButton.classList.add("filter__box__dynamicDivMain__dynamicTag1");
+        tagButton.textContent = tag;
+        tagButton.addEventListener("click", () => toggleTagFilter(tag));
+        dynamicDivTagContainer.appendChild(tagButton);
+        dynamicTagButtons.push(tagButton);
+    });
+}
+
+// Get unique tags from filteredResults
+function getUniqueTags(filteredResults) {
+    const tagSet = new Set();
+    filteredResults.forEach(challenge => {
+        challenge.labels.forEach(label => {
+            tagSet.add(label);
+        });
+    });
+
+    return Array.from(tagSet);
+}
+
 // Delayed search from input event
 function debounceSearch(event) {
     clearTimeout(searchDebounceTimer);
@@ -137,8 +224,12 @@ function executeSearch(query) {
         const matchesType = 
             (onlineChecked && challenge.type.toLowerCase() === "online") ||
             (onsiteChecked && challenge.type.toLowerCase() === "onsite");
-                return matchesQuery && matchesType;
+            const matchesTag = !activeTag ||
+            challenge.labels.some(label => label.toLowerCase() === activeTag.toLowerCase())
+                return matchesQuery && matchesType && matchesTag;
             });
+
+            updateDynamicTags(filteredResults);
 
             displaySearchResults(filteredResults);
 
