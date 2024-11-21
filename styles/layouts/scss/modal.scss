@@ -16,32 +16,24 @@ display:none;
     top:15%;
     left:30%;
     right:30%;
-    padding: 20px;
-    z-index: 1000;    
+    z-index: 1000;
 }
 
-.booking-modal__step--active{
-    display: block;
-}
-
-.modal__content h1{
-    font-size: 1.5rem;
-    padding-bottom: 2rem;
-    color: #444444;
-    font-weight:500;
-    margin-right: auto;
-}
-
-.booking__date{
-    font-size: 1rem;
+.modal__content-loading {
     color:#444444;
-    font-weight: bolder;    
+    font-weight:400;
+    margin-right: auto;
+    margin-top: auto;
+}
+
+.booking__date-custom {
+    background-color: green;
+    color:#444444;    
 }
 
 .booking__form h1{
     font-size: 0.8rem;
-    padding-top: 1.2rem;
-    padding-bottom: 0;
+    margin-top: 0.8rem;
     font-weight: 600;
 }
 
@@ -51,7 +43,7 @@ display:none;
     align-items: center
 }
 
-.custom__date { //NEEDS FIXING
+.custom__date { 
     color:black;
     border-radius: 3px;
     
@@ -60,10 +52,29 @@ display:none;
 .booking__search-btn{ //Searching for available times
     background-color: rgb(76, 76, 215);
     color:white;
-    margin-top:22rem;
+    margin-top:15rem;
     font-size: 1rem;
     padding:5px;
     border-radius: 3px;
-    margin-left:400px;
+    margin-left:370px;
+    min-width: 12rem;
 }
 
+.booking-modal__step{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 200px;
+}
+
+.booking-modal__step h1{
+    font-weight: 500;
+    font-size: xx-large;
+}
+
+.booking-modal__step a{
+    font-weight: 600;
+    text-decoration: underline;
+    
+}

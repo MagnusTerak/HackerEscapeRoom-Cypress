@@ -78,17 +78,17 @@
 
          <!--*************************************************** Modal******************************************************-->
                 <!-- <dialog class="booking-modal">  -->
-                    <div class="booking-modal" id="booking-modal">
+                    <div class="booking-modal" id="booking-modal" style=" display: none">
                         <div class="booking-modal__content">
               
                           <!-- Step 1: Select Date -->
                           <div class="booking-modal__step booking-modal__step--active" id="step1">
                               <div class="modal" id="modal1">
                                 <div class="modal__content">
-                                    <h1>'Loading Challenge information'</h1>
+                                    <h1 class="modal__content-loading">'Loading Challenge information'</h1>
                                     <form class="booking__form" id="booking-form"> 
                                       <label for="booking-date" class="booking__date">What date would you like to come?</label>
-                                      <h1>date</h1>
+                                      <h1 class ="booking__date-custom">date</h1>
                                       <input type="date" class="custom__date" id="booking-date" name="booking-date" required>
                                       <button type="submit" class="booking__search-btn">Search available times</button>
                                     </form>
@@ -107,7 +107,7 @@
                               <div class="modal" id="modal3">
                                 <div class="modal__content">
                                     <h1>Thank you!</h1>
-                                    <a href="index.html">Back to challenges</a>
+                                    <a href="index.html" id="back-to-challenges">Back to challenges</a>
                                 </div>
                               </div>
                         </div>

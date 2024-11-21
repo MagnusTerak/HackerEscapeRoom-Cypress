@@ -6,12 +6,20 @@ console.log(document.querySelector('.custom__date'));
 console.log("hello from modal 1"); //To see if it works
 
 const modal = document.querySelector('.booking-modal');
+
+const step1=document.querySelector('#step1');
+const step2=document.querySelector('#step2');
+const step3=document.querySelector('#step3');
+
 console.log(modal);
 
 export const handleBookButtonClick = ()=>{
 console.log('Hello from the book btn');
   
 modal.style.display = 'block';
+step2.style.display = 'none';
+step3.style.display = 'none';
+
 
 };
 
@@ -35,7 +43,6 @@ const displayAvailableTimes = (availableTimes) => {
     });
 
     const modalContent = document.querySelector('#step1 .modal__content');
-    modalContent.innerHTML=''; //Clearing 
     modalContent.appendChild(timesContainer);
     console.log('Available times are successfully displayed');
 };
