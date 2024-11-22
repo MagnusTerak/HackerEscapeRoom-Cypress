@@ -4,8 +4,17 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        // You can add global Sass options here if needed
+        
       },
     },
+    devSourcemap: true, 
+  },
+  build: {
+    sourcemap: false,
+  },
+  server: {
+    host: 'localhost',
+    port: 5173,
+    strictPort: true, 
   },
 });
