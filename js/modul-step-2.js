@@ -1,14 +1,34 @@
 // Author: Linnea Ryd
 //coAuthor: Elena Lehto Fredenbrink 
 
-const timeSelect = document.querySelector("#booking-time");
-const participantsSelect = document.querySelector("#booking-participants");
+const timeDropdown = document.querySelector("#booking-time");
+const participantsDropdown = document.querySelector("#booking-participants");
 const step2Modal = document.querySelector('#step2');
 const form = document.querySelector("#user-booking");
 
 let challengeId = 1;
 const selectedDate = '2024-12-12';  // to make sure that we are getting the correct data as the apiTest
 
+
+//make a general function for time &partcipants dropdown
+const updateDropdown=(dropdown, options)=> {
+  // Remove all options except the placeholder, it is one because our first option is the placeholder which has index 0
+  while (dropdown.options.length > 1) {
+    dropdown.remove(1); // Removes anything after our placeholder
+  }
+   // Populate new options in the general function, then we will include it to be read from the api..
+   options.forEach((optionValue)=> {
+    const option = document.createElement("option");
+    option.value = optionValue;
+    option.textContent = optionValue;
+    dropdown.appendChild(option);
+  });
+}
+
+//********************************************************************* */
+// we need to check with Ronja to pass the selected date from step1 
+// add logic to fetch the date from step1 
+//********************************************************************* */
 
 async function fetchBookingDetails(challengeId, date) {
   try {
