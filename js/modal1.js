@@ -22,6 +22,7 @@ step3.style.display = 'none';
 };
 
 function showSteps(stepNumber){
+    modal.style.display='block';
     steps.forEach((step, index) => {
         step.style.display = index + 1 === stepNumber ? 'block' : 'none';
         step.classList.toggle('booking-modal__step--active', index + 1 === stepNumber);
@@ -29,12 +30,11 @@ function showSteps(stepNumber){
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    modal.style.display = 'none'; //Hidden modal in the start
-    showSteps(1);
+    modal.style.display = 'none'; 
+    showSteps(1); //step 1 shows
 })
 
 const searchButton = document.querySelector('.booking__search-btn');
-
 searchButton.addEventListener('click', (e) => {
     e.preventDefault();
     showSteps(2); //Showing step 2 of modal
@@ -45,7 +45,7 @@ searchButton.addEventListener('click', (e) => {
 const dateInput = document.querySelector('.custom__date');
 
 const displayAvailableTimes = (availableTimes) => {
-    if(!Array.isArray(availableTimes.data)) {
+    if (!Array.isArray(availableTimes.data)) {
         console.error('Invalid data format', availableTimes);
         return;
     }
@@ -90,4 +90,18 @@ searchButton.addEventListener('click', async (event) => {
         alert('Could not fetch available times. Please try again later.');
     }
 });
+
+const finishBookingButton = document.querySelector('.booking__finish-btn');
+finishBookingButton.addEventListener('click', (event) => {
+    event.preventDefault();
+
+    //Need logic here to finnish the booking. API stuff 
+    modal.style.display = 'none';
+    showSteps(3);
+    console.log('Showing step 3');
+});
+
+const confirmationMessage = document.createElement('p');
+confirmationMessage.textContent = 'thanks';
+step3.appendChild(confirmationMessage);
 
