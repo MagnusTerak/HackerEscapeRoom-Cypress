@@ -30,6 +30,8 @@
     border-radius: 10px;
     margin: 10px;
     padding: 20px;
+    flex-wrap: nowrap;
+    justify-content: space-between;
 
     .challengey {
       border-radius: 10px;
@@ -172,6 +174,15 @@
     .challenge__ratings {
       margin-right: auto;
     }
+  }
+}
+
+.rooms {
+  &__title {
+    text-align: center;
+    @include font-bold;
+    font-size: 3rem;
+    margin: 5rem 0 5rem 0;
   }
 }
 

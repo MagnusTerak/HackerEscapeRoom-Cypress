@@ -37,3 +37,11 @@
     border: 2px solid $color-light-blue;
   }
 }
+
+@mixin button-outlined() {
+  @include button-styles(transparent, $color-navy);
+  border: 2px solid $color-light-blue;
+  &:hover {
+    background-color: $color-light-blue;
+  }
+}
