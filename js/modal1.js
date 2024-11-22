@@ -6,7 +6,7 @@ console.log(document.querySelector('.custom__date'));
 console.log("hello from modal 1"); //To see if it works
 
 const modal = document.querySelector('.booking-modal');
-const steps = document.querySelectorAll('.booking-modal__step')
+const steps = document.querySelectorAll('.booking-modal__step');
 const step1 = document.querySelector('#step1');
 const step2 = document.querySelector('#step2');
 const step3 = document.querySelector('#step3');
@@ -34,37 +34,41 @@ document.addEventListener('DOMContentLoaded', () => {
     showSteps(1); //step 1 shows
 })
 
-const searchButton = document.querySelector('.booking__search-btn');
-searchButton.addEventListener('click', (e) => {
-    e.preventDefault();
-    showSteps(2); //Showing step 2 of modal
-})
-
-
-
+//Responsive text depending on input
 const dateInput = document.querySelector('.custom__date');
+dateInput.addEventListener('keydown', (event) => event.preventDefault());
+
+const clearAvailableTimes = () => {
+    const existingTimesContainer = document.querySelector('.available-times');
+    if (existingTimesContainer) existingTimesContainer.remove();
+    dateInput.value='';  //Clearing the datefield
+};
+
 
 const displayAvailableTimes = (availableTimes) => {
-    if (!Array.isArray(availableTimes.data)) {
-        console.error('Invalid data format', availableTimes);
-        return;
-    }
-    //Creating a list for the available times
-    const timesContainer = document.createElement('ul');
-    timesContainer.classList.add('available-times'); //Class 4 styling
+    clearAvailableTimes ();
+    const timesContainer = document.createElement('div');
+    timesContainer.classList.add('available-times');
     
     //Looping thru all the times to create a list for every available time
     availableTimes.data.forEach((time) => {
-        const timeItem = document.createElement('li'); //Creating a li-element
-        timeItem.textContent = time;
-        timesContainer.appendChild(timeItem); //
+        const timeButton = document.createElement('button'); //Creating a li-element
+        timeButton.classList.add('time-slot');
+        timeButton.addEventListener('click', () => {
+            showSteps(2);
+            console.log(`Time selected: ${time}`);
+        });
+        timesContainer.appendChild(timeButton);
     });
 
     const modalContent = document.querySelector('#step1 .modal__content');
+    modalContent.textContent = `Loading available times`;
     modalContent.appendChild(timesContainer);
-    console.log('Available times are successfully displayed');
+    
+    console.log('Available times are successfully displayed'); //Testing
 };
 
+const searchButton = document.querySelector('.booking__search-btn');
 searchButton.addEventListener('click', async (event) => {
     event.preventDefault();
     const selectedDate = dateInput.value;
@@ -77,19 +81,16 @@ searchButton.addEventListener('click', async (event) => {
 
     try {
         const availableTimes = await fetchAvailableTimes(3, selectedDate);
-
         if (availableTimes.success) {
-            //Hide part 1 and continue to part 2 of modal
-            showSteps(2);
-            console.log('step2');
-        } else{
+            displayAvailableTimes(availableTimes);
+        } else {
             alert('Could not fetch. try again later.');
         }
 
     } catch (error) {
         alert('Could not fetch available times. Please try again later.');
     }
-});
+}); 
 
 const finishBookingButton = document.querySelector('.booking__finish-btn');
 finishBookingButton.addEventListener('click', (event) => {

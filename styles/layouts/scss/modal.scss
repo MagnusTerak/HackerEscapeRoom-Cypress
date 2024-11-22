@@ -7,8 +7,8 @@
     transform: translate(-50%, -50%); //Vertical and horisontal centering
     background-color: white;
     outline: 3px solid rgba(0,0,0,0.1);
-    width: 600px;
-    height: 500px;
+    width: 700px;
+    height: 600px;
     top: 50%;
     left: 50%;
     z-index: 1000;
@@ -23,30 +23,21 @@
 .booking-modal__step .modal__content .booking__date { 
     font-weight: bolder;
     color:#444444; 
+    //What date would you....
     
 }
 
-.booking__date-custom{
-    color:#444444;   
-    margin-top: 4rem;
-    font-weight: 600;
-}
-
 .custom__date { 
-    color: white;
     border: 3px solid lightgray;
     border-radius: 4px;
     font-size: xx-large;
 }
 
-.custom__date::-webkit-calendar-picker-indicator{
-    display: none;
-}
+
 
 .booking__search-btn{ //Searching for available times
     background-color: rgb(76, 76, 215);
     color:white;
-
     font-size: 1rem;
     padding:5px;
     border-radius: 3px;
