@@ -2,59 +2,42 @@
 @use'../../global-styles/_colors.scss' as*;
 
 
-.booking-modal{//modal with all steps, initially hidden
-display:none;
-}
-
 .booking-modal__step{ 
     display: none;//Initially hidden, pops up with btn
+    position: fixed; //modal is in its fixed position when scrolling
+    transform: translate(-50%, -50%); //Vertical and horisontal centering
     background-color: white;
+    outline: 3px solid rgba(0,0,0,0.1);
     width: 600px;
     height: 500px;
-    outline: 3px solid rgba(0,0,0,0.1);
-    position: fixed; //modal is in its fixed position when scrolling
-    top:15%;
-    left:30%;
-    right:30%;
+    top: 50%;
+    left: 50%;
     z-index: 1000;
 }
 
 .modal__content-loading {
-    position: absolute;
-    top:30px;
-    left:50px;
+    position: relative;
     color:#444444;
-    font-weight:400;
-    margin-right: auto; 
+    font-weight: 400;
 }
 
-.booking-modal__step .modal__content .booking__date {
-    margin-left: 35px;
-    margin-top: 80px;
+.booking-modal__step .modal__content .booking__date { 
     font-weight: bolder;
-    position: absolute;
     color:#444444; 
-
-
+    
 }
 
 .booking__date-custom{
-    position: absolute;
-    margin-left:35px;
     color:#444444;   
-    margin-top: 8rem;
+    margin-top: 4rem;
     font-weight: 600;
 }
 
 .custom__date { 
-    position: absolute;
-    margin-left:35px;
-    margin-top: 150px;
     color: white;
-    border-radius: 4px;
-    appearance: none;
-    font-size: xx-large;
     border: 3px solid lightgray;
+    border-radius: 4px;
+    font-size: xx-large;
 }
 
 .custom__date::-webkit-calendar-picker-indicator{
@@ -64,11 +47,10 @@ display:none;
 .booking__search-btn{ //Searching for available times
     background-color: rgb(76, 76, 215);
     color:white;
-    margin-top:26rem;
+
     font-size: 1rem;
     padding:5px;
     border-radius: 3px;
-    margin-left:370px;
     min-width: 12rem;
     
 }
@@ -78,11 +60,10 @@ display:none;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 200px;
+    padding: 60px;
 }
 
 .booking-modal__step a{
     font-weight: 600;
-    text-decoration: underline;
-    
+    text-decoration: underline;  
 }
