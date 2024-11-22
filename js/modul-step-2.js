@@ -1,9 +1,14 @@
-document.addEventListener('DOMContentLoaded', function() {
-  document.getElementById('openModalBtn').addEventListener('click', function() {
-    console.log("Button clicked!");
-    document.querySelector('.booking_modal_step_2').style.display = 'block'; 
-  });
-});
+// Author: Linnea Ryd
+//coAuthor: Elena Lehto Fredenbrink 
+
+const timeSelect = document.querySelector("#booking-time");
+const participantsSelect = document.querySelector("#booking-participants");
+const step2Modal = document.querySelector('#step2');
+const form = document.querySelector("#user-booking");
+
+let challengeId = 1;
+const selectedDate = '2024-12-12';  // to make sure that we are getting the correct data as the apiTest
+
 
 async function fetchBookingDetails(challengeId, date) {
   try {
@@ -26,7 +31,6 @@ async function fetchBookingDetails(challengeId, date) {
 }
 
 function populateTimes(times) {
-  const timeSelect = document.getElementById('booking-time');
   timeSelect.innerHTML = ''; 
 
   if (times.length === 0) {
@@ -34,7 +38,7 @@ function populateTimes(times) {
       option.value = '';
       option.textContent = 'No available times';
       timeSelect.appendChild(option);
-  } else {
+    } else {
       times.forEach(time => {
           const option = document.createElement('option');
           option.value = time; 
@@ -47,7 +51,6 @@ function populateTimes(times) {
 
 
 function populateParticipants(participants) {
-  const participantsSelect = document.getElementById('booking-participants');
   participantsSelect.innerHTML = ''; 
 
   if (participants.length === 0) {
@@ -75,7 +78,7 @@ async function fetchParticipants(challengeId) {
   }
 }
 // Validate email
-const emailInput = document.getElementById('booking-email');
+const emailInput = document.querySelector('#booking-email');
 emailInput.addEventListener('input', function (event) {
   if (!isValidEmail(event.target.value)) {
       emailInput.setCustomValidity('Please enter a valid email address');
@@ -89,17 +92,21 @@ function isValidEmail(email) {
   return regex.test(email);
 }
 
+
 // Close modal when clicking outside
 window.onclick = function (event) {
-  const step2Modal = document.getElementById('step2');
   if (event.target === step2Modal) {
       step2Modal.style.display = 'none';
   }
 };
 
 
-const challengeId = 3; 
-const selectedDate = '2024-11-22'; 
-
 fetchBookingDetails(challengeId, selectedDate);
-    timeSelect.innerHTML = '';
+timeSelect.innerHTML = '';
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelector('#openModalBtn').addEventListener('click', function() {
+    console.log("Button clicked!");
+    document.querySelector('.booking_modal_step_2').style.display = 'block'; 
+  });
+});
