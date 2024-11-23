@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hacker Escape Rooms - Play Online & Onsite Challenges</title>
   <!-- <meta
       http-equiv="Content-Security-Policy"
@@ -19,20 +19,19 @@
   <!-- Open Graph for Social Media Sharing -->
   <meta property="og:title" content="Hacker Escape Rooms - The Ultimate Online & Onsite Challenges">
   <meta property="og:description"
-    content="Dive into our thrilling hacker-themed escape rooms, available online and onsite. Challenge yourself, your friends, or your team. Book your adventure now!">
+  content="Dive into our thrilling hacker-themed escape rooms, available online and onsite. Challenge yourself, your friends, or your team. Book your adventure now!">
   <meta property="og:image" content="https:Hacker-escape-room.com/assets/images/logo/image1.png">
   <meta property="og:url" content="https://Hacker-escape-room.com.com">
   <meta property="og:type" content="website">
-
+  
   <!-- Twitter Card Meta Tags (Optional) -->
   <meta name="twitter:card" content="image">
   <meta name="twitter:title" content="Join the Hacker Escape Room Adventure - Online & Onsite!">
   <meta name="twitter:description"
-    content="Book your escape room experience today! Perfect for groups, parties, and corporate team-building events. Get ready for a thrilling challenge.">
+  content="Book your escape room experience today! Perfect for groups, parties, and corporate team-building events. Get ready for a thrilling challenge.">
   <meta name="twitter:image" content="Hacker-escape-room.com/assets/images/logo/image1.png">
-
-  <link rel="stylesheet" href="styles/layouts/css/main.css">
-
+  
+  
   <!--  Data for Local Business (SEO) -->
   <script type="application/ld+json">
       {
@@ -53,8 +52,9 @@
         "openingHours": "Mo-Su 09:00-22:00"
       }
     </script>
-  <script src="js/menu.js" defer></script>
-  <script type="module" src="./js/apiTest.js"></script>
+    <script src="js/menu.js" defer></script>
+    <script type="module" src="./js/apiTest.js"></script>
+    <script src="./js/modul-step-2.js" defer></script>
 </head>
 
 <body>
@@ -196,50 +196,43 @@
         </div>
 
 
-        <!-- link to styling -->
-        <link rel="stylesheet" href="./styles/layouts/css/modul-step-2.css">
-        <!-- link to step2 js -->
-        <script src="./js/modul-step-2.js" defer></script>
+  
         <!-- Step 2: Enter Details -->
-        <div class="booking_modal_step_2" id="step2">
-          <h1>Book room "Title of room" (step 2)</h1>
-          <form class="user_booking" id="user-booking" action="/submit_booking" method="post">
-            <!-- Name -->
-            <div class="user_booking_name">
-              <label for="booking-name" class="booking_name">Name</label>
-              <input type="name" class="custom_name" id="booking-name" name="user_name" required>
-            </div>
-            <!-- Email -->
-            <div class="user_booking_email">
-              <label for="booking-email" class="booking_email">E-mail</label>
-              <input type="email" class="custom_email" id="booking-email" name="user_email" required>
-            </div>
-            <!-- Times -->
-            <div class="user_booking_time">
-              <label for="booking-time" class="booking_time">What time?</label>
-              <select id="booking-time" name="selected_time" class="custom_time" required>
-                <!-- placeholder times -->
-                <option value="10:00-11:30">10:00-11:30</option>
-                <option value="12:00-13:30">12:00-13:30</option>
-                <option value="14:00-15:30">14:00-15:30</option>
-              </select>
-            </div>
-            <!-- participants -->
-            <div class="user_booking_participants">
-              <label for="booking-participants" class="booking_participants">How many participants?</label>
-              <select id="booking-participants" name="selected_participants" class="custom_participants" required>
-                <!-- placeholder participants -->
-                <option value="2">2 participants</option>
-                <option value="3">3 participants</option>
-                <option value="4">4 participants</option>
-                <option value="5">5 participants</option>
-                <option value="6">6 participants</option>
-              </select>
-            </div>
-            <!-- submit booking btn -->
-            <button type="submit" class="submit_booking_btn">submit booking</button>
-          </form>
-        </div>
+      
+   <div class="booking_modal_step_2" id="step2">
+    <h1 class="room-title">Loading...</h1>
+    <form class="user_booking" id="user-booking" action="/submit_booking" method="post">
+      <!-- Name -->
+      <div class="user_booking_name">
+        <label for="booking-name" class="booking_name">Name</label>
+        <input type="name" class="custom_name" id="booking-name" name="user_name" required>
+      </div>
+      <!-- Email -->
+      <div class="user_booking_email">
+        <label for="booking-email" class="booking_email">E-mail</label>
+        <input type="email" class="custom_email" id="booking-email" name="user_email" required>
+      </div>
+      <!-- Times -->
+      <div class="user_booking_time">
+        <label for="booking-time" class="booking_time">What time?</label>
+        <select id="booking-time" name="selected_time" class="custom_time" required>
+          <!-- placeholder times -->
+          <option value="">Select Time</option>
+        </select>
+      </div>
+      <!-- participants -->
+      <div class="user_booking_participants">
+        <label for="booking-participants" class="booking_participants">How many participants?</label>
+        <select id="booking-participants" name="selected_participants" class="custom_participants" required>
+          <!-- placeholder participants -->
+          <option value=""> Select Participants</option>
+        </select>
+      </div>
+      <!-- submit booking button -->
+      <button type="submit" class="submit_booking_btn">submit booking</button>
+    </form>
+  </div>
+
 
         <!-- Step 3: Confirmation -->
         <div class="booking-modal__step" id="step3">
