@@ -16,11 +16,12 @@ const updateDropdown = (dropdown, options) => {
   while (dropdown.options.length > 1) {
     dropdown.remove(1);
   }
-  // Populate dropdown with new options to be used in populate participants and populate times
-  options.forEach(optionValue => {
+
+  // Populate dropdown with new options
+  options.forEach(({ value, label }) => {
     const option = document.createElement("option");
-    option.value = optionValue;
-    option.textContent = optionValue;
+    option.value = value; // Use start time (HH:mm) as the value
+    option.textContent = label; // Use full range as the display text
     dropdown.appendChild(option);
   });
 };
@@ -51,43 +52,6 @@ const loadRoomTitle = async (challengeId) => {
   }
 };
 
-// async function fetchBookingDetails(challengeId, date) {
-//   try {
-//     const availableTimesResponse = await fetchAvailableTimes(challengeId, date);
-//     if (availableTimesResponse.success) {
-//         populateTimes(availableTimesResponse.data); 
-//     } else {
-//         console.error('Error fetching available times:', availableTimesResponse.error);
-//     }
-
-//     const participantsResponse = await fetchParticipants(challengeId);
-//     if (participantsResponse.success) {
-//         populateParticipants(participantsResponse.data); 
-//     } else {
-//         console.error('Error fetching participants:', participantsResponse.error);
-//     }
-// } catch (error) {
-//     console.error('Error fetching booking details:', error);
-// }
-// }
-
-// function populateTimes(times) {
-//   timeSelect.innerHTML = ''; 
-
-//   if (times.length === 0) {
-//       const option = document.createElement('option');
-//       option.value = '';
-//       option.textContent = 'No available times';
-//       timeSelect.appendChild(option);
-//     } else {
-//       times.forEach(time => {
-//           const option = document.createElement('option');
-//           option.value = time; 
-//           option.textContent = time;
-//           timeSelect.appendChild(option);
-//       });
-//   }
-// }
 
 
 // Load participants dropdown based on challenge details
@@ -112,8 +76,6 @@ const populateParticipantsDropdown = (minParticipants, maxParticipants) => {
     console.error("Invalid participant range");
     return;
   }
-  console.log(`Populating dropdown with range ${minParticipants} to ${maxParticipants}`);
-
   for (let i = minParticipants; i <= maxParticipants; i++) {
     const option = document.createElement("option");
     option.value = i.toString();
@@ -122,15 +84,42 @@ const populateParticipantsDropdown = (minParticipants, maxParticipants) => {
   }
 };
 
-// async function fetchParticipants(challengeId) {
-//   try {
-//       const participants = [2, 3, 4, 5, 6]; 
-//       return { success: true, data: participants };
-//   } catch (error) {
-//       console.error('Error fetching participants:', error);
-//       return { success: false, error: error.message };
-//   }
-// }
+const loadAvailableTimes = async (challengeId, selectedDate) => {
+  try {
+    const { success, data: slots, error } = await fetchAvailableTimes(challengeId, selectedDate);
+    if (success) {
+      const timeRanges = slots.map((slot) => {
+        // Parse start time into hours and minutes
+        const [hours, minutes] = slot.split(':').map(Number);
+
+        // Calculate end time (90 minutes later)
+        const endTime = new Date();
+        endTime.setHours(hours);
+        endTime.setMinutes(minutes + 90);
+
+        // Format end time as HH:mm
+        const endHours = String(endTime.getHours()).padStart(2, '0');
+        const endMinutes = String(endTime.getMinutes()).padStart(2, '0');
+        const formattedEndTime = `${endHours}:${endMinutes}`;
+
+        // Return an object with start time and range
+        return {
+          value: slot, // Start time (HH:mm)
+          label: `${slot} - ${formattedEndTime}`, // Full time range
+        };
+      });
+
+      // Update dropdown with the new time ranges
+      updateDropdown(timeDropdown, timeRanges);
+    } else {
+      console.error("Failed to load available times:", error);
+    }
+  } catch (err) {
+    console.error("Error loading available times:", err);
+  }
+};
+
+
 // // Validate email
 // const emailInput = document.querySelector('#booking-email');
 // emailInput.addEventListener('input', function (event) {
@@ -169,5 +158,5 @@ const populateParticipantsDropdown = (minParticipants, maxParticipants) => {
 document.addEventListener('DOMContentLoaded', () => {
   loadRoomTitle(challengeId);
   loadParticipants(challengeId);
-  loadAvailableTimes(challengeId, date);
+  loadAvailableTimes(challengeId, selectedDate);
 });
