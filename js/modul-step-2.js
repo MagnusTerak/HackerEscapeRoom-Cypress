@@ -90,24 +90,37 @@ const loadRoomTitle = async (challengeId) => {
 // }
 
 
+// Load participants dropdown based on challenge details
+const loadParticipants = async (challengeId) => {
+  try {
+    const { success, data, error } = await fetchChallengeDetails(challengeId);
+    if (success) {
+      const { minParticipants, maxParticipants } = data;
+      console.log('minParticipants:', minParticipants, 'maxParticipants:', maxParticipants); // Debug log
+      populateParticipantsDropdown(minParticipants, maxParticipants);
+    } else {
+      console.error("Failed to load participants:", error);
+    }
+  } catch (err) {
+    console.error("Error loading participants:", err);
+  }
+};
 
-// function populateParticipants(participants) {
-//   participantsSelect.innerHTML = ''; 
+// Populate participants dropdown
+const populateParticipantsDropdown = (minParticipants, maxParticipants) => {
+  if (!minParticipants || !maxParticipants) {
+    console.error("Invalid participant range");
+    return;
+  }
+  console.log(`Populating dropdown with range ${minParticipants} to ${maxParticipants}`);
 
-//   if (participants.length === 0) {
-//       const option = document.createElement('option');
-//       option.value = '';
-//       option.textContent = 'No participants available';
-//       participantsSelect.appendChild(option);
-//   } else {
-//       participants.forEach(participant => {
-//           const option = document.createElement('option');
-//           option.value = participant; 
-//           option.textContent = `${participant} participants`;
-//           participantsSelect.appendChild(option);
-//       });
-//   }
-// }
+  for (let i = minParticipants; i <= maxParticipants; i++) {
+    const option = document.createElement("option");
+    option.value = i.toString();
+    option.textContent = `${i} participant${i > 1 ? "s" : ""}`;
+    participantsDropdown.appendChild(option);
+  }
+};
 
 // async function fetchParticipants(challengeId) {
 //   try {
