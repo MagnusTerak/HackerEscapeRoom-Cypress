@@ -1,6 +1,7 @@
-import { fetchAllChallenges, fetchAvailableTimes, createReservation } from "./apiService.js";
+import { fetchAllChallenges, fetchAvailableTimes,fetchChallengeDetails, createReservation} from "./apiService.js";
 fetchAllChallenges();
 fetchAvailableTimes(3, '2024-12-12');
+fetchChallengeDetails
 createReservation({
     challengeId: 3,
     name: 'Elena',
