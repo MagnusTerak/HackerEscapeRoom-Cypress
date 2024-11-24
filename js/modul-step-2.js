@@ -1,14 +1,22 @@
-import { fetchAvailableTimes,fetchChallengeDetails, createReservation } from "./apiService.js";
+import {
+  fetchAvailableTimes,
+  fetchChallengeDetails,
+  createReservation,
+} from './apiService.js';
 
-const roomTitle = document.querySelector(".room-title");
-const timeDropdown = document.querySelector("#booking-time");
-const participantsDropdown = document.querySelector("#booking-participants");
+const emailInput = document.querySelector('#booking-email');
+const nameInput = document.querySelector('#booking-name');
+const roomTitle = document.querySelector('.room-title');
+const timeDropdown = document.querySelector('#booking-time');
+const participantsDropdown = document.querySelector('#booking-participants');
 const step2Modal = document.querySelector('#step2');
-const form = document.querySelector("#user-booking");
+const form = document.querySelector('#user-booking');
 
 let challengeId = 1;
-const selectedDate = '2024-12-12';  // to make sure that we are getting the correct data as the apiTest
+const selectedDate = '2024-12-12'; // to make sure that we are getting the correct data as the apiTest
 
+
+//-------------------HELPER FUNCTIONS----------------------------
 
 // helper functions: General function to update dropdown options
 const updateDropdown = (dropdown, options) => {
@@ -17,9 +25,18 @@ const updateDropdown = (dropdown, options) => {
     dropdown.remove(1);
   }
 
+  // Helper function to check if an email is valid
+  const isValidEmail = (email) => /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
+  const isValidName = (name) => {
+    const trimmedName = name.trim();
+    // Ensure the name is at least 2 characters and contains only valid letters/spaces
+    const regex = /^[a-zA-Z\s]{2,}$/;
+    return trimmedName.length > 0 && regex.test(trimmedName);
+  };
+
   // Populate dropdown with new options
   options.forEach(({ value, label }) => {
-    const option = document.createElement("option");
+    const option = document.createElement('option');
     option.value = value; // Use start time (HH:mm) as the value
     option.textContent = label; // Use full range as the display text
     dropdown.appendChild(option);
@@ -27,10 +44,17 @@ const updateDropdown = (dropdown, options) => {
 };
 
 //********************************************************************* */
-// we need to check with Ronja to pass the selected date from step1 
-// add logic to fetch the date from step1 
+// we need to check with Ronja to pass the selected date from step1
+// add logic to fetch the date from step1
 //********************************************************************* */
-console.log('challengeDetail From',fetchChallengeDetails(challengeId,selectedDate))
+
+console.log(
+  'challengeDetail From',
+  fetchChallengeDetails(challengeId, selectedDate),
+);
+
+//-------------------- FETCH AND DISPLAY ROOM TITLE-------------------------
+
 const loadRoomTitle = async (challengeId) => {
   try {
     // Fetch challenge details
@@ -38,21 +62,21 @@ const loadRoomTitle = async (challengeId) => {
     if (success) {
       const { title } = data;
       if (title) {
-        roomTitle.textContent = title; 
+        roomTitle.textContent = title;
       } else {
-        roomTitle.textContent = "Room Title Not Found";
+        roomTitle.textContent = 'Room Title Not Found';
       }
     } else {
-      console.error("Failed to load room title:", error);
-      roomTitle.textContent = "Error Loading Room Title";
+      console.error('Failed to load room title:', error);
+      roomTitle.textContent = 'Error Loading Room Title';
     }
   } catch (err) {
-    console.error("Error loading room title:", err);
-    roomTitle.textContent = "Error Loading Room Title";
+    console.error('Error loading room title:', err);
+    roomTitle.textContent = 'Error Loading Room Title';
   }
 };
 
-
+//--------------------FETCH AND DISPLAY PARTICIPANTS NUMBER-----------------
 
 // Load participants dropdown based on challenge details
 const loadParticipants = async (challengeId) => {
@@ -60,33 +84,45 @@ const loadParticipants = async (challengeId) => {
     const { success, data, error } = await fetchChallengeDetails(challengeId);
     if (success) {
       const { minParticipants, maxParticipants } = data;
-      console.log('minParticipants:', minParticipants, 'maxParticipants:', maxParticipants); // Debug log
+      console.log(
+        'minParticipants:',
+        minParticipants,
+        'maxParticipants:',
+        maxParticipants,
+      ); 
       populateParticipantsDropdown(minParticipants, maxParticipants);
     } else {
-      console.error("Failed to load participants:", error);
+      console.error('Failed to load participants:', error);
     }
   } catch (err) {
-    console.error("Error loading participants:", err);
+    console.error('Error loading participants:', err);
   }
 };
 
 // Populate participants dropdown
 const populateParticipantsDropdown = (minParticipants, maxParticipants) => {
   if (!minParticipants || !maxParticipants) {
-    console.error("Invalid participant range");
+    console.error('Invalid participant range');
     return;
   }
   for (let i = minParticipants; i <= maxParticipants; i++) {
-    const option = document.createElement("option");
+    const option = document.createElement('option');
     option.value = i.toString();
-    option.textContent = `${i} participant${i > 1 ? "s" : ""}`;
+    option.textContent = `${i} participant${i > 1 ? 's' : ''}`;
     participantsDropdown.appendChild(option);
   }
+  console.log('type of participants:', typeof minParticipants);
 };
+
+//-----------------------FETCH AND DISPLAY AVAILABLE SLOTS----------------
 
 const loadAvailableTimes = async (challengeId, selectedDate) => {
   try {
-    const { success, data: slots, error } = await fetchAvailableTimes(challengeId, selectedDate);
+    const {
+      success,
+      data: slots,
+      error,
+    } = await fetchAvailableTimes(challengeId, selectedDate);
     if (success) {
       const timeRanges = slots.map((slot) => {
         // Parse start time into hours and minutes
@@ -112,51 +148,94 @@ const loadAvailableTimes = async (challengeId, selectedDate) => {
       // Update dropdown with the new time ranges
       updateDropdown(timeDropdown, timeRanges);
     } else {
-      console.error("Failed to load available times:", error);
+      console.error('Failed to load available times:', error);
     }
   } catch (err) {
-    console.error("Error loading available times:", err);
+    console.error('Error loading available times:', err);
   }
 };
 
+//---------------------VALIDATE EMAIL AND NAME------------------
 
-// // Validate email
-// const emailInput = document.querySelector('#booking-email');
-// emailInput.addEventListener('input', function (event) {
-//   if (!isValidEmail(event.target.value)) {
-//       emailInput.setCustomValidity('Please enter a valid email address');
-//   } else {
-//       emailInput.setCustomValidity('');
-//   }
-// });
+const validateEmail = (event) => {
+  const isValid = isValidEmail(event.target.value);
+  event.target.setCustomValidity(isValid ? '' : 'Please enter a valid email address.');
+};
 
-// function isValidEmail(email) {
-//   const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-//   return regex.test(email);
-// }
+const validateName = (event) => {
+  const trimmedName = event.target.value.trim();
+  if (trimmedName.length === 0) {
+    event.target.setCustomValidity('Name should not be empty or contain only spaces.');
+  } else if (!/^[a-zA-Z\s]{2,}$/.test(trimmedName)) {
+    event.target.setCustomValidity('Please enter a valid name (letters only, at least 2 characters).');
+  } else {
+    event.target.setCustomValidity('');
+  }
+};
 
+//--------------------- FORM SUBMITION-----------------------------
 
-// // Close modal when clicking outside
-// window.onclick = function (event) {
-//   if (event.target === step2Modal) {
-//       step2Modal.style.display = 'none';
-//   }
-// };
+const handleFormSubmission = async (event) => {
+  event.preventDefault();
 
+  // Validate name before submission
+  const nameValue = nameInput.value.trim();
+  if (nameValue.length === 0) {
+    nameInput.setCustomValidity('Name should not be empty.');
+    nameInput.reportValidity();
+    return; // Stop submission
+  } else {
+    nameInput.setCustomValidity(''); // Clear validation message
+  }
+  // Extract form data
+  const reservationData = {
+    challengeId,
+    name: nameValue,
+    email: form['user_email'].value.trim(),
+    date: selectedDate,
+    time: form['selected_time'].value,
+    participants: parseInt(form['selected_participants'].value, 10),
+  };
 
-// fetchBookingDetails(challengeId, selectedDate);
-// timeSelect.innerHTML = '';
+  console.log('Reservation Data:', reservationData);
 
-// document.addEventListener('DOMContentLoaded', function() {
-//   document.querySelector('#openModalBtn').addEventListener('click', function() {
-//     console.log("Button clicked!");
-//     document.querySelector('.booking_modal_step_2').style.display = 'block'; 
-  
-//   });
-// });
+  try {
+    // Send reservation request
+    const { success, data, error } = await createReservation(reservationData);
+
+    if (success) {
+      console.log('Reservation created successfully:', data);
+      console.log('resrvationData', reservationData);
+      nameInput.value = '';
+      emailInput.value = '';
+      timeDropdown.selectedIndex = 0; // Reset to placeholder
+      participantsDropdown.selectedIndex = 0;
+
+      //------------------------------------------------------
+      // you need to put logic to go to the thank you part from Ronja
+      //-------------------------------------------------------
+    } else {
+      console.error('Failed to create reservation:', error);
+      showAlert('Failed to create reservation. Please try again.');
+    }
+  } catch (err) {
+    console.error('Error creating reservation:', err);
+    showAlert('An unexpected error occurred. Please try again.');
+  }
+};
+
+//------------------ADDEVENTLISTENERS--------------------
+
 // Load participants and available times on DOMContentLoaded
 document.addEventListener('DOMContentLoaded', () => {
+  emailInput.addEventListener('input', validateEmail);
+  nameInput.addEventListener('input', validateName);
+  
   loadRoomTitle(challengeId);
   loadParticipants(challengeId);
   loadAvailableTimes(challengeId, selectedDate);
 });
+// on form submition
+if (form) {
+  form.addEventListener('submit', handleFormSubmission);
+}
