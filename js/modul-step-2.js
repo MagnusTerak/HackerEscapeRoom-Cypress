@@ -18,6 +18,9 @@ const selectedDate = '2024-12-12'; // to make sure that we are getting the corre
 
 //-------------------HELPER FUNCTIONS----------------------------
 
+// // Helper function to check if an email is valid
+const isValidEmail = (email) => /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
+
 // helper functions: General function to update dropdown options
 const updateDropdown = (dropdown, options) => {
   // Clear dropdown, keep only the placeholder
@@ -25,14 +28,6 @@ const updateDropdown = (dropdown, options) => {
     dropdown.remove(1);
   }
 
-  // Helper function to check if an email is valid
-  const isValidEmail = (email) => /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
-  const isValidName = (name) => {
-    const trimmedName = name.trim();
-    // Ensure the name is at least 2 characters and contains only valid letters/spaces
-    const regex = /^[a-zA-Z\s]{2,}$/;
-    return trimmedName.length > 0 && regex.test(trimmedName);
-  };
 
   // Populate dropdown with new options
   options.forEach(({ value, label }) => {
@@ -187,11 +182,21 @@ const handleFormSubmission = async (event) => {
   } else {
     nameInput.setCustomValidity(''); // Clear validation message
   }
+    // Validate email before submission
+    const emailValue = emailInput.value.trim();
+    if (!isValidEmail(emailValue)) {
+      emailInput.setCustomValidity('Please enter a valid email address.');
+      emailInput.reportValidity();
+      return; // Stop submission
+    } else {
+      emailInput.setCustomValidity(''); // Clear validation message
+    }
+
   // Extract form data
   const reservationData = {
     challengeId,
     name: nameValue,
-    email: form['user_email'].value.trim(),
+    email: emailValue,
     date: selectedDate,
     time: form['selected_time'].value,
     participants: parseInt(form['selected_participants'].value, 10),
