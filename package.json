@@ -4,13 +4,15 @@
     "description": "A project to compile SCSS to CSS using node-sass or dart-sass",
     "main": "index.js",
     "scripts": {
-        "build-css": "sass styles/layouts/scss:styles/layouts/css --style compressed --source-map",
-        "watch-css": "sass --watch styles/layouts/scss:styles/layouts/css --style compressed --source-map"
+        "dev": "vite",
+        "build": "vite build",
+        "serve": "vite preview"
     },
     "author": "Elena Lehto Fredenbrink",
     "license": "MIT",
     "devDependencies": {
-        "sass": "^1.80.6"
+        "sass": "^1.81.0",
+        "vite": "^5.4.11"
     },
     "keywords": []
 }
