@@ -5,12 +5,14 @@
     "main": "index.js",
     "scripts": {
         "build-css": "sass styles/layouts/scss:styles/layouts/css --style compressed --source-map",
-        "watch-css": "sass --watch styles/layouts/scss:styles/layouts/css --style compressed --source-map"
+        "watch-css": "sass --watch styles/layouts/scss:styles/layouts/css --style compressed --source-map",
+        "dev": "vite"
     },
     "author": "Elena Lehto Fredenbrink",
     "license": "MIT",
     "devDependencies": {
-        "sass": "^1.80.6"
+        "sass": "^1.80.6",
+        "vite": "^5.4.11"
     },
     "keywords": []
 }
