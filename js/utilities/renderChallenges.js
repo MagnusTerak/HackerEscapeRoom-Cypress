@@ -19,7 +19,7 @@ export const renderChallenges = (challenges, container, withButtons = true) => {
       );
   
       // Create the card element
-      const challengeCard = challenge.createChallengeCard();
+      const challengeCard = challenge.createChallengeCard(withButtons);
   
       // Append the card to the container
       container.appendChild(challengeCard);

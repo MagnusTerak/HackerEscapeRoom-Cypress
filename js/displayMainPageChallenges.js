@@ -1,5 +1,5 @@
 import { fetchAllChallenges } from './apiService.js';
-import { renderChallenges } from './utils/renderChallenges.js';
+import { renderChallenges } from './utilities/renderChallenges.js';
 
 const challengesListElement = document.querySelector(".challenges__list");
 
