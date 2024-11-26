@@ -1,9 +1,14 @@
 import { fetchAvailableTimes } from "./apiService.js";
+//import' ../styles/layouts/scss/modal.scss';
+
+document.addEventListener('DOMContentLoaded', () => {
+    modal.style.display = 'none';
+    console.log('Modal is hidden when page is loaded');
+});
 
 console.log(document.querySelector('.booking__searchButton'));
 console.log(document.querySelector('.custom__date'));
 /*Ronjas modal script*/ 
-console.log("hello from modal 1"); //To see if it works
 
 const modal = document.querySelector('.booking-modal');
 const steps = document.querySelectorAll('.booking-modal__step');
@@ -11,12 +16,10 @@ const step1 = document.querySelector('#step1');
 const step2 = document.querySelector('#step2');
 const step3 = document.querySelector('#step3');
 
-console.log(modal);
-
 export const handleBookButtonClick = ()=>{
-console.log('Hello from the book btn');
   
 modal.style.display = 'block';
+console.log('modal is now displayed');
 step2.style.display = 'none';
 step3.style.display = 'none';
 };
@@ -28,11 +31,6 @@ function showSteps(stepNumber){
         step.classList.toggle('booking-modal__step--active', index + 1 === stepNumber);
     });
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-    modal.style.display = 'none'; 
-    showSteps(1); //step 1 shows
-})
 
 //Responsive text depending on input
 const dateInput = document.querySelector('.custom__date');
