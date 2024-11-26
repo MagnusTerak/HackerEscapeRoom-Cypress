@@ -4,7 +4,7 @@ import Challenge from './challengeClass.js';
 const challengesListElement = document.querySelector(".challenges__list");
 
 let challengesArray = [];
-const displayedChallenges = 3;
+// const displayedChallenges = 3;
 
 const displayNumberOfChallenges = async () => {
     const { success, data: challenges, error } = await fetchAllChallenges();

@@ -1,55 +1,49 @@
 import { fetchAllChallenges } from './apiService.js';
-import TCard from './temporary.js'; 
+import Challenge from './challengeClass.js';
+import '../styles/layouts/scss/rooms.scss';
 
-const challengesListElement = document.querySelector('.challenges__list');
+const challengesList = document.querySelector('.challenges__list');
 
 // Shared array to store challenges
 let challengesArray = [];
 
-
 export const displayAllChallenges = async () => {
-    // Fetch challenges from the API
-    const { success, data: challenges, error } = await fetchAllChallenges();
+  // Fetch challenges from the API
+  const { success, data: challenges, error } = await fetchAllChallenges();
 
-    if (!success) {
-        console.error("Failed to fetch challenges:", error);
-        challengesListElement.innerHTML = `<li>Error loading challenges. Please try again later.</li>`;
-        return;
-    }
-    challengesArray = challenges;
-    // Clear existing content
-    challengesListElement.innerHTML = '';
+  if (!success) {
+    console.error('Failed to fetch challenges:', error);
+    challengesList.innerHTML = `<li>Error loading challenges. Please try again later.</li>`;
+    return;
+  }
+  challengesArray = challenges;
 
-    // Loop through challenges and display them in cards
-    challenges.forEach((challengeData) => {
-        const tCard = new TCard(
-            challengeData.id,
-            challengeData.title,
-            challengeData.description,
-            challengeData.type,
-            challengeData.minParticipants,
-            challengeData.maxParticipants,
-            challengeData.rating,
-            challengeData.image,
-            challengeData.labels
-        );
+  // Clear existing content
+  challengesList.innerHTML = '';
 
-        const challengeElement = tCard.createTCard(tCard);
+  // Loop through challenges and display them in cards
+  challenges.forEach((challengeData) => {
+    const challenge = new Challenge(
+      challengeData.id,
+      challengeData.title,
+      challengeData.description,
+      challengeData.type,
+      challengeData.minParticipants,
+      challengeData.maxParticipants,
+      challengeData.rating,
+      challengeData.image,
+      challengeData.labels,
+    );
 
-        // Create "Book This Challenge" button for each button
-        const bookButton = document.createElement('button');
-        bookButton.textContent = 'Book This Challenge';
-        bookButton.classList.add('book-button');
-        bookButton.addEventListener('click', () => handleBookButtonClick(challengeData.id));
+    const challengeCard = challenge.createChallengeCard(true);
 
-        challengeElement.appendChild(bookButton);
-        challengesListElement.appendChild(challengeElement);
-    });
+    challengesList.appendChild(challengeCard);
+  });
 };
 
-const handleBookButtonClick = (challengeId) => {
-    console.log(`display challenge ID: ${challengeId}`);
-};
+// const handleBookButtonClick = (challengeId) => {
+//     console.log(`display challenge ID: ${challengeId}`);
+// };
 export const getChallengesArray = () => challengesArray;
 
 displayAllChallenges();
