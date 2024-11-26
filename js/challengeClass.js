@@ -1,3 +1,4 @@
+import'../styles/layouts/scss/rooms.scss';
 class Challenge {
   constructor(
     id,
@@ -102,7 +103,7 @@ class Challenge {
     if (this.type === "online") {
       challengeParticipants.textContent += " (networked)";
     }
-    detailsInfo.appendChild(rating);
+    imageContainer.appendChild(rating);
     detailsInfo.appendChild(challengeParticipants);
     
     if (this.labels && this.labels.length > 0) {
