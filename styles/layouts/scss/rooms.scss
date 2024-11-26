@@ -22,7 +22,7 @@
     font-weight: 400;
   }
   
-  .challenges__list {
+  &__list {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -139,13 +139,11 @@
 @include large-screen {
   .challenges {
     position: static;
-    display: flex;
-    flex-direction: row;
     width: 100vw;
     // margin: 50px 0 100px;
     max-width: 2000px;
     padding: 0;
-    background-color: #5927e2;
+
     &__title {
       position: static;
       text-align: center;
@@ -155,28 +153,15 @@
       
       margin: 4rem auto 4rem;
     }
+    .challenges__list{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+      gap: 20px;
+}
   }
   
-  .challenges__list {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); 
-    gap: 20px;
   
 
-    .challengey {
-      margin: 0 1.5%;
-      flex-wrap: wrap;
-      overflow: visible;
-
-      &.challenge1 {
-        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-      }
-
-      &.challenge2 {
-        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-      }
-    }
-  }
   .challenge__details {
     display: flex;
     flex-direction: column;
