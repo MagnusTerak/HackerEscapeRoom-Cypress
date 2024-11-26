@@ -105,6 +105,10 @@ class Challenge {
     detailsInfo.appendChild(rating);
     detailsInfo.appendChild(challengeParticipants);
     
+    if (this.labels && this.labels.length > 0) {
+      const labels = this.createLabels();
+      detailsInfo.appendChild(labels); 
+    }
 
     const challengeDescription = document.createElement("p");
     challengeDescription.className = "challenge__description"
@@ -128,13 +132,27 @@ class Challenge {
     }
     imageContainer.appendChild(typeIcon);
     
-
-
+    
     liItem.appendChild(imageContainer);
     liItem.appendChild(detailsContainer);
 
     return liItem;
   }
+  createLabels() {
+    const labelsContainer = document.createElement("div");
+    labelsContainer.className = "challenge__labels";
+
+    this.labels.forEach(label => {
+      const labelItem = document.createElement("span");
+      labelItem.className = "challenge__label";
+      labelItem.textContent = `${label}- `; 
+      labelsContainer.appendChild(labelItem);
+    });
+
+    return labelsContainer;
+  }
+
+  
 }
 
 export default Challenge;
