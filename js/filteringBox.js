@@ -1,5 +1,5 @@
 import { getChallengesArray } from "./displayAllChallenges.js";
-import TCard from "./temporary.js";
+import { renderChallenges } from './utilities/renderChallenges';
 
 const filterBtn = document.querySelector(".filter__button");
 filterBtn.addEventListener("click", openFilterModal);
@@ -249,23 +249,7 @@ function displaySearchResults(filteredResults) {
     }
 
     // Loop challenges and present in cards
-    filteredResults.forEach((challengeData) => {
-        const tCard = new TCard(
-            challengeData.id,
-            challengeData.title,
-            challengeData.description,
-            challengeData.type,
-            challengeData.minParticipants,
-            challengeData.maxParticipants,
-            challengeData.rating,
-            challengeData.image,
-            challengeData.labels
-        );
-
-        const challengeElement = tCard.createTCard(tCard);
-
-        challengesListElement.appendChild(challengeElement);
-    });
+    renderChallenges(filteredResults, challengesListElement);
 
 }
 

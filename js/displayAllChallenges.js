@@ -1,5 +1,6 @@
 import { fetchAllChallenges } from './apiService.js';
 import Challenge from './challengeClass.js';
+import { renderChallenges } from './utilities/renderChallenges.js';
 import '../styles/layouts/scss/rooms.scss';
 
 const challengesList = document.querySelector('.challenges__list');
@@ -20,25 +21,7 @@ export const displayAllChallenges = async () => {
 
   // Clear existing content
   challengesList.innerHTML = '';
-
-  // Loop through challenges and display them in cards
-  challenges.forEach((challengeData) => {
-    const challenge = new Challenge(
-      challengeData.id,
-      challengeData.title,
-      challengeData.description,
-      challengeData.type,
-      challengeData.minParticipants,
-      challengeData.maxParticipants,
-      challengeData.rating,
-      challengeData.image,
-      challengeData.labels,
-    );
-
-    const challengeCard = challenge.createChallengeCard(true);
-
-    challengesList.appendChild(challengeCard);
-  });
+  renderChallenges(challenges, challengesList);
 };
 
 // const handleBookButtonClick = (challengeId) => {
