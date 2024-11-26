@@ -9,7 +9,7 @@
   padding-top: 11%;
   max-width: 2000px;
   margin: 15px; // height: 446px;
-
+  
   &__title {
     text-align: center;
     justify-content: center;
@@ -21,26 +21,28 @@
     font-size: 1.9rem;
     font-weight: 400;
   }
-
+  
   .challenges__list {
     display: flex;
+    flex-direction: column;
     justify-content: space-around;
     width: 100%;
     max-width: 2000px;
     border-radius: 10px;
     margin: 10px;
     padding: 20px;
-    flex-wrap: nowrap;
     justify-content: space-between;
-
+    
     .challengey {
       border-radius: 10px;
       position:relative;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
       overflow: hidden;
-      width: 85%;
+      width: 90%;
+      margin-top: 30px;
       margin-bottom: 20px;
       margin-left: 10px;
+      padding-top: 0;
       transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 
       &:hover {
@@ -114,6 +116,11 @@
         font-size: 1.125rem;
         height: 5em;
       }
+      .challenge__labels{
+        font-size: 0.8rem;
+        font-style: italic;
+        color:#5927e2;
+      }
 
       .challenge__btn {
         @include button-primary();
@@ -121,7 +128,6 @@
         min-width: 50%;
         align-self: flex-end;
         padding: 1rem 1.5rem;
-        border: 5px solid blueviolet;
         position: absolute;
         bottom: 0;
         margin-bottom: 1em;
@@ -132,14 +138,14 @@
 
 @include large-screen {
   .challenges {
-    display: flex;
     position: static;
-    flex-direction: column;
+    display: flex;
+    flex-direction: row;
     width: 100vw;
-    margin: 50px 0 100px;
+    // margin: 50px 0 100px;
     max-width: 2000px;
     padding: 0;
-    
+    background-color: #5927e2;
     &__title {
       position: static;
       text-align: center;
@@ -152,15 +158,14 @@
   }
   
   .challenges__list {
-    flex-wrap: wrap;
-    display: flex;
-    width: 95vw;
-    padding: 1.5%;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 20px;
+  
 
     .challengey {
       margin: 0 1.5%;
-      flex-wrap: no-wrap;
+      flex-wrap: wrap;
       overflow: visible;
 
       &.challenge1 {

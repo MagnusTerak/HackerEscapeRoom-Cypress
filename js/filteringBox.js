@@ -20,7 +20,7 @@ function openFilterModal() {
     filterBtn.classList.add("filter__hidden");
 
     // filterBox
-    const filterBox = document.createElement("box");
+    const filterBox = document.createElement("div");
     filterSection.appendChild(filterBox);
     filterBox.classList.add("filter__box");
 

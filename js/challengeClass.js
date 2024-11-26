@@ -79,9 +79,6 @@ class Challenge {
     img.src = this.image;
     img.alt = this.description;
     img.loading = "lazy";
-    img.style.width = "100%";
-    img.style.height = "100%";
-    img.style.objectFit = "cover";
     imageContainer.appendChild(img);
 
     const detailsContainer = document.createElement("div");
@@ -106,23 +103,24 @@ class Challenge {
     imageContainer.appendChild(rating);
     detailsInfo.appendChild(challengeParticipants);
     
-    if (this.labels && this.labels.length > 0) {
-      const labels = this.createLabels();
-      detailsInfo.appendChild(labels); 
-    }
-
+    
     const challengeDescription = document.createElement("p");
     challengeDescription.className = "challenge__description"
     challengeDescription.textContent = this.description;
-
+    
     detailsContainer.appendChild(title);
+
+    if (this.labels && this.labels.length > 0) {
+      const labels = this.createLabels();
+      detailsContainer.appendChild(labels); 
+    }
     detailsContainer.appendChild(detailsInfo);
     detailsContainer.appendChild(challengeDescription);
     
     if(btn){
-    detailsContainer.appendChild(this.createBookChallengeBtn());
+      detailsContainer.appendChild(this.createBookChallengeBtn());
     }
-
+    
     const typeIcon = document.createElement("span");
     typeIcon.className = "challenge__type-icon";
     
@@ -136,7 +134,7 @@ class Challenge {
     
     liItem.appendChild(imageContainer);
     liItem.appendChild(detailsContainer);
-
+    
     return liItem;
   }
   createLabels() {
@@ -146,7 +144,7 @@ class Challenge {
     this.labels.forEach(label => {
       const labelItem = document.createElement("span");
       labelItem.className = "challenge__label";
-      labelItem.textContent = `${label}- `; 
+      labelItem.textContent = `*${label} `; 
       labelsContainer.appendChild(labelItem);
     });
 
