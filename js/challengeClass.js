@@ -99,9 +99,12 @@ class Challenge {
     const challengeParticipants = document.createElement("div");
     challengeParticipants.className = "challenge__participants";
     challengeParticipants.textContent = `${this.minParticipants} - ${this.maxParticipants} participants`;
-    
+    if (this.type === "online") {
+      challengeParticipants.textContent += " (networked)";
+    }
     detailsInfo.appendChild(rating);
     detailsInfo.appendChild(challengeParticipants);
+    
 
     const challengeDescription = document.createElement("p");
     challengeDescription.className = "challenge__description"
