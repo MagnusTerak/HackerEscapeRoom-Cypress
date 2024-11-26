@@ -35,6 +35,7 @@
 
     .challengey {
       border-radius: 10px;
+      position:relative;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
       overflow: hidden;
       width: 85%;
@@ -111,6 +112,7 @@
       .challenge__description {
         margin: 1.5rem 0 2rem 0;
         font-size: 1.125rem;
+        height: 5em;
       }
 
       .challenge__btn {
@@ -119,6 +121,10 @@
         min-width: 50%;
         align-self: flex-end;
         padding: 1rem 1.5rem;
+        border: 5px solid blueviolet;
+        position: absolute;
+        bottom: 0;
+        margin-bottom: 1em;
       }
     }
   }
