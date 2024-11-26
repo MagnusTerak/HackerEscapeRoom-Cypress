@@ -46,21 +46,22 @@ class Challenge {
     return challengeRating;
   }
 
-  mainPageBtn() {
-    const link = document.createElement("a");
-    link.className = "challenge__btn";
+  createBookChallengeBtn() {
+    const bookingBtn = document.createElement("button");
+    bookingBtn.className = "challenge__btn";
+
     if (this.type === "onsite") {
-      link.textContent = "Book this room";
-      link.addEventListener('click', () => {
-        window.location.href = "challenges.html";
+      bookingBtn.textContent = "Book this room";
+      bookingBtn.addEventListener('click', () => {
+        this.openModal();
       });
     } else if (this.type === "online") {
-      link.textContent = "Take challenge online";
-      link.addEventListener('click', () => {
-        window.location.href = "challenges.html";
+      bookingBtn.textContent = "Take challenge online";
+      bookingBtn.addEventListener('click', () => {
+        this.openBookingModal();
       });
     }
-    return link;
+    return bookingBtn;
   }
 
   createChallengeCard(btn) {
@@ -111,7 +112,7 @@ class Challenge {
     detailsContainer.appendChild(challengeDescription);
     
     if(btn){
-    detailsContainer.appendChild(this.mainPageBtn());
+    detailsContainer.appendChild(this.createBookChallengeBtn());
     }
 
     const typeIcon = document.createElement("span");
@@ -120,7 +121,7 @@ class Challenge {
     if (this.type === "online") {
       typeIcon.textContent = "💻"; 
     } else if (this.type === "onsite") {
-      typeIcon.textContent = "🏠"; // Home symbol
+      typeIcon.textContent = "🏠"; 
     }
     imageContainer.appendChild(typeIcon);
     
