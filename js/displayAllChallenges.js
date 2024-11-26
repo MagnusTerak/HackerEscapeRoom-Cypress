@@ -1,6 +1,6 @@
 import { fetchAllChallenges } from './apiService.js';
 import TCard from './temporary.js'; 
-import { handleBookButtonClick } from './modal1.js';
+import { openBookingModal } from './modal1.js';
 
 
 const challengesListElement = document.querySelector('.challenges__list');
@@ -42,12 +42,12 @@ export const displayAllChallenges = async () => {
         const bookButton = document.createElement('button');
         bookButton.textContent = 'Book This Challenge';
         bookButton.classList.add('book-button');
-        bookButton.addEventListener('click', () => handleBookButtonClick(challengeData.id));
+        bookButton.addEventListener('click', () => openBookingModal(challengeData.id));
 
         challengeElement.appendChild(bookButton);
         challengesListElement.appendChild(challengeElement);
 
-        bookButton.addEventListener('click',()=>handleBookButtonClick());
+        bookButton.addEventListener('click',()=> openBookingModal());
     });
 };
 

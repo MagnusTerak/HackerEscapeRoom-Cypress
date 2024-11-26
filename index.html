@@ -67,7 +67,7 @@
 
     <link
       rel="stylesheet"
-      href="styles/layouts/css/main.css"
+      href="./styles/layouts/css/main.css"
     >
 
     <!--  Data for Local Business (SEO) -->
@@ -232,24 +232,23 @@
         <!--*************************************************** Modal******************************************************-->
 
         <!-- <dialog class="booking-modal">  -->
-          <div class="booking-modal">
-          <div class="booking-modal__content">
-
-            <!-- Step 1: Select Date -->
-            <div class="booking-modal__step booking-modal__step--active" id="step1">
-              <div class="modal" id="modal1">
-                <div class="modal__content">
-                    <h1>Book room "Title of room" (step 1)</h1>
-                    <form class="booking__form"> 
-                      <label for "dates" class="booking__date">What date would you like to come?</label>
-                      <h1>date</h1>
-                      <input type="date" class="custom__date" id="booking-date" name="booking-date"required>
-                      <button type="submit" class="booking__search-btn">Search available times</button>
-                    </form>
-                   </button>
+          <div class="booking-modal" id="booking-modal" style=" display: none">
+            <div class="booking-modal__content">
+  
+              <!-- Step 1: Select Date -->
+              <div class="booking-modal__step booking-modal__step--active" id="step1">
+                  <div class="modal" id="modal1">
+                    <div class="modal__content">
+                        <h1 class="modal__content-loading">'Loading Challenge information'</h1>
+                        <form class="booking__form" id="booking-form"> 
+                          <label for="booking-date" class="booking__date">What date would you like to come?</label>
+                          <p class ="booking__date-custom">date</p>
+                          <input type="date" class="custom__date" id="booking-date" name="booking-date" required>
+                          <button type="submit" class="booking__search-btn">Search available times</button>
+                        </form>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
 
              <!-- Step 2: Enter Details -->
         <div class="booking_modal_step_2" id="step2">

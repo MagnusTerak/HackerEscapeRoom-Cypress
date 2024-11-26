@@ -16,7 +16,7 @@ const step1 = document.querySelector('#step1');
 const step2 = document.querySelector('#step2');
 const step3 = document.querySelector('#step3');
 
-export const handleBookButtonClick = ()=>{
+export const openBookingModal = ()=>{
   
 modal.style.display = 'block';
 console.log('modal is now displayed');
