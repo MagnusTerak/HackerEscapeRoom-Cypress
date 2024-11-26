@@ -50,7 +50,15 @@
       .challenge__image-container {
         width: 100%;
         height: auto;
+        position: relative;
 
+        .challenge__type-icon{
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 2rem;
+          height: 2rem;
+        }
         .challenge__img {
           width: 100%;
           height: 100%;

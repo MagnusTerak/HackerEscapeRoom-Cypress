@@ -88,7 +88,7 @@ class Challenge {
 
     const title = document.createElement("h2");
     title.className = "challenge__details__title_temporary";
-    title.textContent = this.title + " (" + this.type + ")";
+    title.textContent = this.title + (this.type === "onsite" ? " (onsite)" : "");
 
     const detailsInfo = document.createElement("div");
     detailsInfo.className = "challenge__details-info";
@@ -113,6 +113,18 @@ class Challenge {
     if(btn){
     detailsContainer.appendChild(this.mainPageBtn());
     }
+
+    const typeIcon = document.createElement("span");
+    typeIcon.className = "challenge__type-icon";
+    
+    if (this.type === "online") {
+      typeIcon.textContent = "💻"; 
+    } else if (this.type === "onsite") {
+      typeIcon.textContent = "🏠"; // Home symbol
+    }
+    imageContainer.appendChild(typeIcon);
+    
+
 
     liItem.appendChild(imageContainer);
     liItem.appendChild(detailsContainer);
