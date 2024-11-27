@@ -1,11 +1,24 @@
 import { fetchAvailableTimes } from "./apiService.js";
 //import' ../styles/layouts/scss/modal.scss';
 
+// document.addEventListener('DOMContentLoaded', () => {
+//     const modal = document.querySelector('.booking-modal');
+//     modal.style.display = 'none';
+//     console.log('Modal is hidden when page is loaded');
+// });
+
 document.addEventListener('DOMContentLoaded', () => {
-    const modal = document.querySelector('.booking-modal');
-    modal.style.display = 'none';
-    console.log('Modal is hidden when page is loaded');
-});
+    // Responsive text depending on input
+    const dateInput = document.querySelector('.custom__date');
+    if (dateInput) {
+      dateInput.addEventListener('keydown', (event) => event.preventDefault());
+    } else {
+      console.warn('.custom__date element is not found in the DOM.');
+    }
+
+  });
+  
+  
 
 console.log(document.querySelector('.booking__searchButton'));
 console.log(document.querySelector('.custom__date'));
@@ -22,8 +35,6 @@ modal.style.display = 'block';
 console.log('modal is now displayed');
 showSteps(1);
 };
-
-module.exports = { openBookingModal };
 
 function showSteps(stepNumber){
     modal.style.display='block';
