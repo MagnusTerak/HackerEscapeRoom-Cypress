@@ -7,6 +7,7 @@ import {
 fetchAllChallenges();
 fetchAvailableTimes(3, '2024-12-12');
 fetchChallengeDetails(3);
+fetchChallengeDetails(3);
 createReservation({
   challengeId: 3,
   name: 'Elena',
