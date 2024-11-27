@@ -23,6 +23,8 @@ console.log('modal is now displayed');
 showSteps(1);
 };
 
+module.exports = { openBookingModal };
+
 function showSteps(stepNumber){
     modal.style.display='block';
     steps.forEach((step, index) => {
