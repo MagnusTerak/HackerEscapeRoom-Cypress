@@ -1,1 +1,17 @@
-.filter{display:flex;justify-content:center;margin-bottom:5rem}.filter__box{width:84.5%;height:25rem;border:2px solid #8acfe5;border-radius:2px}.filter__box__topDiv{display:flex;flex-direction:row;justify-content:space-between}.filter__box__topDiv__closeFilterBtn{background-color:rgba(0,0,0,0);border:none;font-size:2.5rem;color:gray;padding-top:1.5rem;padding-right:1.5rem}.filter__box__topDiv__closeFilterBtn:hover{color:red;cursor:pointer}.filter__box__topDiv__title{font-family:"Roboto",sans-serif;font-style:normal;font-weight:normal;font-size:1rem;font-size:1.5rem;padding-left:2rem;padding-top:1.5rem}.filter__button{background-color:rgba(0,0,0,0);color:#011827;max-width:308px;padding:1.5rem 2rem;border:none;border-radius:.3rem;cursor:pointer;display:inline-block;text-align:center;justify-content:center;font-family:"Roboto",sans-serif;font-style:normal;font-weight:700;font-size:1.5rem;border:2px solid #8acfe5}.filter__button:hover{background-color:#8acfe5}.filter__button:hover{cursor:pointer}.filter__button__title{font-family:"Roboto",sans-serif;font-style:normal;font-weight:normal;font-size:1rem;padding:.5rem;font-size:1.75rem}.filter__hidden{display:none}/*# sourceMappingURL=filter.css.map */
+/* Error: Undefined mixin.
+ *    ,
+ * 44 |         @include button-outlined;
+ *    |         ^^^^^^^^^^^^^^^^^^^^^^^^
+ *    '
+ *   styles\layouts\scss\filter.scss 44:9  root stylesheet */
+
+body::before {
+  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
+      "Droid Sans Mono", monospace, monospace;
+  white-space: pre;
+  display: block;
+  padding: 1em;
+  margin-bottom: 1em;
+  border-bottom: 2px solid black;
+  content: "Error: Undefined mixin.\a    \2577 \a 44 \2502          @include button-outlined;\d\a    \2502          ^^^^^^^^^^^^^^^^^^^^^^^^\a    \2575 \a   styles\\layouts\\scss\\filter.scss 44:9  root stylesheet";
+}

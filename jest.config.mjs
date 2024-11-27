@@ -1,6 +1,12 @@
 export default {
-    testEnvironment: "jsdom",
-    transform: {
-      "^.+\\.m?js$": "babel-jest",
+  testEnvironment: 'jest-environment-jsdom',
+  transform: {
+    '^.+\\.jsx?$': 'babel-jest', 
+  },
+  moduleFileExtensions: ['js', 'json'], 
+  globals: {
+    'jest-environment-jsdom': {
+      customExportConditions: ['node', 'node-addons'], 
     },
-  };
+  },
+};
