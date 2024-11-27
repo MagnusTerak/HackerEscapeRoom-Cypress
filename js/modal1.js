@@ -2,6 +2,7 @@ import { fetchAvailableTimes } from "./apiService.js";
 //import' ../styles/layouts/scss/modal.scss';
 
 document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.querySelector('.booking-modal');
     modal.style.display = 'none';
     console.log('Modal is hidden when page is loaded');
 });
@@ -17,11 +18,9 @@ const step2 = document.querySelector('#step2');
 const step3 = document.querySelector('#step3');
 
 export const openBookingModal = ()=>{
-  
 modal.style.display = 'block';
 console.log('modal is now displayed');
-step2.style.display = 'none';
-step3.style.display = 'none';
+showSteps(1);
 };
 
 function showSteps(stepNumber){
