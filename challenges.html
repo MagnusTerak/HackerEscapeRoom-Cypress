@@ -2,10 +2,13 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Challenges</title>
-  <link rel="stylesheet" href="styles/layouts/css/main.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Challenges</title>
+    <link
+    rel="stylesheet"
+    href="./styles/layouts/css/main.css"
+  >
   <script src="js/menu.js" defer></script>
   <script type="module" src="./js/apiTest.js"></script>
   <script type="module" src="./js/displayAllChallenges.js"></script>
@@ -45,26 +48,37 @@
 
 
 
-
-
-    <!--*************************************************** Challenges ******************************************************-->
-    <article class="rooms carousel" aria-label="rooms and challenges">
-      <!-- Slide container with cards  -->
-      <h1 class="rooms__title">Our challenges </h1>
-
-      <!--************ Filters ****************-->
-
-      <section class="filter">
-        <button class="filter__button">
-          <h2 class="filter__button__title">Filter challenges</h2>
-        </button>
-      </section>
-
-      <!--************ continue to challenge list *********-->
-      <ol class="challenges__list carousel__viewport">
-
-      </ol>
-    </article>
+        
+       
+       
+       <article
+       class="challenges carousel"
+       aria-label="rooms and challenges"
+       >
+       <!-- Slide container with cards  -->
+       <h2 class="challenges__title">Our challenges</h2>
+       
+       <!--************ Filters ****************-->
+             <section class="filter">
+              <button class="filter__button">
+                <h2 class="filter__button__title">Filter challenges</h2>
+              </button>
+            </section>
+        <ol class="challenges__list">
+        </ol>
+        </article>
+        
+        <div class="main__btns">
+          <ul class="main__btns-list">
+            <li class="main__btns-item">
+              <lass="main__btns-item">
+                <a href="#onsite-challenges" class="main__btn onsite">On-site challenges</a>
+            </li>
+            <li class="main__btns-item">
+              <a href="#onsite-challenges" class="main__btn online">Online challenges</a>
+            </li>
+          </ul>
+        </div> 
 
     <!--*************************************************** Modal******************************************************-->
     <!-- <dialog class="booking-modal">  -->
