@@ -12,6 +12,10 @@ const challenge = new Challenge(
   ['bash', 'coding']
 );
 
+const starsElement = challenge.createChallengeStars();
+const card = challenge.createChallengeCard();
+const btn = challenge.mainPageBtn();
+
 test('Checks if challenge constructor is working', () => {
   expect(challenge.id).toBe(1);
   expect(challenge.title).toBe('Shell 3000');
@@ -26,23 +30,17 @@ test('Checks if challenge constructor is working', () => {
 
 
 test('Checks if DOM elements for stars is created', () => {
-  const starsElement = challenge.createChallengeStars();
-
   expect(starsElement).toBeInstanceOf(HTMLElement);
   expect(starsElement.className).toBe('challenge__ratings');
   expect(starsElement.children.length).toBeGreaterThan(0);
 });
 
 test('Checks if DOM elements for button is created', () => {
-  const btn = challenge.mainPageBtn();
-
   expect(btn).toBeInstanceOf(HTMLElement);
   expect(btn.className).toBe('challenge__btn');
 });
 
 test('Checks if challenge card childrens have a right class names', () => {
-  const card = challenge.createChallengeCard();
-
   expect(card.className).toBe('challenge__slide challengey challenges');
   expect(card.firstChild.className).toBe('challenge__image-container');
   expect(card.firstChild.nextSibling.className).toBe('challenge__details');
@@ -51,3 +49,9 @@ test('Checks if challenge card childrens have a right class names', () => {
   expect(card.firstChild.nextSibling.firstChild.nextSibling.className).toBe('challenge__details-info');
   expect(card.firstChild.nextSibling.firstChild.nextSibling.nextSibling.className).toBe('challenge__description');
 });
+
+console.log(`
+    Challenge title is ${challenge.title}\n
+    Star element class is ${starsElement.className}\n
+    Button class is ${btn.className}\n
+    Challenge DOM has a right image container ${card.firstChild.className}`)
