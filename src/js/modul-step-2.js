@@ -52,7 +52,7 @@ console.log(
 
 //-------------------- FETCH AND DISPLAY ROOM TITLE-------------------------
 
-export const loadRoomTitle = async (challengeId) => {
+const loadRoomTitle = async (challengeId) => {
   try {
     // Fetch challenge details
     const { success, data, error } = await fetchChallengeDetails(challengeId);
