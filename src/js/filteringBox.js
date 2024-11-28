@@ -11,7 +11,7 @@ const searchDebounceDelay = 400;
 let searchField;
 
 // Variable for toggletracing
-let activeTag = null;
+let activeTags = [];
 // Array for the dynamic tags
 let dynamicTagButtons = [];
 let activeButtons = [];
@@ -150,11 +150,9 @@ function filterByTag(tag) {
 
 function updateTagButtons() {
     dynamicTagButtons.forEach(button => {
-        const buttonActive = button.textContent === activeTag;
+        const isActive = activeTags.includes(button.textContent);
+        button.classList.toggle('active-tag', isActive);
         
-        if (buttonActive) {
-            handleActiveButton(button, buttonActive);
-        }
     });
 }
 
@@ -179,7 +177,13 @@ function handleActiveButton(button, state) {
 }
 
 function toggleTagFilter(tag) {
-    activeTag = tag;
+    const index = activeTags.indexOf(tag);
+    if (index === -1) {
+        activeTags.push(tag); 
+        }
+    else {
+        activeTags.splice(index, 1);
+    }
 
     updateTagButtons();
     executeSearch(searchField ? searchField.value : "");
@@ -193,18 +197,20 @@ function updateDynamicTags(filteredResults) {
     dynamicTagButtons = [];
 
     tags.forEach(tag => {
+        const capFirstLetterTag = tag.charAt(0).toUpperCase() + tag.slice(1).toLowerCase();
         const tagButton = document.createElement("button");
         tagButton.classList.add("filter__box__centerDiv__dynamicDivMain__dynamicTag");
-        tagButton.textContent = tag;
+        tagButton.textContent = capFirstLetterTag;
         tagButton.addEventListener("click", () => toggleTagFilter(tag));
+        
+
+        if (activeTags.includes(tag)) {
+            tagButton.classList.add("active-tag");
+        }
+
         dynamicDivTagContainer.appendChild(tagButton);
         dynamicTagButtons.push(tagButton);
-
-        activeButtons.forEach(btnName => {
-            if (btnName.toLowerCase() == tag.toLowerCase()) {
-                tagButton.classList.toggle('active-tag');
-            } 
-        })
+        
     });
 }
 
@@ -217,7 +223,7 @@ function getUniqueTags(filteredResults) {
         });
     });
 
-    return Array.from(tagSet);
+    return Array.from(tagSet).sort((a, b) => a.localeCompare(b));
 }
 
 // Delayed search from input event
@@ -244,8 +250,9 @@ function executeSearch(query) {
         const matchesType = 
             (onlineChecked && challenge.type.toLowerCase() === "online") ||
             (onsiteChecked && challenge.type.toLowerCase() === "onsite");
-            const matchesTag = !activeTag ||
-            challenge.labels.some(label => label.toLowerCase() === activeTag.toLowerCase())
+        const matchesTag = 
+            activeTags.length === 0 || 
+            activeTags.some(tag => challenge.labels.some(label => label.toLowerCase() === tag.toLowerCase()));
                 return matchesQuery && matchesType && matchesTag;
             });
 
@@ -287,7 +294,5 @@ function destroyFilterBox() {
     const filterBox = document.querySelector(".filter__box");
     filterBox.remove();
 }
-
-
 
 renderChallenges(filteredResults, challengesListElement);
