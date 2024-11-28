@@ -158,10 +158,10 @@
             </figure>
 
             <!-- Snapper for slide navigation -->
-            <div class="carousel__snapper">
+            <!-- <div class="carousel__snapper">
               <a href="#testimonial__carousel__slide2" class="carousel__next">Go to next slide</a>
               <a href="#testimonial__carousel__slide2" class="carousel__prev">Go to last slide</a>
-            </div>
+            </div> -->
           </li>
 
           <!-- Slide 2 -->
@@ -181,10 +181,10 @@
             </figure>
 
             <!-- Snapper for slide navigation -->
-            <div class="carousel__snapper">
+            <!-- <div class="carousel__snapper">
               <a href="#testimonial__carousel__slide1" class="carousel__next">Go to next slide</a>
               <a href="#testimonial__carousel__slide1" class="carousel__prev">Go to first slide</a>
-            </div>
+            </div> -->
           </li>
 
         </ol>
@@ -204,7 +204,6 @@
     <div class="main__btns">
       <ul class="main__btns-list">
         <li class="main__btns-item">
-          <lass="main__btns-item">
             <a href="#onsite-challenges" class="main__btn onsite">On-site challenges</a>
         </li>
         <li class="main__btns-item">
@@ -215,56 +214,8 @@
 
     <!--*************************************************** Modal******************************************************-->
 
-    <!-- <dialog class="booking-modal">  -->
-    <div class="booking-modal">
-      <div class="booking-modal__content">
-
-        <!-- Step 1: Select Date -->
-        <div class="booking-modal__step booking-modal__step--active" id="step1">
-          <h2 class="booking-modal__title">Select a Date(Step1/Modal1)</h2>
-          Add a Form labels, an input field for the date, and a button for searching available times (Modal 1). Decide
-          whether to generate these elements dynamically using JavaScript or include them directly as static HTML tags.
-          Regardless of the approach, ensure all necessary elements are properly integrated into challenges.html.
-        </div>
-
-
-  
-        <!-- Step 2: Enter Details -->
-      
-   <div class="booking_modal_step_2" id="step2">
-    <h1 class="room-title">Loading...</h1>
-    <form class="user_booking" id="user-booking" action="/submit_booking" method="post">
-      <!-- Name -->
-      <div class="user_booking_name">
-        <label for="booking-name" class="booking_name">Name</label>
-        <input type="name" class="custom_name" id="booking-name" name="user_name" required>
-      </div>
-      <!-- Email -->
-      <div class="user_booking_email">
-        <label for="booking-email" class="booking_email">E-mail</label>
-        <input type="email" class="custom_email" id="booking-email" name="user_email" required>
-      </div>
-      <!-- Times -->
-      <div class="user_booking_time">
-        <label for="booking-time" class="booking_time">What time?</label>
-        <select id="booking-time" name="selected_time" class="custom_time" required>
-          <!-- placeholder times -->
-          <option value="">Select Time</option>
-        </select>
-      </div>
-      <!-- participants -->
-      <div class="user_booking_participants">
-        <label for="booking-participants" class="booking_participants">How many participants?</label>
-        <select id="booking-participants" name="selected_participants" class="custom_participants" required>
-          <!-- placeholder participants -->
-          <option value=""> Select Participants</option>
-        </select>
-      </div>
-      <!-- submit booking button -->
-      <button type="submit" class="submit_booking_btn">submit booking</button>
-    </form>
-  </div>
-
+ 
+        
         <!-- <dialog class="booking-modal">  -->
           <div class="booking-modal" id="booking-modal" style=" display: none">
             <div class="booking-modal__content">
@@ -280,50 +231,46 @@
                           <input type="date" class="custom__date" id="booking-date" name="booking-date" required>
                           <button type="submit" class="booking__search-btn">Search available times</button>
                         </form>
+                      </div>
                     </div>
                   </div>
+                  
+                  <!-- Step 2: Enter Details -->
+                
+             <div class="booking_modal_step_2" id="step2">
+              <h1 class="room-title">Loading...</h1>
+              <form class="user_booking" id="user-booking" action="/submit_booking" method="post">
+                <!-- Name -->
+                <div class="user_booking_name">
+                  <label for="booking-name" class="booking_name">Name</label>
+                  <input type="name" class="custom_name" id="booking-name" name="user_name" required>
                 </div>
-
-             <!-- Step 2: Enter Details -->
-        <div class="booking_modal_step_2" id="step2">
-          <h1>Book room "Title of room" (step 2)</h1>
-          <form class="user_booking" id="user-booking" action="/submit_booking" method="post">
-            <!-- Name -->
-            <div class="user_booking_name">
-              <label for="name_booking" class="booking_name">Name</label>
-              <input type="name" class="custom_name" id="booking-name" name="user_name" required>
+                <!-- Email -->
+                <div class="user_booking_email">
+                  <label for="booking-email" class="booking_email">E-mail</label>
+                  <input type="email" class="custom_email" id="booking-email" name="user_email" required>
+                </div>
+                <!-- Times -->
+                <div class="user_booking_time">
+                  <label for="booking-time" class="booking_time">What time?</label>
+                  <select id="booking-time" name="selected_time" class="custom_time" required>
+                    <!-- placeholder times -->
+                    <option value="">Select Time</option>
+                  </select>
+                </div>
+                <!-- participants -->
+                <div class="user_booking_participants">
+                  <label for="booking-participants" class="booking_participants">How many participants?</label>
+                  <select id="booking-participants" name="selected_participants" class="custom_participants" required>
+                    <!-- placeholder participants -->
+                    <option value=""> Select Participants</option>
+                  </select>
+                </div>
+                <!-- submit booking button -->
+                <button type="submit" class="submit_booking_btn">submit booking</button>
+              </form>
             </div>
-            <!-- Email -->
-            <div class="user_booking_email">
-              <label for="email_booking" class="booking_email">Email</label>
-              <input type="email" class="custom_email" id="booking-email" name="user_email" required>
-            </div>
-            <!-- Times -->
-            <div class="user_booking_time">
-              <label for="time_booking" class="booking_time">What time?</label>
-              <select id="booking-time" name="selected_time" class="custom_time" required>
-                <!-- placeholder times -->
-                <option value="10:00-11:30">10:00-11:30</option>
-                <option value="12:00-13:30">12:00-13:30</option>
-                <option value="14:00-15:30">14:00-15:30</option>
-              </select>
-            </div>
-            <!-- participants -->
-            <div class="user_booking_participants">
-              <label for="participants_booking" class="booking_participants">How many participants?</label>
-              <select id="booking-participants" name="selected_participants" class="custom_participants" required>
-                <!-- placeholder participants -->
-                <option value="2">2 participants</option>
-                <option value="3">3 participants</option>
-                <option value="4">4 participants</option>
-                <option value="5">5 participants</option>
-                <option value="6">6 participants</option>
-              </select>
-            </div>
-            <!-- submit booking btn -->
-            <button type="submit" class="submit_booking_btn">submit booking</button>
-          </form>
-        </div>
+                 
 
               <!-- Step 3: Confirmation -->
               <div class="booking-modal__step" id="step3">
@@ -335,6 +282,8 @@
                 </div>
           </div>
         </div>
+        </div>
+        
         <!-- </dialog> -->
         
         <!--*************************************************** STORY ******************************************************-->
