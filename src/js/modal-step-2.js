@@ -1,35 +1,33 @@
-import '@/styles/layouts/module-step-2.scss'
-
+import '@/styles/layouts/modal.scss';
 import {
   fetchAvailableTimes,
   fetchChallengeDetails,
   createReservation,
 } from './apiService.js';
+import { showSteps } from './modal1.js';
 
+// DOM Elements
 const emailInput = document.querySelector('#booking-email');
 const nameInput = document.querySelector('#booking-name');
-const roomTitle = document.querySelector('.modal__content-loading');
 const timeDropdown = document.querySelector('#booking-time');
 const participantsDropdown = document.querySelector('#booking-participants');
-const step2Modal = document.querySelector('#step2');
 const form = document.querySelector('#user-booking');
 
-let challengeId = 1;
-const selectedDate = '2024-12-12'; // to make sure that we are getting the correct data as the apiTest
+// State variables
+let challengeId;
+let selectedDate;
 
 
-//-------------------HELPER FUNCTIONS----------------------------
+// Utility Functions
+const showAlert = (message) => {
+  alert(message);
+};
 
-// // Helper function to check if an email is valid
-const isValidEmail = (email) => /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
-
-// helper functions: General function to update dropdown options
 const updateDropdown = (dropdown, options) => {
   // Clear dropdown, keep only the placeholder
   while (dropdown.options.length > 1) {
     dropdown.remove(1);
   }
-
 
   // Populate dropdown with new options
   options.forEach(({ value, label }) => {
@@ -40,36 +38,46 @@ const updateDropdown = (dropdown, options) => {
   });
 };
 
-//********************************************************************* */
-// we need to check with Ronja to pass the selected date from step1
-// add logic to fetch the date from step1
-//********************************************************************* */
 
-console.log(
-  'challengeDetail From',
-  fetchChallengeDetails(challengeId, selectedDate),
-);
+//------------------- Validator Functions----------------------------
 
-//-------------------- FETCH AND DISPLAY ROOM TITLE-------------------------
+// // Helper function to check if an email is valid
+const isValidEmail = (email) =>
+  /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
 
-const loadRoomTitle = async (challengeId) => {
+
+//------------------- Initialize step 2 Function----------------------------
+export const initializeStep2 = async (id, date) => {
+  challengeId = id;
+  selectedDate = date;
+  console.log(
+    `Initializing Step 2 with challengeId: ${challengeId}, date: ${selectedDate}`,
+  );
+
+  if (!challengeId || !selectedDate) {
+    console.error(
+      'Missing challengeId or selectedDate in Step 2 initialization',
+    );
+    return;
+  }
+
   try {
-    // Fetch challenge details
-    const { success, data, error } = await fetchChallengeDetails(challengeId);
-    if (success) {
-      const { title } = data;
-      if (title) {
-        roomTitle.textContent = title;
-      } else {
-        roomTitle.textContent = 'Room Title Not Found';
-      }
+    const step2RoomTitle = document.querySelector(
+      '#step2 .modal__content-loading',
+    );
+
+    // Fetch and load the room title
+    const { success, data } = await fetchChallengeDetails(challengeId);
+    if (success && data.title) {
+      step2RoomTitle.textContent = data.title;
     } else {
-      console.error('Failed to load room title:', error);
-      roomTitle.textContent = 'Error Loading Room Title';
+      step2RoomTitle.textContent = 'Room Title Not Found';
     }
+    await loadParticipants(challengeId);
+    await loadAvailableTimes(challengeId, selectedDate);
+    showSteps(2); // Move to Step 2
   } catch (err) {
-    console.error('Error loading room title:', err);
-    roomTitle.textContent = 'Error Loading Room Title';
+    console.error('Error initializing Step 2:', err);
   }
 };
 
@@ -86,7 +94,7 @@ const loadParticipants = async (challengeId) => {
         minParticipants,
         'maxParticipants:',
         maxParticipants,
-      ); 
+      );
       populateParticipantsDropdown(minParticipants, maxParticipants);
     } else {
       console.error('Failed to load participants:', error);
@@ -156,15 +164,21 @@ const loadAvailableTimes = async (challengeId, selectedDate) => {
 
 const validateEmail = (event) => {
   const isValid = isValidEmail(event.target.value);
-  event.target.setCustomValidity(isValid ? '' : 'Please enter a valid email address.');
+  event.target.setCustomValidity(
+    isValid ? '' : 'Please enter a valid email address.',
+  );
 };
 
 const validateName = (event) => {
   const trimmedName = event.target.value.trim();
   if (trimmedName.length === 0) {
-    event.target.setCustomValidity('Name should not be empty or contain only spaces.');
+    event.target.setCustomValidity(
+      'Name should not be empty or contain only spaces.',
+    );
   } else if (!/^[a-zA-Z\s]{2,}$/.test(trimmedName)) {
-    event.target.setCustomValidity('Please enter a valid name (letters only, at least 2 characters).');
+    event.target.setCustomValidity(
+      'Please enter a valid name (letters only, at least 2 characters).',
+    );
   } else {
     event.target.setCustomValidity('');
   }
@@ -174,8 +188,10 @@ const validateName = (event) => {
 
 const handleFormSubmission = async (event) => {
   event.preventDefault();
-
   // Validate name before submission
+
+  console.log('Selected Date:', selectedDate);
+  console.log('Challenge ID:', challengeId);
   const nameValue = nameInput.value.trim();
   if (nameValue.length === 0) {
     nameInput.setCustomValidity('Name should not be empty.');
@@ -184,15 +200,20 @@ const handleFormSubmission = async (event) => {
   } else {
     nameInput.setCustomValidity(''); // Clear validation message
   }
-    // Validate email before submission
-    const emailValue = emailInput.value.trim();
-    if (!isValidEmail(emailValue)) {
-      emailInput.setCustomValidity('Please enter a valid email address.');
-      emailInput.reportValidity();
-      return; // Stop submission
-    } else {
-      emailInput.setCustomValidity(''); // Clear validation message
-    }
+  // Validate email before submission
+  const emailValue = emailInput.value.trim();
+  if (!isValidEmail(emailValue)) {
+    emailInput.setCustomValidity('Please enter a valid email address.');
+    emailInput.reportValidity();
+    return; // Stop submission
+  } else {
+    emailInput.setCustomValidity(''); // Clear validation message
+  }
+
+  if (!selectedDate || !challengeId) {
+    showAlert('Missing challenge ID or selected date.');
+    return; // Stop submission
+  }
 
   // Extract form data
   const reservationData = {
@@ -204,7 +225,7 @@ const handleFormSubmission = async (event) => {
     participants: parseInt(form['selected_participants'].value, 10),
   };
 
-  console.log('Reservation Data:', reservationData);
+  // console.log('Reservation Data:', reservationData);
 
   try {
     // Send reservation request
@@ -212,12 +233,12 @@ const handleFormSubmission = async (event) => {
 
     if (success) {
       console.log('Reservation created successfully:', data);
-      console.log('resrvationData', reservationData);
       nameInput.value = '';
       emailInput.value = '';
       timeDropdown.selectedIndex = 0; // Reset to placeholder
       participantsDropdown.selectedIndex = 0;
 
+      showSteps(3);
       //------------------------------------------------------
       // you need to put logic to go to the thank you part from Ronja
       //-------------------------------------------------------
@@ -237,12 +258,9 @@ const handleFormSubmission = async (event) => {
 document.addEventListener('DOMContentLoaded', () => {
   emailInput.addEventListener('input', validateEmail);
   nameInput.addEventListener('input', validateName);
-  
-  loadRoomTitle(challengeId);
-  loadParticipants(challengeId);
-  loadAvailableTimes(challengeId, selectedDate);
 });
-// on form submition
-if (form) {
+
+if (!form._hasSubmitListener) {
   form.addEventListener('submit', handleFormSubmission);
+  form._hasSubmitListener = true;
 }

@@ -83,10 +83,6 @@
 <script type="module" src="./src/js/apiTest.js"></script>
 <script type="module" src="./src/js/displayMainPageChallenges.js"></script>
 <script type="module" src="./src/js/modul-step-2.js"></script>
-
-    <link rel="stylesheet" href="./src/styles/layouts/css/main.css">
-
-
 </head>
 
 <body>
@@ -217,7 +213,7 @@
  
         
         <!-- <dialog class="booking-modal">  -->
-          <div class="booking-modal" id="booking-modal" style=" display: none">
+          <div class="booking-modal" id="booking-modal" >
             <div class="booking-modal__content">
   
               <!-- Step 1: Select Date -->
@@ -239,7 +235,7 @@
                 
              <div class="booking_modal_step_2" id="step2">
               <h1 class="modal__content-loading">Loading...</h1>
-              <form class="user_booking" id="user-booking" action="/submit_booking" method="post">
+              <form class="user_booking" id="user-booking"  method="post">
                 <!-- Name -->
                 <div class="user_booking_name">
                   <label for="booking-name" class="booking_name">Name</label>
@@ -277,7 +273,7 @@
                 <div class="modal" id="modal3">
                   <div class="modal__content">
                       <h1>Thank you!</h1>
-                      <a href="index.html">Back to challenges</a>
+                      <a href="challenges.html">Back to challenges</a>
                   </div>
                 </div>
           </div>

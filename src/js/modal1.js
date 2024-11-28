@@ -1,184 +1,91 @@
 import { fetchAvailableTimes, fetchChallengeDetails } from "./apiService.js";
-import '@/styles/layouts/modal.scss';
+import "@/styles/layouts/modal.scss";
+import { initializeStep2 } from './modal-step-2.js';
 
-// variable declaration: 
-const modal = document.querySelector('.booking-modal');
-const steps = document.querySelectorAll('.booking-modal__step');
-const step1 = document.querySelector('#step1');
-const step2 = document.querySelector('#step2');
-const step3 = document.querySelector('#step3');
-const dateInput = document.querySelector('.custom__date');
-const roomTitle = document.querySelector('.modal__content-loading');
-const searchAvailableTimesBTN = document.querySelector('.booking__search-btn');
+// DOM Selectors
+const modal = document.querySelector(".booking-modal");
+const steps = document.querySelectorAll(".booking-modal__step");
+const dateInput = document.querySelector(".custom__date");
+const roomTitle = document.querySelector(".modal__content-loading");
+const searchAvailableTimesBTN = document.querySelector(".booking__search-btn");
 
-// let challengeId= 1;
+let challengeId; 
 
-function showSteps(stepNumber){
-    modal.style.display='block';
-    steps.forEach((step, index) => {
-        step.style.display = index + 1 === stepNumber ? 'block' : 'none';
-        step.classList.toggle('booking-modal__step--active', index + 1 === stepNumber);
-    });
-}
-
-// document.addEventListener('DOMContentLoaded', () => {
-//     // Responsive text depending on input
-//     const dateInput = document.querySelector('.custom__date');
-//     if (dateInput) {
-//       dateInput.addEventListener('keydown', (event) => event.preventDefault());
-//     } else {
-//       console.warn('.custom__date element is not found in the DOM.');
-//     }
-
-//   });
-  const loadRoomTitle = async (challengeId) => {
-    try {
-      // Fetch challenge details
-      const { success, data, error } = await fetchChallengeDetails(challengeId);
-      if (success) {
-        const { title } = data;
-        if (title) {
-          roomTitle.textContent = title;
-        } else {
-          roomTitle.textContent = 'Room Title Not Found';
-        }
-      } else {
-        console.error('Failed to load room title:', error);
-        roomTitle.textContent = 'Error Loading Room Title';
-      }
-    } catch (err) {
-      console.error('Error loading room title:', err);
-      roomTitle.textContent = 'Error Loading Room Title';
-    }
-  };
-  
-
-
-// console.log(document.querySelector('.booking__searchAvailableTimesBTN'));
-console.log(document.querySelector('.custom__date'));
-/*Ronjas modal script*/ 
-
-
-export const openBookingModal = (challengeId) => {
-    if (!challengeId) {
-        console.error('No challengeId provided to openBookingModal');
-        return;
-    }
-    
-    modal.style.display = 'block';
-    console.log(`Modal is now displayed for challengeId: ${challengeId}`);
-    loadRoomTitle(challengeId); 
-    showSteps(1);
+// to set the minimum selectable date to tomorrow
+const setMinimumSelectableDate = () => {
+  const today = new Date();
+  today.setDate(today.getDate() + 1); // Tomorrow
+  const minDate = today.toISOString().split('T')[0]; // Format as YYYY-MM-DD
+  dateInput.setAttribute('min', minDate); // Set as the minimum date
 };
 
 
-
-//Responsive text depending on input
-dateInput.addEventListener('keydown', (event) => event.preventDefault());
-
-const clearAvailableTimes = () => {
-    const existingTimesContainer = document.querySelector('.available-times');
-    if (existingTimesContainer) existingTimesContainer.remove();
-    dateInput.value='';  //Clearing the datefield
+export const showSteps = (stepNumber) => {
+  const steps = document.querySelectorAll(".booking-modal__step");
+  steps.forEach((step, index) => {
+    if (index + 1 === stepNumber) {
+      step.style.display = "block"; // Show the active step
+      step.classList.add("booking-modal__step--active");
+    } else {
+      step.style.display = "none"; 
+      step.classList.remove("booking-modal__step--active");
+    }
+  });
 };
 
-const displayAvailableTimes = async (challengeId, selectedDate) => {
-    try {
-        const { success, data, error } = await fetchAvailableTimes(challengeId, selectedDate);
-        if (success) {
-            const timesContainer = document.querySelector('#step2 .user_booking_time #booking-time');
-            // Clear existing options
-            while (timesContainer.options.length > 1) {
-                timesContainer.remove(1);
-            }
-            // Populate new time options
-            data.forEach((time) => {
-                const option = document.createElement('option');
-                option.value = time;
-                option.textContent = time;
-                timesContainer.appendChild(option);
-            });
-            console.log('Available times updated in Step 2.');
-        } else {
-            console.error('Error fetching available times:', error);
-        }
-    } catch (err) {
-        console.error('Error fetching available times:', err);
+// Fetch and display the room title
+export const loadRoomTitle = async (challengeId) => {
+  try {
+    const { success, data } = await fetchChallengeDetails(challengeId);
+    if (success && data.title) {
+      roomTitle.textContent = data.title;
+    } else {
+      roomTitle.textContent = "Room Title Not Found";
     }
+  } catch (err) {
+    roomTitle.textContent = "Error Loading Room Title";
+    console.error("Error loading room title:", err);
+  }
 };
 
-searchAvailableTimesBTN.addEventListener('click', async (event) => {
-    event.preventDefault();
+// Event listener for the "Search Available Times" button in Step 1
+searchAvailableTimesBTN.addEventListener("click", async (event) => {
+  event.preventDefault();
 
-    const selectedDate = dateInput.value;
-    if (!selectedDate) {
-        alert('Please select a valid date.');
-        dateInput.focus();
-        return;
-    }
-    await displayAvailableTimes(challengeId, selectedDate);
-    showSteps(2);
-});
-// const displayAvailableTimes = (availableTimes) => {
-//     clearAvailableTimes ();
-//     const timesContainer = document.createElement('div');
-//     timesContainer.classList.add('available-times');
-    
-//     //Looping thru all the times to create a list for every available time
-//     availableTimes.data.forEach((time) => {
-//         const timeButton = document.createElement('button'); //Creating a li-element
-//         timeButton.classList.add('time-slot');
-//         timeButton.addEventListener('click', () => {
-//             showSteps(2);
-//             console.log(`Time selected: ${time}`);
-//         });
-//         timesContainer.appendChild(timeButton);
-//     });
+  const selectedDate = dateInput.value; 
+  if (!selectedDate) {
+    alert("Please select a valid date.");
+    dateInput.focus();
+    return;
+  }
 
-//     const modalContent = document.querySelector('#step1 .modal__content');
-//     modalContent.textContent = `Loading available times`;
-//     modalContent.appendChild(timesContainer);
-    
-//     console.log('Available times are successfully displayed'); //Testing
-// };
+  if (!challengeId) {
+    console.error("Error: challengeId is undefined.");
+    return;
+  }
 
-searchAvailableTimesBTN.addEventListener('click', async (event) => {
-    event.preventDefault();
-
-    const selectedDate = dateInput.value;
-    if (!selectedDate) {
-        alert('Please select a valid date.');
-        dateInput.focus();
-        return;
-    }
-
-    if (!challengeId) {
-        console.error('Error: challengeId is undefined.');
-        return;
-    }
-
-    await displayAvailableTimes(challengeId, selectedDate);
-    showSteps(2);
+  // Pass `challengeId and selectedDate directly to initialize Step 2
+  await initializeStep2(challengeId, selectedDate);
 });
 
+// Function to open the booking modal (Step 1 initialization)
+export const openBookingModal = (id) => {
+  challengeId = id;
+  if (!challengeId) {
+    console.error("No challengeId provided to openBookingModal");
+    return;
+  }
 
-// const finishBookingButton = document.querySelector('.booking__finish-btn');
-// finishBookingButton.addEventListener('click', (event) => {
-//     event.preventDefault();
+  modal.style.display = "block";
+  console.log(`Modal is displayed for challengeId: ${challengeId}`);
+  loadRoomTitle(challengeId);
+  showSteps(1); 
+};
 
-//     //Need logic here to finnish the booking. API stuff 
-//     modal.style.display = 'none';
-//     showSteps(3);
-//     console.log('Showing step 3');
-// });
+// Hide the modal on page load
+document.addEventListener("DOMContentLoaded", () => {
+  modal.style.display = "none";
+  console.log("Modal is hidden when the page is loaded");
 
-// const confirmationMessage = document.createElement('p');
-// confirmationMessage.textContent = 'thanks';
-// step3.appendChild(confirmationMessage);
-
-
-document.addEventListener('DOMContentLoaded', () => {
-    const modal = document.querySelector('.booking-modal');
-    modal.style.display = 'none';
-    console.log('Modal is hidden when page is loaded');
+  setMinimumSelectableDate();
 });
