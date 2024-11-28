@@ -49,19 +49,18 @@ class Challenge {
   }
 
   createBookChallengeBtn() {
-    const bookingBtn = document.createElement("button");
-    bookingBtn.className = "challenge__btn";
-
-    if (this.type === "onsite") {
-      bookingBtn.textContent = "Book this room";
-      bookingBtn.addEventListener('click', openBookingModal
-      );
-    } else if (this.type === "online") {
-      bookingBtn.textContent = "Take challenge online";
-      bookingBtn.addEventListener('click',openBookingModal);
+      const bookingBtn = document.createElement("button");
+      bookingBtn.className = "challenge__btn";
+  
+      if (this.type === "onsite") {
+          bookingBtn.textContent = "Book this room";
+          bookingBtn.addEventListener('click', () => openBookingModal(this.id)); 
+      } else if (this.type === "online") {
+          bookingBtn.textContent = "Take challenge online";
+          bookingBtn.addEventListener('click', () => openBookingModal(this.id)); 
+      }
+      return bookingBtn;
     }
-    return bookingBtn;
-  }
 
   createChallengeCard(btn) {
     const liItem = document.createElement("li");

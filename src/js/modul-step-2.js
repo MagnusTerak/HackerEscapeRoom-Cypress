@@ -1,4 +1,5 @@
 import '@/styles/layouts/module-step-2.scss'
+
 import {
   fetchAvailableTimes,
   fetchChallengeDetails,
@@ -7,7 +8,7 @@ import {
 
 const emailInput = document.querySelector('#booking-email');
 const nameInput = document.querySelector('#booking-name');
-const roomTitle = document.querySelector('.room-title');
+const roomTitle = document.querySelector('.modal__content-loading');
 const timeDropdown = document.querySelector('#booking-time');
 const participantsDropdown = document.querySelector('#booking-participants');
 const step2Modal = document.querySelector('#step2');
@@ -51,7 +52,7 @@ console.log(
 
 //-------------------- FETCH AND DISPLAY ROOM TITLE-------------------------
 
-const loadRoomTitle = async (challengeId) => {
+export const loadRoomTitle = async (challengeId) => {
   try {
     // Fetch challenge details
     const { success, data, error } = await fetchChallengeDetails(challengeId);

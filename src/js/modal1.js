@@ -1,11 +1,10 @@
-import { fetchAvailableTimes } from "./apiService.js";
+import { fetchAvailableTimes, fetchChallengeDetails } from "./apiService.js";
+// import { loadRoomTitle } from "./modul-step-2.js";
 import '@/styles/layouts/modal.scss';
 
-document.addEventListener('DOMContentLoaded', () => {
-    const modal = document.querySelector('.booking-modal');
-    modal.style.display = 'none';
-    console.log('Modal is hidden when page is loaded');
-});
+const roomTitle = document.querySelector('.modal__content-loading');
+
+// let challengeId= 1;
 
 // document.addEventListener('DOMContentLoaded', () => {
 //     // Responsive text depending on input
@@ -17,10 +16,29 @@ document.addEventListener('DOMContentLoaded', () => {
 //     }
 
 //   });
-  
+  const loadRoomTitle = async (challengeId) => {
+    try {
+      // Fetch challenge details
+      const { success, data, error } = await fetchChallengeDetails(challengeId);
+      if (success) {
+        const { title } = data;
+        if (title) {
+          roomTitle.textContent = title;
+        } else {
+          roomTitle.textContent = 'Room Title Not Found';
+        }
+      } else {
+        console.error('Failed to load room title:', error);
+        roomTitle.textContent = 'Error Loading Room Title';
+      }
+    } catch (err) {
+      console.error('Error loading room title:', err);
+      roomTitle.textContent = 'Error Loading Room Title';
+    }
+  };
   
 
-console.log(document.querySelector('.booking__searchButton'));
+// console.log(document.querySelector('.booking__searchButton'));
 console.log(document.querySelector('.custom__date'));
 /*Ronjas modal script*/ 
 
@@ -30,11 +48,18 @@ const step1 = document.querySelector('#step1');
 const step2 = document.querySelector('#step2');
 const step3 = document.querySelector('#step3');
 
-export const openBookingModal = ()=>{
-modal.style.display = 'block';
-console.log('modal is now displayed');
-showSteps(1);
+export const openBookingModal = (challengeId) => {
+    if (!challengeId) {
+        console.error('No challengeId provided to openBookingModal');
+        return;
+    }
+    
+    modal.style.display = 'block';
+    console.log(`Modal is now displayed for challengeId: ${challengeId}`);
+    loadRoomTitle(challengeId); 
+    showSteps(1);
 };
+
 
 function showSteps(stepNumber){
     modal.style.display='block';
@@ -116,3 +141,9 @@ const confirmationMessage = document.createElement('p');
 confirmationMessage.textContent = 'thanks';
 step3.appendChild(confirmationMessage);
 
+
+document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.querySelector('.booking-modal');
+    modal.style.display = 'none';
+    console.log('Modal is hidden when page is loaded');
+});
