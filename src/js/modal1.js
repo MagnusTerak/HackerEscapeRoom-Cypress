@@ -8,6 +8,7 @@ const steps = document.querySelectorAll(".booking-modal__step");
 const dateInput = document.querySelector(".custom__date");
 const roomTitle = document.querySelector(".modal__content-loading");
 const searchAvailableTimesBTN = document.querySelector(".booking__search-btn");
+const closeBTN = document.querySelectorAll('.close');
 
 let challengeId; 
 
@@ -88,4 +89,11 @@ document.addEventListener("DOMContentLoaded", () => {
   console.log("Modal is hidden when the page is loaded");
 
   setMinimumSelectableDate();
+});
+
+closeBTN.forEach(button =>{
+    button.addEventListener('click', () => {
+        const modal = button.closest('.booking-modal');
+        modal.style.display = 'none';
+    });
 });
