@@ -1,5 +1,5 @@
 import'@/styles/layouts/rooms.scss';
-
+import {openBookingModal} from './modal1.js'
 class Challenge {
   constructor(
     id,
@@ -54,14 +54,11 @@ class Challenge {
 
     if (this.type === "onsite") {
       bookingBtn.textContent = "Book this room";
-      bookingBtn.addEventListener('click', () => {
-        this.openModal();
-      });
+      bookingBtn.addEventListener('click', openBookingModal
+      );
     } else if (this.type === "online") {
       bookingBtn.textContent = "Take challenge online";
-      bookingBtn.addEventListener('click', () => {
-        this.openBookingModal();
-      });
+      bookingBtn.addEventListener('click',openBookingModal);
     }
     return bookingBtn;
   }
