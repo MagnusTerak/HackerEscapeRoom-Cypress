@@ -16,6 +16,15 @@ let activeTags = [];
 let dynamicTagButtons = [];
 let activeButtons = [];
 
+// Array for rating stars
+let ratingStars = {
+    lowestStars: [],
+    lowestRating: 0,
+
+    highestStars: [],
+    highestRating: 5,
+}
+
 function openFilterModal() {
     const filterSection = document.querySelector(".filter");
     filterBtn.classList.add("filter__hidden");
@@ -95,6 +104,9 @@ function openFilterModal() {
     checkBoxLabel2.appendChild(document.createTextNode("Include on-site challenges"));
     checkDivBottom.appendChild(checkBoxLabel2);
 
+    // Star rating
+    createStarRating();
+
     // Div-structure for dynamic tags
     const dynamicDivMain = document.createElement("div");
     centerDiv.appendChild(dynamicDivMain);
@@ -136,7 +148,6 @@ function openFilterModal() {
     searchDivMain.appendChild(searchField);
     searchField.classList.add("filter__box__searchDivMain__searchfield");
     searchField.addEventListener("input", debounceSearch);
-
 }
 
 function filterByTag(tag) {
@@ -172,6 +183,118 @@ function handleActiveButton(button, state) {
         if (!foundTag) {
             activeButtons.push(button.textContent);
         }
+    }
+}
+
+function createStarRating() {
+    const filterBox = document.querySelector(".filter__box__centerDiv");
+
+    // Rating div
+    const ratingDiv = document.createElement("div");
+    ratingDiv.classList.add("filter__box__centerDiv__ratingDiv");
+    filterBox.appendChild(ratingDiv);
+
+    // Rating title
+    const ratingTitle = document.createElement("h4");
+    ratingTitle.textContent = "By rating";
+    ratingDiv.appendChild(ratingTitle);
+    ratingTitle.classList.add("filter__box__centerDiv__ratingDiv__title");
+   
+    // Star div
+    const starDiv = document.createElement("div");
+    starDiv.classList.add("filter__box__centerDiv__ratingDiv__starDiv");
+    ratingDiv.appendChild(starDiv);
+
+    // Lowest rating stars
+    for (let index = 1; index <= 5; index++) {
+        const star = new Image()
+        star.src = "assets/svg/star.svg";
+        star.className = "filter__box__centerDiv__ratingDiv__star";
+        starDiv.appendChild(star)
+        ratingStars["lowestStars"].push(star);
+        star.id = "lowest_" + index
+
+        starEvents(star, "lowestRating", index);
+    }
+
+    // Text between stars
+    const textBetween = document.createElement("p");
+    textBetween.textContent = "to";
+    textBetween.classList.add("filter__box__centerDiv__ratingDiv__starDiv__text");
+    starDiv.appendChild(textBetween);
+
+    // Highest rating stars
+    for (let index = 1; index <= 5; index++) {
+        const star = new Image()
+        star.src = "assets/svg/star-filled.svg";
+        star.className = "filter__box__centerDiv__ratingDiv__star"
+        starDiv.appendChild(star)
+        ratingStars["highestStars"].push(star);
+        star.id = "highest_" + index
+
+        starEvents(star, "highestRating", index);
+    }
+}
+
+function starEvents(star, state, index) {
+    star.addEventListener("click", () => {
+        let notValid = false; 
+        let currentCorrectStateName = state.includes("lowest") ? "lowestRating" : "highestRating";
+        
+        if (currentCorrectStateName === "lowestRating") {
+            if (index > ratingStars["highestRating"]) {
+                notValid = true
+            }
+        } else {
+            if (index < ratingStars["lowestRating"]) {
+                notValid = true
+            }
+        }
+
+        if (!notValid) {
+            ratingStars[state] = index;
+            refreshStars(star);
+            executeSearch(searchField ? searchField.value : "");
+        }
+    })
+
+    star.addEventListener("mouseover", () => {
+        refreshStars(star, index)
+    })
+
+    star.addEventListener("mouseout", () => {
+        refreshStars(star)
+    })
+}
+
+function refreshStars(sendingStar, force) {
+    let ratingState = sendingStar.id.includes("lowest") ? "lowestRating" : "highestRating";
+    let hoverRating = force ? force : ratingStars[ratingState];
+
+    if (sendingStar.id.includes("lowest")) {
+        ratingStars["lowestStars"].forEach((star, currentStarIndex) => {
+            if (currentStarIndex + 1 <= hoverRating) { 
+                if (star.getAttribute('src') === "assets/svg/star.svg") {
+                    star.src = "assets/svg/star-filled.svg";
+                } else {
+                    if (currentStarIndex + 1 === Number(sendingStar.id[sendingStar.id.length - 1])) {
+                        star.src = "assets/svg/star-filled.svg";
+                    }
+                }
+            } else {
+                if (star.getAttribute('src') === "assets/svg/star-filled.svg") {
+                    star.src = "assets/svg/star.svg";
+                }
+            }
+        });
+    } else {
+        ratingStars["highestStars"].forEach((star, currentStarIndex) => {
+            if (currentStarIndex > hoverRating - 1) {
+                star.src = "assets/svg/star.svg";
+            } else {
+                star.src = "assets/svg/star-filled.svg";
+            }
+        })
     }
 }
 
@@ -239,6 +362,8 @@ function executeSearch(query) {
     const onlineChecked = document.getElementById("DOM__checkBox1").checked;
     const onsiteChecked = document.getElementById("DOM__checkBox2").checked;
     const filteredResults = challengesArray.filter(challenge => {
+        const matchesRating = challenge.rating >= ratingStars["lowestRating"] && challenge.rating <= ratingStars["highestRating"];
+        
         const matchesQuery =
             challenge.title.toLowerCase().includes(query.toLowerCase()) || 
             challenge.description.toLowerCase().includes(query.toLowerCase()) ||
@@ -250,7 +375,8 @@ function executeSearch(query) {
             (onsiteChecked && challenge.type.toLowerCase() === "onsite");
         const matchesTag =  
             activeTags.every(tag => challenge.labels.some(label => label.toLowerCase() === tag.toLowerCase()));
-                return matchesQuery && matchesType && matchesTag;
+                return matchesQuery && matchesType && matchesTag && matchesRating;
+
             });
 
             // updateDynamicTags(filteredResults);
