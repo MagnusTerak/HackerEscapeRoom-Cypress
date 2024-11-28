@@ -148,11 +148,10 @@ function filterByTag(tag) {
     displaySearchResults(filteredResults);
 }
 
-function updateTagButtons() {
+function updateTagButtons(tag) {
     dynamicTagButtons.forEach(button => {
-        const isActive = activeTags.includes(button.textContent);
+        const isActive = activeTags.includes(button.textContent.toLowerCase());
         button.classList.toggle('active-tag', isActive);
-        
     });
 }
 
@@ -185,7 +184,7 @@ function toggleTagFilter(tag) {
         activeTags.splice(index, 1);
     }
 
-    updateTagButtons();
+    updateTagButtons(tag);
     executeSearch(searchField ? searchField.value : "");
 }
 
@@ -202,7 +201,6 @@ function updateDynamicTags(filteredResults) {
         tagButton.classList.add("filter__box__centerDiv__dynamicDivMain__dynamicTag");
         tagButton.textContent = capFirstLetterTag;
         tagButton.addEventListener("click", () => toggleTagFilter(tag));
-        
 
         if (activeTags.includes(tag)) {
             tagButton.classList.add("active-tag");
@@ -255,7 +253,7 @@ function executeSearch(query) {
                 return matchesQuery && matchesType && matchesTag;
             });
 
-            updateDynamicTags(filteredResults);
+            // updateDynamicTags(filteredResults);
 
             displaySearchResults(filteredResults);
 
@@ -293,5 +291,3 @@ function destroyFilterBox() {
     const filterBox = document.querySelector(".filter__box");
     filterBox.remove();
 }
-
-renderChallenges(filteredResults, challengesListElement);
