@@ -70,3 +70,18 @@ menu.addEventListener('click', (e) => {
 });
 closeBtn.addEventListener('click', handleCloseMenu);
 window.addEventListener('scroll', handleCloseMenu);
+
+// Redirection from index.html to challenges.html with prefiltered results for online/onsite challenges
+document.addEventListener('DOMContentLoaded', () => {
+  const onlineButton = document.querySelector('.main__btn.online');
+  const onsiteButton = document.querySelector('.main__btn.onsite');
+
+  onlineButton.addEventListener('click', () => {
+    window.location.href = 'challenges.html?type=online';
+  });
+
+  onsiteButton.addEventListener('click', () => {
+    window.location.href = 'challenges.html?type=onsite';
+  });
+  
+});
