@@ -1,7 +1,5 @@
 import { fetchAllChallenges } from './apiService.js';
-import Challenge from './challengeClass.js';
 import { renderChallenges } from './utilities/renderChallenges.js';
-import '../styles/layouts/scss/rooms.scss';
 
 const challengesList = document.querySelector('.challenges__list');
 

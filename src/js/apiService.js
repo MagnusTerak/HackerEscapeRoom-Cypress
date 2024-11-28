@@ -1,13 +1,26 @@
 const BASE_URL = 'https://lernia-sjj-assignments.vercel.app/api';
 
 // Helper function to validate date format (YYYY-MM-DD)
-const isValidDate = (date) => /^\d{4}-\d{2}-\d{2}$/.test(date);
+export const isValidDate= (dateString) => {
+  const regex = /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/;
+  if (!regex.test(dateString)) return false;
+
+  // Further validate logical date correctness
+  const date = new Date(dateString);
+  return date instanceof Date && !isNaN(date);
+}
+
 
 // Helper function to validate time format (HH:mm)
-const isValidTime = (time) => /^\d{2}:\d{2}$/.test(time);
+export const isValidTime = (timeString) => {
+  // Regular expression to strictly match valid time formats
+  const regex = /^(?:[01]\d|2[0-3]):[0-5]\d$/;
+  return regex.test(timeString);
+}
+
 
 // Helper function for a simple input validation
-const validateReservationInput = ({
+export const validateReservationInput = ({
   challengeId,
   name,
   email,

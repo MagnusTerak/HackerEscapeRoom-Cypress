@@ -1,4 +1,5 @@
-import'../styles/layouts/scss/rooms.scss';
+import'@/styles/layouts/rooms.scss';
+
 class Challenge {
   constructor(
     id,
