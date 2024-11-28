@@ -134,7 +134,7 @@ function openFilterModal() {
     searchDiv2.appendChild(searchFieldTitle);
     searchFieldTitle.classList.add("filter__box__searchDiv__title");
 
-    const searchField = document.createElement("input");
+    searchField = document.createElement("input");
     searchField.type = "search";
     searchField.id = "searchField-input";
     searchField.placeholder = "Start typing to filter";
@@ -169,7 +169,7 @@ function toggleTagFilter(tag) {
     }
 
     updateTagButtons();
-    executeSearch(searchField.value || "");
+    executeSearch(searchField ? searchField.value : "");
 }
 
 // Update the dynamic tags based on tags present in the filteredResults
@@ -178,6 +178,7 @@ function updateDynamicTags(filteredResults) {
     dynamicDivTagContainer.textContent = "";
     const tags = getUniqueTags(filteredResults);
     dynamicTagButtons = [];
+    console.log(dynamicTagButtons);
 
     tags.forEach(tag => {
         const tagButton = document.createElement("button");
@@ -198,7 +199,8 @@ function getUniqueTags(filteredResults) {
         });
     });
 
-    return Array.from(tagSet);
+    // Sort the tags in alohabetic order
+    return Array.from(tagSet).sort((a, b) => a.localeCompare(b)); 
 }
 
 // Delayed search from input event
