@@ -1,12 +1,13 @@
 export default {
-  testEnvironment: 'jest-environment-jsdom',
+  testEnvironment: 'jsdom', // Simulate a browser-like environment
   transform: {
-    '^.+\\.jsx?$': 'babel-jest', 
+    '^.+\\.m?[jt]sx?$': 'babel-jest', // Use Babel to transpile ES6+ syntax
   },
-  moduleFileExtensions: ['js', 'json'], 
-  globals: {
-    'jest-environment-jsdom': {
-      customExportConditions: ['node', 'node-addons'], 
-    },
+  moduleNameMapper: {
+    '\\.(css|scss)$': '<rootDir>/jest.mock.js', // Mock CSS/SCSS files
+    '^@/(.*)$': '<rootDir>/src/$1', // Map '@' alias to the 'src' folder
   },
+  transformIgnorePatterns: [
+    'node_modules/(?!(some-esm-package|another-esm-package)/)', // Optional: Transpile ESM packages
+  ],
 };

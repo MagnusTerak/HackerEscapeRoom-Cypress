@@ -1,3 +1,4 @@
+import '@/styles/layouts/module-step-2.scss'
 import {
   fetchAvailableTimes,
   fetchChallengeDetails,
