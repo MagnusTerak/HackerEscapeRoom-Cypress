@@ -9,7 +9,7 @@
         "build": "vite build",
         "serve": "vite preview",
         "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
-        "deploy": "vite build && git subtree push --prefix dist origin gh-pages"
+        "deploy": "gh-pages -d dist"
     },
     "author": "Elena Lehto Fredenbrink",
     "license": "MIT",
