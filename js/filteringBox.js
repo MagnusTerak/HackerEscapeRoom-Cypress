@@ -1,5 +1,5 @@
 import { getChallengesArray } from "./displayAllChallenges.js";
-import TCard from "./temporary.js";
+import { renderChallenges } from './utilities/renderChallenges';
 import '../styles/layouts/scss/filter.scss';
 
 const filterBtn = document.querySelector(".filter__button");
@@ -21,7 +21,7 @@ function openFilterModal() {
     filterBtn.classList.add("filter__hidden");
 
     // filterBox
-    const filterBox = document.createElement("box");
+    const filterBox = document.createElement("div");
     filterSection.appendChild(filterBox);
     filterBox.classList.add("filter__box");
 
@@ -269,23 +269,7 @@ function displaySearchResults(filteredResults) {
     }
 
     // Loop challenges and present in cards
-    filteredResults.forEach((challengeData) => {
-        const tCard = new TCard(
-            challengeData.id,
-            challengeData.title,
-            challengeData.description,
-            challengeData.type,
-            challengeData.minParticipants,
-            challengeData.maxParticipants,
-            challengeData.rating,
-            challengeData.image,
-            challengeData.labels
-        );
-
-        const challengeElement = tCard.createTCard(tCard);
-
-        challengesListElement.appendChild(challengeElement);
-    });
+    renderChallenges(filteredResults, challengesListElement);
 
 }
 

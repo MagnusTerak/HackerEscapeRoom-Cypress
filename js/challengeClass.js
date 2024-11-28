@@ -1,3 +1,4 @@
+import'../styles/layouts/scss/rooms.scss';
 class Challenge {
   constructor(
     id,
@@ -46,21 +47,22 @@ class Challenge {
     return challengeRating;
   }
 
-  mainPageBtn() {
-    const link = document.createElement("a");
-    link.className = "challenge__btn";
+  createBookChallengeBtn() {
+    const bookingBtn = document.createElement("button");
+    bookingBtn.className = "challenge__btn";
+
     if (this.type === "onsite") {
-      link.textContent = "Book this room";
-      link.addEventListener('click', () => {
-        window.location.href = "challenges.html";
+      bookingBtn.textContent = "Book this room";
+      bookingBtn.addEventListener('click', () => {
+        this.openModal();
       });
     } else if (this.type === "online") {
-      link.textContent = "Take challenge online";
-      link.addEventListener('click', () => {
-        window.location.href = "challenges.html";
+      bookingBtn.textContent = "Take challenge online";
+      bookingBtn.addEventListener('click', () => {
+        this.openBookingModal();
       });
     }
-    return link;
+    return bookingBtn;
   }
 
   createChallengeCard(btn) {
@@ -77,9 +79,6 @@ class Challenge {
     img.src = this.image;
     img.alt = this.description;
     img.loading = "lazy";
-    img.style.width = "100%";
-    img.style.height = "100%";
-    img.style.objectFit = "cover";
     imageContainer.appendChild(img);
 
     const detailsContainer = document.createElement("div");
@@ -88,7 +87,7 @@ class Challenge {
 
     const title = document.createElement("h2");
     title.className = "challenge__details__title_temporary";
-    title.textContent = this.title + " (" + this.type + ")";
+    title.textContent = this.title + (this.type === "onsite" ? " (onsite)" : "");
 
     const detailsInfo = document.createElement("div");
     detailsInfo.className = "challenge__details-info";
@@ -98,27 +97,61 @@ class Challenge {
     const challengeParticipants = document.createElement("div");
     challengeParticipants.className = "challenge__participants";
     challengeParticipants.textContent = `${this.minParticipants} - ${this.maxParticipants} participants`;
-    
-    detailsInfo.appendChild(rating);
+    if (this.type === "online") {
+      challengeParticipants.textContent += " (networked)";
+    }
+    imageContainer.appendChild(rating);
     detailsInfo.appendChild(challengeParticipants);
-
+    
+    
     const challengeDescription = document.createElement("p");
     challengeDescription.className = "challenge__description"
     challengeDescription.textContent = this.description;
-
+    
     detailsContainer.appendChild(title);
+
+    if (this.labels && this.labels.length > 0) {
+      const labels = this.createLabels();
+      detailsContainer.appendChild(labels); 
+    }
     detailsContainer.appendChild(detailsInfo);
     detailsContainer.appendChild(challengeDescription);
     
     if(btn){
-    detailsContainer.appendChild(this.mainPageBtn());
+      detailsContainer.appendChild(this.createBookChallengeBtn());
     }
-
+    
+    const typeIcon = document.createElement("span");
+    typeIcon.className = "challenge__type-icon";
+    
+    if (this.type === "online") {
+      typeIcon.textContent = "💻"; 
+    } else if (this.type === "onsite") {
+      typeIcon.textContent = "🏠"; 
+    }
+    imageContainer.appendChild(typeIcon);
+    
+    
     liItem.appendChild(imageContainer);
     liItem.appendChild(detailsContainer);
-
+    
     return liItem;
   }
+  createLabels() {
+    const labelsContainer = document.createElement("div");
+    labelsContainer.className = "challenge__labels";
+
+    this.labels.forEach(label => {
+      const labelItem = document.createElement("span");
+      labelItem.className = "challenge__label";
+      labelItem.textContent = `*${label} `; 
+      labelsContainer.appendChild(labelItem);
+    });
+
+    return labelsContainer;
+  }
+
+  
 }
 
 export default Challenge;
