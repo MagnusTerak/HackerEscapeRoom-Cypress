@@ -250,9 +250,8 @@ function executeSearch(query) {
         const matchesType = 
             (onlineChecked && challenge.type.toLowerCase() === "online") ||
             (onsiteChecked && challenge.type.toLowerCase() === "onsite");
-        const matchesTag = 
-            activeTags.length === 0 || 
-            activeTags.some(tag => challenge.labels.some(label => label.toLowerCase() === tag.toLowerCase()));
+        const matchesTag =  
+            activeTags.every(tag => challenge.labels.some(label => label.toLowerCase() === tag.toLowerCase()));
                 return matchesQuery && matchesType && matchesTag;
             });
 
