@@ -12,16 +12,16 @@ let searchField;
 
 // Variable for toggletracing
 let activeTag = null;
-
 // Array for the dynamic tags
 let dynamicTagButtons = [];
+let activeButtons = [];
 
 function openFilterModal() {
     const filterSection = document.querySelector(".filter");
     filterBtn.classList.add("filter__hidden");
 
     // filterBox
-    const filterBox = document.createElement("div");
+    const filterBox = document.createElement("box");
     filterSection.appendChild(filterBox);
     filterBox.classList.add("filter__box");
 
@@ -43,73 +43,76 @@ function openFilterModal() {
     closeFilterButton.innerHTML = "X";
     closeFilterButton.addEventListener("click", closeFilterModal);
 
-    // Checkbox divs
-    const checkDivMain = document.createElement("div");
-    filterBox.appendChild(checkDivMain);
-    checkDivMain.classList.add("filter__box__checkDivMain");
+    // Center div
+    const centerDiv = document.createElement("div");
+    filterBox.appendChild(centerDiv);
+    centerDiv.classList.add("filter__box__centerDiv");
 
-    const checkDiv2 = document.createElement("div");
-    checkDivMain.appendChild(checkDiv2);
-    checkDiv2.classList.add("filter__box__checkDivMain__checkDiv2");
+    // Checkbox main div
+    const checkDiv = document.createElement("div");
+    centerDiv.appendChild(checkDiv);
+    checkDiv.classList.add("filter__box__centerDiv__checkDiv");
 
-    const checkDiv3 = document.createElement("div");
-    checkDivMain.appendChild(checkDiv3);
-    checkDiv3.classList.add("filter__box__checkDivMain__checkDiv3");
-
-    const checkDiv4 = document.createElement("div");
-    checkDivMain.appendChild(checkDiv4);
-    checkDiv4.classList.add("filter__box__checkDivMain__checkDiv4");
-
-    // Checkboxes
+    // Title checkboxes
     const checkBoxTitle = document.createElement("h4");
     checkBoxTitle.textContent = "By type";
-    checkDiv2.appendChild(checkBoxTitle);
-    checkBoxTitle.classList.add("filter__box__checkDiv__title");
+    checkDiv.appendChild(checkBoxTitle);
+    checkBoxTitle.classList.add("filter__box__centerDiv__checkDiv__title");
 
+    // Checkboxes side divs
+    const checkDivTop = document.createElement("div");
+    checkDiv.appendChild(checkDivTop);
+    checkDivTop.classList.add("filter__box__centerDiv__checkDiv__divTop");
+
+    const checkDivBottom = document.createElement("div");
+    checkDiv.appendChild(checkDivBottom);
+    checkDivBottom.classList.add("filter__box__centerDiv__checkDiv__divBottom");
+
+    // Checkboxes
     const checkBox1 = document.createElement("input");
     checkBox1.type = ("checkbox");
     checkBox1.id = "DOM__checkBox1";
     checkBox1.checked = true;
-    checkDiv3.appendChild(checkBox1);
-    checkBox1.classList.add("filter__box__checkDiv__checkbox1");
+    checkDivTop.appendChild(checkBox1);
+    checkBox1.classList.add("filter__box__centerDiv__checkDiv__checkBox");
     checkBox1.addEventListener("change", () => executeSearch(searchField.value));
 
     const checkBoxLabel1 = document.createElement("label");
     checkBoxLabel1.htmlFor = "DOM__checkBox1";
     checkBoxLabel1.appendChild(document.createTextNode("Include online challenges"));
-    checkDiv3.appendChild(checkBoxLabel1);
+    checkDivTop.appendChild(checkBoxLabel1);
      
     const checkBox2 = document.createElement("input");
     checkBox2.type = ("checkbox");
     checkBox2.id = ("DOM__checkBox2")
     checkBox2.checked = true;
-    checkDiv4.appendChild(checkBox2);
-    checkBox2.classList.add("filter__box__checkDiv__checkbox2");
+    checkDivBottom.appendChild(checkBox2);
+    checkBox2.classList.add("filter__box__centerDiv__checkDiv__checkBox");
     checkBox2.addEventListener("change", () => executeSearch(searchField.value));
 
     const checkBoxLabel2 = document.createElement("label");
     checkBoxLabel2.htmlFor = "DOM__checkBox2";
     checkBoxLabel2.appendChild(document.createTextNode("Include on-site challenges"));
-    checkDiv4.appendChild(checkBoxLabel2);
+    checkDivBottom.appendChild(checkBoxLabel2);
 
     // Div-structure for dynamic tags
     const dynamicDivMain = document.createElement("div");
-    filterBox.appendChild(dynamicDivMain);
-    dynamicDivMain.classList.add("filter__box__dynamicDivMain")
+    centerDiv.appendChild(dynamicDivMain);
+    dynamicDivMain.classList.add("filter__box__centerDiv__dynamicDivMain")
 
     const dynamicDivTitle = document.createElement("div");
     dynamicDivMain.appendChild(dynamicDivTitle);
-    dynamicDivTitle.classList.add("filter__box__dynamicDivMain__dynamicDivTitle")
+    dynamicDivTitle.classList.add("filter__box__centerDiv__dynamicDivMain__dynamicDivTitle")
 
     const dynamicDivTagContainer = document.createElement("div");
     dynamicDivMain.appendChild(dynamicDivTagContainer);
-    dynamicDivTagContainer.classList.add("filter__box__dynamicDivMain__dynamicDivTagContainer");
+    dynamicDivTagContainer.classList.add("filter__box__centerDiv__dynamicDivMain__dynamicDivTagContainer");
 
     // Dynamic tags title
     const dynamicTagTitle = document.createElement("h4");
     dynamicTagTitle.textContent = "By tags";
     dynamicDivTitle.appendChild(dynamicTagTitle);
-    dynamicTagTitle.classList.add("filter__box__dynamicDivMain__title");
+    dynamicTagTitle.classList.add("filter__box__centerDiv__dynamicDivMain__title");
 
     // Populate dynamic tags
     const challengesArray = getChallengesArray();
@@ -120,26 +123,18 @@ function openFilterModal() {
     filterBox.appendChild(searchDivMain);
     searchDivMain.classList.add("filter__box__searchDivMain");
 
-    const searchDiv2 = document.createElement("div");
-    searchDivMain.appendChild(searchDiv2);
-    searchDiv2.classList.add("filter__box__searchDivMain__searchDiv2");
-
-    const searchDiv3 = document.createElement("div");
-    searchDivMain.appendChild(searchDiv3);
-    searchDiv3.classList.add("filter__box__searchDivMain__searchDiv3");
-
     // Search field
     const searchFieldTitle = document.createElement("h4");
     searchFieldTitle.textContent = "Or type to search for keywords";
-    searchDiv2.appendChild(searchFieldTitle);
-    searchFieldTitle.classList.add("filter__box__searchDiv__title");
+    searchDivMain.appendChild(searchFieldTitle);
+    searchFieldTitle.classList.add("filter__box__searchDivMain__title");
 
-    searchField = document.createElement("input");
+    const searchField = document.createElement("input");
     searchField.type = "search";
     searchField.id = "searchField-input";
     searchField.placeholder = "Start typing to filter";
-    searchDiv3.appendChild(searchField);
-    searchField.classList.add("filter__box__searchDiv__searchfield");
+    searchDivMain.appendChild(searchField);
+    searchField.classList.add("filter__box__searchDivMain__searchfield");
     searchField.addEventListener("input", debounceSearch);
 
 }
@@ -156,17 +151,35 @@ function filterByTag(tag) {
 function updateTagButtons() {
     dynamicTagButtons.forEach(button => {
         const buttonActive = button.textContent === activeTag;
-        button.classList.toggle("active-tag", buttonActive);
+        
+        if (buttonActive) {
+            handleActiveButton(button, buttonActive);
+        }
     });
 }
 
+function handleActiveButton(button, state) {
+    let foundTag = false;
+
+    activeButtons.forEach(btnName => {
+        if (btnName.toLowerCase() == button.textContent.toLowerCase()) {
+            foundTag = true;
+        }
+    })
+
+    if (foundTag && state) {
+        if (activeButtons.includes(button.textContent)) {
+            activeButtons = activeButtons.filter(val => val !== button.textContent)
+        }
+    } else {
+        if (!foundTag) {
+            activeButtons.push(button.textContent);
+        }
+    }
+}
+
 function toggleTagFilter(tag) {
-    if (activeTag === tag) {
-        activeTag = null;
-    }
-    else {
-        activeTag = tag;
-    }
+    activeTag = tag;
 
     updateTagButtons();
     executeSearch(searchField ? searchField.value : "");
@@ -174,19 +187,24 @@ function toggleTagFilter(tag) {
 
 // Update the dynamic tags based on tags present in the filteredResults
 function updateDynamicTags(filteredResults) {
-    const dynamicDivTagContainer = document.querySelector(".filter__box__dynamicDivMain__dynamicDivTagContainer");
+    const dynamicDivTagContainer = document.querySelector(".filter__box__centerDiv__dynamicDivMain__dynamicDivTagContainer");
     dynamicDivTagContainer.textContent = "";
     const tags = getUniqueTags(filteredResults);
     dynamicTagButtons = [];
-    console.log(dynamicTagButtons);
 
     tags.forEach(tag => {
         const tagButton = document.createElement("button");
-        tagButton.classList.add("filter__box__dynamicDivMain__dynamicTag1");
+        tagButton.classList.add("filter__box__centerDiv__dynamicDivMain__dynamicTag");
         tagButton.textContent = tag;
         tagButton.addEventListener("click", () => toggleTagFilter(tag));
         dynamicDivTagContainer.appendChild(tagButton);
         dynamicTagButtons.push(tagButton);
+
+        activeButtons.forEach(btnName => {
+            if (btnName.toLowerCase() == tag.toLowerCase()) {
+                tagButton.classList.toggle('active-tag');
+            } 
+        })
     });
 }
 
@@ -199,8 +217,7 @@ function getUniqueTags(filteredResults) {
         });
     });
 
-    // Sort the tags in alohabetic order
-    return Array.from(tagSet).sort((a, b) => a.localeCompare(b)); 
+    return Array.from(tagSet);
 }
 
 // Delayed search from input event
@@ -270,3 +287,7 @@ function destroyFilterBox() {
     const filterBox = document.querySelector(".filter__box");
     filterBox.remove();
 }
+
+
+
+renderChallenges(filteredResults, challengesListElement);
