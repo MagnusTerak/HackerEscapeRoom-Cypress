@@ -241,9 +241,24 @@ function createStarRating() {
 
 function starEvents(star, state, index) {
     star.addEventListener("click", () => {
-        ratingStars[state] = index;
-        refreshStars(star);
-        executeSearch(searchField ? searchField.value : "");
+        let notValid = false; 
+        let currentCorrectStateName = state.includes("lowest") ? "lowestRating" : "highestRating";
+        
+        if (currentCorrectStateName === "lowestRating") {
+            if (index > ratingStars["highestRating"]) {
+                notValid = true
+            }
+        } else {
+            if (index < ratingStars["lowestRating"]) {
+                notValid = true
+            }
+        }
+
+        if (!notValid) {
+            ratingStars[state] = index;
+            refreshStars(star);
+            executeSearch(searchField ? searchField.value : "");
+        }
     })
 
     star.addEventListener("mouseover", () => {
