@@ -1,5 +1,10 @@
 import'../styles/layouts/rooms.scss';
 import {openBookingModal} from './modal1.js'
+
+import starFilled from '../../assets/svg/star-filled.svg';
+import starHalf from '../../assets/svg/star-half.svg';
+import starEmpty from '../../assets/svg/star.svg';
+
 class Challenge {
   constructor(
     id,
@@ -33,13 +38,13 @@ class Challenge {
       const star = new Image();
 
       if (i <= Math.floor(rate)) {
-        star.src = "../../assets/svg/star-filled.svg";
+        star.src = starFilled;
         star.className = "star filled";
       } else if (i === Math.ceil(rate) && rate % 1 !== 0) {
-        star.src = "../../assets/svg/star-half.svg";
+        star.src = starHalf; 
         star.className = "star half";
       } else {
-        star.src = "../../assets/svg/star.svg";
+        star.src = starEmpty;
         star.className = "star unfilled";
       }
 
