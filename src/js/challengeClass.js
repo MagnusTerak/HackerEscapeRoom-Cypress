@@ -1,4 +1,4 @@
-import'@/styles/layouts/rooms.scss';
+import'../styles/layouts/rooms.scss';
 import {openBookingModal} from './modal1.js'
 class Challenge {
   constructor(
