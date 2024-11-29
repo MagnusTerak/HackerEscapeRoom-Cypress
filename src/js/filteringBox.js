@@ -300,8 +300,6 @@ function destroyFilterBox() {
     filterBox.remove();
 }
 
-renderChallenges(filteredResults, challengesListElement);
-
 // Filter by type, render in DOM
 function filterChallengesByType(type) {
     const challengesArray = getChallengesArray();
@@ -313,3 +311,5 @@ function filterChallengesByType(type) {
     renderChallenges(filteredChallenges, challengesListElement);
 
   }
+  
+renderChallenges(filteredResults, challengesListElement);
