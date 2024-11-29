@@ -18,6 +18,16 @@ export const isValidTime = (timeString) => {
   return regex.test(timeString);
 }
 
+export const isDateAtLeastTomorrow = (dateString) => {
+  const today = new Date();
+  today.setUTCHours(0, 0, 0, 0); 
+  const tomorrow = new Date(today);
+  tomorrow.setUTCDate(today.getUTCDate() + 1); 
+  const inputDate = new Date(dateString);
+
+  return inputDate >= tomorrow; 
+};
+
 
 // Helper function for a simple input validation
 export const validateReservationInput = ({
@@ -48,6 +58,10 @@ export const validateReservationInput = ({
   }
   if (!isValidDate(date)) {
     console.log("Invalid 'date': Must be in YYYY-MM-DD format.");
+    return false;
+  }
+  if (!isDateAtLeastTomorrow(date)) {
+    console.log("Invalid 'date': Booking must be at least tomorrow or later.");
     return false;
   }
   if (!isValidTime(time)) {

@@ -6,6 +6,7 @@ import {
   createReservation,
   isValidDate,
   isValidTime,
+  isDateAtLeastTomorrow,
   validateReservationInput,
 } from '@/js/apiService.js'; 
 
@@ -17,11 +18,35 @@ describe('API and Helper Functions', () => {
   });
 
   describe('Helper Functions', () => {
+
+    it('isDateAtLeastTomorrow should validate dates correctly', () => {
+      const today = new Date();
+      today.setUTCHours(0, 0, 0, 0);
+    
+      const yesterday = new Date(today);
+      yesterday.setUTCDate(today.getUTCDate() - 1);
+    
+      const tomorrow = new Date(today);
+      tomorrow.setUTCDate(today.getUTCDate() + 1);
+    
+      const dayAfterTomorrow = new Date(today);
+      dayAfterTomorrow.setUTCDate(today.getUTCDate() + 2);
+    
+      // Convert dates to string format (YYYY-MM-DD) for testing
+      const formatDate = (date) =>
+        date.toISOString().split('T')[0]; 
+    
+      expect(isDateAtLeastTomorrow(formatDate(today))).toBe(false); 
+      expect(isDateAtLeastTomorrow(formatDate(yesterday))).toBe(false); 
+      expect(isDateAtLeastTomorrow(formatDate(tomorrow))).toBe(true); 
+      expect(isDateAtLeastTomorrow(formatDate(dayAfterTomorrow))).toBe(true); 
+    });
+    
     it('isValidDate should validate correct date formats', () => {
-      expect(isValidDate('2023-12-01')).toBe(true);
-      expect(isValidDate('01-12-2023')).toBe(false);
-      expect(isValidDate('2023/12/01')).toBe(false);
-      expect(isValidDate('2023-13-01')).toBe(false); 
+      expect(isValidDate('2025-12-01')).toBe(true);
+      expect(isValidDate('01-12-2025')).toBe(false);
+      expect(isValidDate('2025/12/01')).toBe(false);
+      expect(isValidDate('2025-13-01')).toBe(false); 
     });
 
     it('isValidTime should validate correct time formats', () => {
@@ -36,7 +61,7 @@ describe('API and Helper Functions', () => {
         challengeId: 1,
         name: 'John Doe',
         email: 'john@example.com',
-        date: '2023-12-01',
+        date: '2025-12-01',
         time: '10:00',
         participants: 5,
       };
@@ -49,6 +74,7 @@ describe('API and Helper Functions', () => {
       expect(validateReservationInput(validData)).toBe(true);
       expect(validateReservationInput(invalidData)).toBe(false);
     });
+  
   });
 
   describe('API Service Functions', () => {
@@ -77,9 +103,9 @@ describe('API and Helper Functions', () => {
         json: jest.fn().mockResolvedValue(mockSlots),
       });
 
-      const result = await fetchAvailableTimes(1, '2023-12-01');
+      const result = await fetchAvailableTimes(1, '2025-12-01');
       expect(fetch).toHaveBeenCalledWith(
-        'https://lernia-sjj-assignments.vercel.app/api/booking/available-times?date=2023-12-01&challenge=1',
+        'https://lernia-sjj-assignments.vercel.app/api/booking/available-times?date=2025-12-01&challenge=1',
         {},
       );
       expect(result).toEqual({ success: true, data: mockSlots.slots });
@@ -125,7 +151,7 @@ describe('API and Helper Functions', () => {
         challengeId: 1,
         name: 'John Doe',
         email: 'john@example.com',
-        date: '2023-12-01',
+        date: '2025-12-01',
         time: '10:00',
         participants: 5,
       };
@@ -154,7 +180,7 @@ describe('API and Helper Functions', () => {
         challengeId: 1,
         name: 'John Doe',
         email: null, // Invalid email
-        date: '2023-12-01',
+        date: '2025-12-01',
         time: '10:00',
         participants: 5,
       };
@@ -170,7 +196,7 @@ describe('API and Helper Functions', () => {
         challengeId: 1,
         name: 'John Doe',
         email: 'john@example.com',
-        date: '2023-12-01',
+        date: '2025-12-01',
         time: '10:00',
         participants: 5,
       };
