@@ -9,19 +9,19 @@ export default defineConfig({
       '@styles': path.resolve(__dirname, './src/styles'),
     },
   },
-  css: {
-    preprocessorOptions: {
-      scss: {
-        additionalData: `
-   @use "@/styles/global-styles/_buttons.scss" as *;
-          @use "@/styles/global-styles/_colors.scss" as *;
-          @use "@/styles/global-styles/_fonts.scss" as *;
-          @use "@/styles/global-styles/_screens.scss" as *;
-        `,
-      },
-    },
-    devSourcemap: true, 
-  },
+  // css: {
+  //   preprocessorOptions: {
+  //     scss: {
+  //       additionalData: `
+  //  @use "@/styles/global-styles/_buttons.scss" as *;
+  //         @use "@/styles/global-styles/_colors.scss" as *;
+  //         @use "@/styles/global-styles/_fonts.scss" as *;
+  //         @use "@/styles/global-styles/_screens.scss" as *;
+  //       `,
+  //     },
+  //   },
+  //   devSourcemap: true, 
+  // },
   build: {
     sourcemap: true,
     rollupOptions: {
