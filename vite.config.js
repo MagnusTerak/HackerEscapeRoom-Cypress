@@ -27,7 +27,6 @@ export default defineConfig({
     rollupOptions: {
         input: {
           main: 'index.html',
-          page1: 'challenges.html',
         },
     }
   },
