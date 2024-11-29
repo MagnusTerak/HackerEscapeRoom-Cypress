@@ -27,6 +27,7 @@ export default defineConfig({
     rollupOptions: {
         input: {
           main: 'index.html',
+          page1: path.resolve(__dirname, 'challenges.html'),
         },
     }
   },
