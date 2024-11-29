@@ -1,7 +1,7 @@
-@use "@/styles/global-styles/_buttons.scss" as *;
-@use '@/styles/global-styles/_fonts.scss' as *;
-@use '@/styles/global-styles/_screens.scss' as *;
-@use '@/styles/global-styles/_colors.scss' as *;
+@use "../global-styles/_buttons.scss" as *;
+@use '../global-styles/_fonts.scss' as *;
+@use '../global-styles/_screens.scss' as *;
+@use '../global-styles/_colors.scss' as *;
 
 .testimonials {
   display: flex;
