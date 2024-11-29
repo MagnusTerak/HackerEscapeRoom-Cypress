@@ -33,13 +33,13 @@ class Challenge {
       const star = new Image();
 
       if (i <= Math.floor(rate)) {
-        star.src = "../../public/assets/svg/star-filled.svg";
+        star.src = "../../assets/svg/star-filled.svg";
         star.className = "star filled";
       } else if (i === Math.ceil(rate) && rate % 1 !== 0) {
-        star.src = "../../public/assets/svg/star-half.svg";
+        star.src = "../../assets/svg/star-half.svg";
         star.className = "star half";
       } else {
-        star.src = "../../public/assets/svg/star.svg";
+        star.src = "../../assets/svg/star.svg";
         star.className = "star unfilled";
       }
 
