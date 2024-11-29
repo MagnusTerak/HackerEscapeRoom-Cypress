@@ -25,3 +25,7 @@ We are in phase.
 Today we decided to use JEST testing in our project. 
 We are in phase for both deadlines.
 ![Meeting #2](images/241126.png) This is a screenshot of our projectboard right now.
+
+28/11-2024
+We had a check up meeting to see where we`re at and how everything is going. 
+We are making the final adjustments before our merge into main. 
