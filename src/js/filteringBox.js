@@ -148,7 +148,20 @@ function openFilterModal() {
     searchDivMain.appendChild(searchField);
     searchField.classList.add("filter__box__searchDivMain__searchfield");
     searchField.addEventListener("input", debounceSearch);
+
 }
+
+// Display challenges by type online/onsite present in URL from redirection
+document.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const challengeType = urlParams.get('type');
+    
+    setTimeout(() => {
+        if (challengeType) {
+        filterChallengesByType(challengeType);
+        }
+    }, 400);
+});
 
 function filterByTag(tag) {
     const challengesArray = getChallengesArray();
@@ -416,4 +429,19 @@ function closeFilterModal() {
 function destroyFilterBox() {
     const filterBox = document.querySelector(".filter__box");
     filterBox.remove();
+<<<<<<< HEAD
 }
+
+// Filter by type, render in DOM
+function filterChallengesByType(type) {
+    const challengesArray = getChallengesArray();
+    const filteredChallenges = challengesArray.filter(challenge => 
+      challenge.type.toLowerCase() === type.toLowerCase()
+    );
+    
+    const challengesListElement = document.querySelector(".challenges__list");
+    renderChallenges(filteredChallenges, challengesListElement);
+
+  }
+  
+renderChallenges(filteredResults, challengesListElement);
