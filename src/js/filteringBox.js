@@ -429,7 +429,7 @@ function closeFilterModal() {
 function destroyFilterBox() {
     const filterBox = document.querySelector(".filter__box");
     filterBox.remove();
-<<<<<<< HEAD
+
 }
 
 // Filter by type, render in DOM
