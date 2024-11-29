@@ -83,10 +83,6 @@
 <script type="module" src="./src/js/apiTest.js"></script>
 <script type="module" src="./src/js/displayMainPageChallenges.js"></script>
 <script type="module" src="./src/js/modul-step-2.js"></script>
-
-    <link rel="stylesheet" href="./src/styles/layouts/css/main.css">
-
-
 </head>
 
 <body>
@@ -158,10 +154,10 @@
             </figure>
 
             <!-- Snapper for slide navigation -->
-            <div class="carousel__snapper">
+            <!-- <div class="carousel__snapper">
               <a href="#testimonial__carousel__slide2" class="carousel__next">Go to next slide</a>
               <a href="#testimonial__carousel__slide2" class="carousel__prev">Go to last slide</a>
-            </div>
+            </div> -->
           </li>
 
           <!-- Slide 2 -->
@@ -181,10 +177,10 @@
             </figure>
 
             <!-- Snapper for slide navigation -->
-            <div class="carousel__snapper">
+            <!-- <div class="carousel__snapper">
               <a href="#testimonial__carousel__slide1" class="carousel__next">Go to next slide</a>
               <a href="#testimonial__carousel__slide1" class="carousel__prev">Go to first slide</a>
-            </div>
+            </div> -->
           </li>
 
         </ol>
@@ -204,7 +200,6 @@
     <div class="main__btns">
       <ul class="main__btns-list">
         <li class="main__btns-item">
-          <lass="main__btns-item">
             <a href="#onsite-challenges" class="main__btn onsite">On-site challenges</a>
         </li>
         <li class="main__btns-item">
@@ -215,115 +210,135 @@
 
     <!--*************************************************** Modal******************************************************-->
 
-    <!-- <dialog class="booking-modal">  -->
-    <div class="booking-modal">
-      <div class="booking-modal__content">
-
-        <!-- Step 1: Select Date -->
-        <div class="booking-modal__step booking-modal__step--active" id="step1">
-          <h2 class="booking-modal__title">Select a Date(Step1/Modal1)</h2>
-          Add a Form labels, an input field for the date, and a button for searching available times (Modal 1). Decide
-          whether to generate these elements dynamically using JavaScript or include them directly as static HTML tags.
-          Regardless of the approach, ensure all necessary elements are properly integrated into challenges.html.
-        </div>
-
-
+ 
+        
+        <!-- <dialog class="booking-modal">  -->
+          <div class="booking-modal" id="booking-modal" >
+            <div class="booking-modal__content">
   
-        <!-- Step 2: Enter Details -->
-      
-   <div class="booking_modal_step_2" id="step2">
-    <h1 class="room-title">Loading...</h1>
-    <form class="user_booking" id="user-booking" action="/submit_booking" method="post">
-      <!-- Name -->
-      <div class="user_booking_name">
-        <label for="booking-name" class="booking_name">Name</label>
-        <input type="name" class="custom_name" id="booking-name" name="user_name" required>
-      </div>
-      <!-- Email -->
-      <div class="user_booking_email">
-        <label for="booking-email" class="booking_email">E-mail</label>
-        <input type="email" class="custom_email" id="booking-email" name="user_email" required>
-      </div>
-      <!-- Times -->
-      <div class="user_booking_time">
-        <label for="booking-time" class="booking_time">What time?</label>
-        <select id="booking-time" name="selected_time" class="custom_time" required>
-          <!-- placeholder times -->
-          <option value="">Select Time</option>
-        </select>
-      </div>
-      <!-- participants -->
-      <div class="user_booking_participants">
-        <label for="booking-participants" class="booking_participants">How many participants?</label>
-        <select id="booking-participants" name="selected_participants" class="custom_participants" required>
-          <!-- placeholder participants -->
-          <option value=""> Select Participants</option>
-        </select>
-      </div>
-      <!-- submit booking button -->
-      <button type="submit" class="submit_booking_btn">submit booking</button>
-    </form>
-  </div>
+              <!-- Step 1: Select Date -->
+              <div class="booking-modal__step booking-modal__step--active" id="step1">
+                  <div class="modal" id="modal1">
+                    <div class="modal__content">
+                        <h1 class="modal__content-loading">'Loading Challenge information'</h1>
+                        <form class="booking__form" id="booking-form"> 
+                          <label for="booking-date" class="booking__date">What date would you like to come?</label>
+                          <p class ="booking__date-custom">date</p>
+                          <input type="date" class="custom__date" id="booking-date" name="booking-date" required>
+                          <button type="submit" class="booking__search-btn">Search available times</button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- Step 2: Enter Details -->
+                
+             <div class="booking_modal_step_2" id="step2">
+              <h1 class="modal__content-loading">Loading...</h1>
+              <form class="user_booking" id="user-booking"  method="post">
+                <!-- Name -->
+                <div class="user_booking_name">
+                  <label for="booking-name" class="booking_name">Name</label>
+                  <input type="name" class="custom_name" id="booking-name" name="user_name" required>
+                </div>
+                <!-- Email -->
+                <div class="user_booking_email">
+                  <label for="booking-email" class="booking_email">E-mail</label>
+                  <input type="email" class="custom_email" id="booking-email" name="user_email" required>
+                </div>
+                <!-- Times -->
+                <div class="user_booking_time">
+                  <label for="booking-time" class="booking_time">What time?</label>
+                  <select id="booking-time" name="selected_time" class="custom_time" required>
+                    <!-- placeholder times -->
+                    <option value="">Select Time</option>
+                  </select>
+                </div>
+                <!-- participants -->
+                <div class="user_booking_participants">
+                  <label for="booking-participants" class="booking_participants">How many participants?</label>
+                  <select id="booking-participants" name="selected_participants" class="custom_participants" required>
+                    <!-- placeholder participants -->
+                    <option value=""> Select Participants</option>
+                  </select>
+                </div>
+                <!-- submit booking button -->
+                <button type="submit" class="submit_booking_btn">submit booking</button>
+              </form>
+            </div>
+                 
 
-
-        <!-- Step 3: Confirmation -->
-        <div class="booking-modal__step" id="step3">
-          <h2 class="booking-modal__title">Thank You!</h2>
-          add a paragraph for the confirmation and a button to close the modal button
+              <!-- Step 3: Confirmation -->
+              <div class="booking-modal__step" id="step3">
+                <div class="modal" id="modal3">
+                  <div class="modal__content">
+                      <h1>Thank you!</h1>
+                      <a href="challenges.html">Back to challenges</a>
+                  </div>
+                </div>
+          </div>
         </div>
-      </div>
-    </div>
-    <!-- </dialog> -->
-
-    <!--*************************************************** STORY ******************************************************-->
-    <section class="story">
-      <div class="story__container">
-        <h2 class="story__intro">
-          Quodsi haberent magnalia inter potentiam et divitias, et non illam
-          quidem haec eo spectant haec quoque vos omnino desit illud quo solo
-          felicitatis libertatisque perficiuntur.
-        </h2>
-        <a href="#story-section" class="story__btn">Read the full story</a>
-      </div>
-    </section>
-    <!--*************************************************** STORY ******************************************************-->
-    <div class="play">
-      <div class="play__container">
-        <div class="play__image__container item1">
-          <img class="play__image" src="./assets/images/gallery/nesa-by-makers-IgUR1iX0mqM-unsplash1.png" loading="lazy"
-            alt=" Nesa by makers- developers trying to solve our puzzel ">
         </div>
-        <section class="play__details item2">
-          <h2 class="play__title">
-            Play with your friends or build your team stronger at work
+        
+        <!-- </dialog> -->
+        
+        <!--*************************************************** STORY ******************************************************-->
+        <section class="story">
+        <div class="story__container">
+          <h2 class="story__intro">
+            Quodsi haberent magnalia inter potentiam et divitias, et non illam
+            quidem haec eo spectant haec quoque vos omnino desit illud quo solo
+            felicitatis libertatisque perficiuntur.
           </h2>
-          <p class="play__description">
-            Praeterea, ex culpa non invenies unum aut non accusatis unum. Et
-            nihil inuitam. Nemo nocere tibi erit, et non inimicos, et
-          </p>
-          <a href="#challenges" class="play__btn">Book on-site today</a>
-        </section>
-        <div class="play__image__container item3">
-          <img class="play__image g3" src="./assets/images/gallery/kelly-sikkema-YK0HPwWDJ1I-unsplash1.png"
-            loading="lazy" alt="Kelly sikkema- trying to solve our puzzels">
+          <a href="#story-section" class="story__btn">Read the full story</a>
         </div>
-        <section class="play__details item4">
-          <h2 class="play__title">
-            Play online or visit our venue for one of our 25 escape rooms
-          </h2>
-          <p class="play__description">
-            Praeterea, ex culpa non invenies unum aut non accusatis unum. Et
-            nihil inuitam. Nemo nocere tibi erit, et non inimicos, et
-          </p>
-          <a href="challenges.html" class="play__btn">See all challenges</a>
-        </section>
+      </section>
+      <!--*************************************************** STORY ******************************************************-->
+      <div class="play">
+        <div class="play__container">
+          <div class="play__image__container item1">
+            <img
+              class="play__image"
+              src="./assets/images/gallery/nesa-by-makers-IgUR1iX0mqM-unsplash1.png"
+              loading="lazy"
+              alt=" Nesa by makers- developers trying to solve our puzzel "
+            >
+          </div>
+          <section class="play__details item2">
+            <h2 class="play__title">
+              Play with your friends or build your team stronger at work
+            </h2>
+            <p class="play__description">
+              Praeterea, ex culpa non invenies unum aut non accusatis unum. Et
+              nihil inuitam. Nemo nocere tibi erit, et non inimicos, et
+            </p>
+            <a href="#challenges"  class="play__btn">Book on-site today</a>
+          </section>
+          <div class="play__image__container item3">
+            <img
+              class="play__image g3"
+              src="./assets/images/gallery/kelly-sikkema-YK0HPwWDJ1I-unsplash1.png"
+              loading="lazy"
+              alt="Kelly sikkema- trying to solve our puzzels"
+            >
+          </div>
+          <section class="play__details item4">
+            <h2 class="play__title">
+              Play online or visit our venue for one of our 25 escape rooms
+            </h2>
+            <p class="play__description">
+              Praeterea, ex culpa non invenies unum aut non accusatis unum. Et
+              nihil inuitam. Nemo nocere tibi erit, et non inimicos, et
+            </p>
+            <a href="challenges.html"  class="play__btn">See all challenges</a>
+          </section>
+        </div>
       </div>
-    </div>
-    <!--*************************************************** FOOTER ******************************************************-->
-    <footer class="footer">
-      <div class="footer__content">
-        <section class="footer__about item1">
-          <h2 class="footer__title">[Esc] Hacker Escape Rooms</h1>
+      <!--*************************************************** FOOTER ******************************************************-->
+      <footer class="footer">
+        <div class="footer__content">
+          <section class="footer__about item1">
+            <h2 class="footer__title">[Esc] Hacker Escape Rooms</h1>
             <p class="footer__text">
               Quodsi haberent magnalia inter potentiam et divitias, et non illam
               quidem haec eo spectant haec quoque vos omnino desit illud quo

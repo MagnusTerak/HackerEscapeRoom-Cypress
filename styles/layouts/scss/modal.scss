@@ -1,8 +1,9 @@
-@use '@/styles/global-styles/_fonts.scss' as *;
-@use '@/styles/global-styles/_colors.scss' as *;
+@use '../../global-styles/_fonts.scss' as *;
+@use'../../global-styles/_colors.scss' as *;
 
 .booking-modal__step{ 
-    display: block;//Initially hidden, pops up with btn
+    display: flex;//Initially hidden, pops up with btn
+    flex-direction: column;
     position: fixed; //modal is in its fixed position when scrolling
     transform: translate(-50%, -50%); //Vertical and horisontal centering
     background-color: white;
@@ -14,34 +15,25 @@
     z-index: 1000;
 }
 
-
 .modal__content-loading {
     position: relative;
     color:#444444;
     font-weight: 400;
     margin-top: 10px;
-    margin-bottom: 2rem;
     
 }
-
-.booking__date-custom {
-    margin-top: 2rem;
-    margin-bottom: -2em;
-}
-
 
 .booking-modal__step .modal__content .booking__date { 
     font-weight: bolder;
     color:#444444; 
-    //What date would you....   
+    //What date would you....
+    
 }
 
 .custom__date { 
     border: 3px solid lightgray;
     border-radius: 4px;
     font-size: xx-large;
-    margin-top: 2rem;
-    color:#a19f9f;
 }
 
 
@@ -52,10 +44,7 @@
     font-size: 1rem;
     padding:5px;
     border-radius: 3px;
-    min-width: 11rem;
-    display: flex;
-    margin-top: 19rem;
-    margin-left: 27rem;
+    min-width: 12rem;
     
 }
 
@@ -67,27 +56,7 @@
     padding: 60px;
 }
 
-.booking-modal__step #modal3{
-    display: flexbox;
-    flex-direction: column;
-    justify-items: center;
-    text-align: center;
-    padding: 12rem;
-}
-
-.booking-modal__step a{ //back to challenges link
+.booking-modal__step a{
     font-weight: 600;
     text-decoration: underline;  
-}
-
-.booking-modal__step h1{ //Thank you
- margin-bottom: 2rem;
-}
-
-.close{
-    position:absolute;
-    cursor: pointer;
-    top:20px;
-    right:20px;
-    font-size: larger;
 }
