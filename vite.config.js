@@ -25,8 +25,10 @@ export default defineConfig({
   build: {
     sourcemap: true,
     rollupOptions: {
-      input: './src/js/main.js', // Define your entry point here
-    },
+        input: {
+          main: 'index.html',
+        },
+    }
   },
   server: {
     host: 'localhost',
