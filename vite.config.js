@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import path from 'path';
 
 export default defineConfig({
+  base: '/EscapeRoom-grupp2/',
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'), // Alias for src directory
@@ -21,7 +22,7 @@ export default defineConfig({
     devSourcemap: true, 
   },
   build: {
-    sourcemap: false,
+    sourcemap: true,
     rollupOptions: {
       input: './src/js/main.js', // Define your entry point here
     },
@@ -29,7 +30,7 @@ export default defineConfig({
   server: {
     host: 'localhost',
     port: 5173,
-    strictPort: true, 
+    strictPort: false, 
   },
   test: {
     environment: 'jsdom',
