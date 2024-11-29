@@ -7,8 +7,10 @@
     transform: translate(-50%, -50%); //Vertical and horisontal centering
     background-color: white;
     outline: 3px solid rgba(0,0,0,0.1);
-    width: 700px;
-    height: 600px;
+    width: 60%;
+    height: auto;
+    min-height: 600px;
+    max-width: 700px;
     top: 50%;
     left: 50%;
     z-index: 1000;
@@ -33,6 +35,7 @@
 .booking-modal__step .modal__content .booking__date { 
     font-weight: bolder;
     color:#444444; 
+    position: relative;
     //What date would you....   
 }
 
@@ -54,8 +57,12 @@
     border-radius: 3px;
     min-width: 11rem;
     display: flex;
-    margin-top: 19rem;
-    margin-left: 27rem;
+    // margin-top: 19rem;
+    // margin-left: 27rem;
+    position:absolute;
+    bottom: 0;
+    right: 0;
+    margin: 30px;
     
 }
 
@@ -68,11 +75,12 @@
 }
 
 .booking-modal__step #modal3{
-    display: flexbox;
-    flex-direction: column;
+    // display: flexbox;
+    // // flex-direction: column;
     justify-items: center;
     text-align: center;
-    padding: 12rem;
+    align-content: center;
+   margin-top: 35%;
 }
 
 .booking-modal__step a{ //back to challenges link
