@@ -1,6 +1,6 @@
 import { getChallengesArray } from "./displayAllChallenges.js";
 import { renderChallenges } from './utilities/renderChallenges';
-import '@/styles/layouts/filter.scss';
+import '../styles/layouts/filter.scss';
 
 const filterBtn = document.querySelector(".filter__button");
 filterBtn.addEventListener("click", openFilterModal);

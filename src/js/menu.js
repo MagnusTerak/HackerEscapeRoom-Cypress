@@ -1,4 +1,4 @@
-import '@/styles/layouts/header.scss';
+import '../styles/layouts/header.scss';
 
 const menuItems = [
   { name: 'Play online', href: '#onLine' },

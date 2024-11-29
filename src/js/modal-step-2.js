@@ -1,4 +1,4 @@
-import '@/styles/layouts/modal.scss';
+import '../styles/layouts/modal.scss';
 import {
   fetchAvailableTimes,
   fetchChallengeDetails,

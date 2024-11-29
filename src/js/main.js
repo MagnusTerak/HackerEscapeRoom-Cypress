@@ -1,1 +1,1 @@
-import '@/styles/layouts/main.scss';
+import '../styles/layouts/main.scss';

@@ -1,5 +1,5 @@
 import { fetchAvailableTimes, fetchChallengeDetails } from "./apiService.js";
-import "@/styles/layouts/modal.scss";
+import "../styles/layouts/modal.scss";
 import { initializeStep2 } from './modal-step-2.js';
 
 // DOM Selectors
