@@ -442,6 +442,4 @@ function filterChallengesByType(type) {
     const challengesListElement = document.querySelector(".challenges__list");
     renderChallenges(filteredChallenges, challengesListElement);
 
-  }
-  
-renderChallenges(filteredResults, challengesListElement);
+}
