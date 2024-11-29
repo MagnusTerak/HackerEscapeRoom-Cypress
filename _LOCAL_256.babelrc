@@ -1,3 +1,0 @@
-{
-    "presets": ["@babel/preset-env"] //babel helps transpile modern syntax so it is compatible with jest and node.js
-  }

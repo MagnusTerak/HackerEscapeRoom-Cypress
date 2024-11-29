@@ -2,7 +2,6 @@ import { defineConfig } from 'vite';
 import path from 'path';
 
 export default defineConfig({
-  base: '/EscapeRoom-grupp2/',
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'), // Alias for src directory
