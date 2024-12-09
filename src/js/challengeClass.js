@@ -46,6 +46,8 @@ class Challenge {
       } else if (rate === 0){
         star.src = starEmpty;
         star.className = "star unfilled";
+        challengeRating.appendChild(star);
+        return challengeRating;
       }
 
       challengeRating.appendChild(star);
