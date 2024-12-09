@@ -199,8 +199,13 @@
 @include x-large-screen{
   .challenges__list{
     display: grid;
-    grid-template-columns: repeat(4, 1fr); 
+    grid-template-columns: repeat(4, auto);
     gap: 20px;
     width: 100%;
+    margin: auto;
+  }
+  .challengey {
+    width: 100%; 
+    margin: 0;
   }
 }
