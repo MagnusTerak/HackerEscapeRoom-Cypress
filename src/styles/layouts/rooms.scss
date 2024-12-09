@@ -135,7 +135,7 @@
   }
 }
 
-@include large-screen {
+@include large-screen-special {
   .challenges {
     position: static;
     width: 100vw;
@@ -154,7 +154,7 @@
     }
     .challenges__list{
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
       gap: 20px;
 }
   }
@@ -196,3 +196,16 @@
 }
 
 // }
+@include x-large-screen{
+  .challenges__list{
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    gap: 20px;
+    width: 100%;
+    margin: auto;
+  }
+  .challengey {
+    width: 100%; 
+    margin: 0;
+  }
+}
