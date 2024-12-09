@@ -10,17 +10,17 @@
     width: 50%;
 }
 
-.about_title {
+.about__title {
     margin: 0 0 1rem 0rem;
     text-align: center;
     @include font-style(normal, normal, 3rem);
 }
 
-.about_text {
+.about__text {
     @include font-italic(1.4rem);
 }
 
-.about_image {
+.about__image {
     width: 50rem;
     height: 25rem;
 }
