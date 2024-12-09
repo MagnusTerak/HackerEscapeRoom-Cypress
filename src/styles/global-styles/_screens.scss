@@ -5,7 +5,12 @@
   }
 
 @mixin large-screen {
-    @media screen and (min-width: 869px)and (max-width:1599px) { //640 px
+    @media screen and (min-width: 869px) { //640 px
+        @content;
+    }
+}
+@mixin large-screen-special {
+    @media screen and (min-width: 869px) and (max-width:1599px) { //640 px
         @content;
     }
 }
