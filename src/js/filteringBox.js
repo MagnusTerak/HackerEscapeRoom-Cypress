@@ -25,6 +25,12 @@ let ratingStars = {
     highestRating: 5,
 }
 
+let sortVal; 
+
+// Sorting query
+const sortSelection = document.querySelector(".sorting-selection");
+sortSelection.addEventListener("change", (e) => executeSearch(searchField ? searchField.value : "", e), false);
+
 function openFilterModal() {
     const filterSection = document.querySelector(".filter");
     filterBtn.classList.add("filter__hidden");
@@ -371,12 +377,12 @@ function debounceSearch(event) {
 }
 
 //Perform search on challenges array from case-insensitive userinput 
-function executeSearch(query) {
+function executeSearch(query, sortAttribute) {
 
     const challengesArray = getChallengesArray();
     console.log("All challenges:", challengesArray); 
-    const onlineChecked = document.getElementById("DOM__checkBox1").checked;
-    const onsiteChecked = document.getElementById("DOM__checkBox2").checked;
+    const onlineChecked = document.getElementById("DOM__checkBox1") ? document.getElementById("DOM__checkBox1").checked : true;
+    const onsiteChecked = document.getElementById("DOM__checkBox2") ? document.getElementById("DOM__checkBox2").checked : true;
     const filteredResults = challengesArray.filter(challenge => {
         const matchesRating = challenge.rating >= ratingStars["lowestRating"] && challenge.rating <= ratingStars["highestRating"];
         
@@ -397,6 +403,27 @@ function executeSearch(query) {
             });
 
             // updateDynamicTags(filteredResults);
+
+            if (sortAttribute) {
+                sortVal = sortAttribute
+            }
+
+            if (sortVal) {
+                filteredResults.sort((a, b) => {
+                    switch (sortVal.target.value) {
+                        case "name":
+                            return a.title.localeCompare(b.title); 
+                        case "name-reverse":
+                            return b.title.localeCompare(a.title); 
+                        case "rating-lowest":
+                            return a.rating - b.rating;
+                        case "rating-highest":
+                            return b.rating - a.rating;
+                        default:
+                            break
+                    }
+                });
+            }
 
             displaySearchResults(filteredResults);
 
