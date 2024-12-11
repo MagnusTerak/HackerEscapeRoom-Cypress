@@ -78,6 +78,9 @@
       font-size: 1.125rem;
     }
   }
+  #testimonial__carousel__slide2{
+    display: none;
+  }
 }
 
 // ----------------------Large Screen Adjustments-----------------------
@@ -85,6 +88,10 @@
   .testimonials {
     width: 100%;
     max-width: 2000px;
+
+    #testimonial__carousel__slide2{
+      display: block;
+    }
 
     &__list {
       max-width: 2000px;
