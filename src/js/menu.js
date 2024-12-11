@@ -1,8 +1,8 @@
 import '../styles/layouts/header.scss';
 
 const menuItems = [
-  { name: 'Play online', href: '#onLine' },
-  { name: 'Play on-site', href: '#onSite' },
+  { name: 'Play online', href: 'challenges.html?type=online' },
+  { name: 'Play on-site', href: 'challenges.html?type=onsite' },
   { name: 'The story', href: '#story' },
   { name: 'Contact us', href: '#contact' },
 ];
