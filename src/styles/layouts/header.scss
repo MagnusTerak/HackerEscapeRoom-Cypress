@@ -2,7 +2,7 @@
 @use '../global-styles/_fonts.scss' as *;
 @use '../global-styles/_screens.scss' as *;
 @use '../global-styles/_colors.scss' as *;
-
+@use '../global-styles/key-frames' as *;
 .header {
   color: white;
   background-color: $color-navy;
