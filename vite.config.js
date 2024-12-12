@@ -28,6 +28,7 @@ export default defineConfig({
         input: {
             main:  'index.html',
             challenges: 'challenges.html',
+            about: 'about.html',
         },
     }
   },
