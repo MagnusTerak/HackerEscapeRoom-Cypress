@@ -11,7 +11,7 @@
   max-width: 2000px;
   margin-bottom: 4rem;
   margin-top: 1.5rem;
-  margin-left: 2rem;
+  margin-left: 1rem;
 
   &__container {
     width: 95vw;
@@ -78,6 +78,9 @@
       font-size: 1.125rem;
     }
   }
+  #testimonial__carousel__slide2{
+    display: none;
+  }
 }
 
 // ----------------------Large Screen Adjustments-----------------------
@@ -85,6 +88,10 @@
   .testimonials {
     width: 100%;
     max-width: 2000px;
+
+    #testimonial__carousel__slide2{
+      display: block;
+    }
 
     &__list {
       max-width: 2000px;

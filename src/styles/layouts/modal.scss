@@ -3,8 +3,9 @@
 @use '../global-styles/_screens.scss' as *;
 @use '../global-styles/_colors.scss' as *;
 
+
 .booking-modal__step{ 
-    display: block;//Initially hidden, pops up with btn
+    display: block;
     position: fixed; //modal is in its fixed position when scrolling
     transform: translate(-50%, -50%); //Vertical and horisontal centering
     background-color: white;
@@ -18,6 +19,11 @@
     z-index: 1000;
 }
 
+.booking-modal__step--active {
+    #modal1{
+    animation: modalFadeIn 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+}
 
 .modal__content-loading {
     position: relative;
@@ -101,3 +107,4 @@
     right:20px;
     font-size: larger;
 }
+

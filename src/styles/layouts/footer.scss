@@ -28,7 +28,10 @@
   }
 
   &__list {
-    padding: 1rem;
+    padding: 1rem;    
+    a { 
+      color: white;
+    }
   }
 
   &__item {
@@ -37,6 +40,18 @@
 
   ul {
     padding: 0.5rem 0;
+    .text-like-link {
+      color: white;
+      text-decoration: none;
+      cursor: text;
+    
+      &:hover,
+      &:active,
+      &:visited {
+        color: white;
+        text-decoration: none;
+      }
+    }
   }
 }
 
