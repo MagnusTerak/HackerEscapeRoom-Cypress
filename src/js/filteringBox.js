@@ -533,7 +533,7 @@ function handleTagSwitchState(e) {
         title.textContent = "Combine Tags";
         currentTagSwitchState = "AND";
     } else {
-        title.textContent = "Match Any Tag";
+        title.textContent = "Match All Tags";
         currentTagSwitchState = "OR";
     }
 
