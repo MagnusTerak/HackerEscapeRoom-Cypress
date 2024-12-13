@@ -502,7 +502,7 @@ function createTagSwitch() {
 
     // switch title
     const switchTitle = document.createElement("h4");
-    switchTitle.textContent = "Match Any Tag’/'Combine Any Tags";
+    switchTitle.textContent = "Match Any Tag";
     tagSwitchDiv.appendChild(switchTitle);
     switchTitle.classList.add("filter__box__bottomDiv__tagSwitchDiv__title");
 
@@ -527,10 +527,13 @@ function createTagSwitch() {
 
 function handleTagSwitchState(e) {
     let value = e.target.checked;
+    let title = document.querySelector('.filter__box__bottomDiv__tagSwitchDiv__title');
 
     if (value) {
+        title.textContent = "Combine Tags";
         currentTagSwitchState = "AND";
     } else {
+        title.textContent = "Match Any Tag";
         currentTagSwitchState = "OR";
     }
 
