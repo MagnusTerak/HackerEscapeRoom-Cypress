@@ -11,6 +11,10 @@ Potential improvements:
         - Active tabs to adress "You are here"
         - Return to index by pressing logo
         - Add searching functionality for the entire site.
+        - Combine "Play online" and "Play onsite" into "Our challenges" 
+        in order to simplify the nagivation for the user. As it sits now, the user
+        may be confused wehter or not to return to the homepage in order to select
+        other types of challenges.
         
     Content:
         - More distinct sections / positioning of headers etc
@@ -34,9 +38,14 @@ Potential improvements:
         - Clarify the bookingmodal either by making the background opac or
         assign a specific page for the booking instead of opening a modal.
 
+    Challenges page:
+        - Reposition buttons for "Online challenges" and "On-site challenges" to
+        the proximity of the filtering button instead of near the footer.
+
     Footer:
         - Replace text for social media links with icons instead
         - Reduce height of the entierty of the footer
+        - Add legal disclaimer accessed through a link in the footer
 
 Trunk test:
 
